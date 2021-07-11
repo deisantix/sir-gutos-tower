@@ -75,6 +75,8 @@ def game_witcher_ato1():
     info.modi_file('Noelle: False\n', '.save', 4)
     info.modi_file('AT_ESP: False\n', '.save', 5)
 
+    info.save_atri()
+
     # ATO 1 ───────────────────────────────────────────────────────────────────────────────────────
     sleep(1)
     print(f'\n\033[31m{" ATO 1":─>40}\033[m')
@@ -816,5 +818,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# adicionar itens do inventario no .save pois senao nao funciona

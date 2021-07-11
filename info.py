@@ -23,12 +23,16 @@ itens = {'Barrinha Protein': {'Quantidade': 1, 'Descricao': 'Parece uma boa font
 def ver_save():
     file1_exists = path.isfile('.info')
     file2_exists = path.isfile('.save')
-    filesize = path.getsize('.info')
+
+    if file1_exists:
+        filesize = path.getsize('.info')
+    else:
+        filesize = 0
 
     global txt
     txt = ''
 
-    if file1_exists is False or file2_exists is False or filesize <= 2:
+    if not file1_exists or not file2_exists or filesize < 2:
         save = open('.info', 'a+')
         save_2 = open('.save', 'a+')
         save.write('conquistas:\n')

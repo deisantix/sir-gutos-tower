@@ -8,7 +8,7 @@ noelle_atri = {'Nome': 'Noelle', 'Vida': 75, 'Ataque': 35, 'Defesa': 15, 'Energi
 gustav_atri = {'Nome': 'Gustav', 'Vida': 50, 'Ataque': 5, 'Defesa': 10, 'Magia': 35, 'Energia': 210, 'Critico': 15}
 
 txt = ''
-tempo = 0
+tempo = 20
 deaths = 0
 perso_info = {}
 attributes = {}
@@ -83,6 +83,77 @@ def modi_file(texto, arquivo, pos, mode='w'):
         file.writelines(list_lines)
 
 
+# FUNÇÃO PARA DEFINIR VELOCIDADE DE NARRATIVA
+def velo_narrativa():
+    print('\n\033[mQUAL A VELOCIDADE QUE VOCÊ PREFERE O TEXTO?')
+    print('\033[33m[1] NORMAL')
+    print('[2] RÁPIDO (Recomendado)')
+    print('[3] INSTANTÂNEO\033[m')
+    sleep(1)
+
+    while True:
+        escolha = input('Digite a velocidade: ')
+        if escolha not in '123':
+            sleep(1)
+            print('\033[31mNão é uma opção.\033[m\n')
+            continue
+        else:
+            break
+
+    global tempo
+    if escolha == '1':
+        tempo = 20
+    elif escolha == '2':
+        tempo = 70
+    elif escolha == '3':
+        tempo = 0
+
+    return tempo
+
+
+# FUNÇÃO DE NARRATIVA
+def narrativa(comeco, final, arquivo):
+    file = open(arquivo)
+    dia = file.readlines()
+
+    nar = []
+    sleep(1)
+    print(end='\n')
+    for linha in range(len(dia)):
+        if final in dia[linha]:
+            break
+        elif comeco in dia[linha]:
+            nar.append(dia[linha][len(comeco) + 1:-1])
+    file.close()
+
+    for linha in nar:
+        if tempo == 0:
+            seg = 0
+        else:
+            seg = round(len(linha) / tempo)
+
+        if '{NOME}' in linha:
+            linha = linha.replace('{NOME}', perso_info['Nome'])
+        if '{a}' in linha:
+            if perso_info['Genero'] == 'M':
+                linha = linha.replace('{a}', 'o')
+            else:
+                linha = linha.replace('{a}', 'a')
+        if '{e}' in linha:
+            if perso_info['Genero'] == 'M':
+                linha = linha.replace('{e}', 'e')
+            else:
+                linha = linha.replace('{e}', 'a')
+        if '{ae}' in linha:
+            if perso_info['Genero'] == 'M':
+                linha = linha.replace('{ae}', '')
+            else:
+                linha = linha.replace('{ae}', 'a')
+
+        print(f'\033[32m{linha}')
+        sleep(seg)
+
+
 # FUNÇÃO QUE DESIGNA TODAS AS CARACTERÍSTICAS INICIAIS DO PERSONAGEM PRINCIPAL
 def caract():
     global perso_info
@@ -151,11 +222,11 @@ def caract():
         save.write(f'Nome: {nome}\n')
 
     # CLASSE ────────────────────────────────────────────────────────────────────────────
-    sleep(1)
-    print('\nAgora escolha sua classe!')
-    sleep(.5)
-    print('[1] \033[95mFeiticeiro\033[m [2] \033[37mCavalheiro\033[m [3] \033[33mArqueiro\033[m [4] Saber mais?')
     while True:
+        sleep(1)
+        print('\nAgora escolha sua classe!')
+        sleep(.5)
+        print('[1] \033[95mFeiticeiro\033[m [2] \033[37mCavalheiro\033[m [3] \033[33mArqueiro\033[m [4] Saber mais?')
         sleep(.5)
         classe = input('Digite um número para escolher a classe: ').strip()
 
@@ -191,23 +262,10 @@ def caract():
         # OPÇÃO 4 ─ EXPLICAÇÃO
         elif classe == '4':
             while True:
-                sleep(.5)
-                print('\033[33mClasses\033[32m são o que vão definir suas habilidades nesse jogo de texto.')
-                sleep(2)
-                print('O personagem terá quatro fatores para se preocupar: '
-                      '\033[31mVida\033[32m, \033[33mAtaque (físico)\033[32m, \033[37mDefesa\033[32m e \033[95mEnergia\033[32m.')
-                sleep(3)
-                print('Cada \033[33mClasse\033[32m tem attributes diferentes um dos outros.')
-                sleep(2)
-                print('Por exemplo, o \033[33mFeiticeiro\033[32m tem muita \033[95mEnergia\033[32m, '
-                      'porém seus ataques físicos e sua defesa não são dos melhores')
-                sleep(4)
-                print('São poucas opções, mas escolha o que gostar mais. '
-                      'Cada um terá um papel diferente no jogo.\033[m')
-                sleep(2)
+                narrativa('classes.', 'fim.', '.help')
 
                 while True:
-                    gotit = input('Entendeu? [S/N] ').upper().strip()
+                    gotit = input('\n\033[mEntendeu? [S/N] ').upper().strip()
                     if gotit not in 'SN':
                         sleep(1)
                         print('Oh não... Tente novamente.')
@@ -241,72 +299,6 @@ def skills():
     attributes_backup = attributes.copy()
 
     return attributes
-
-
-# FUNÇÃO PARA DEFINIR VELOCIDADE DE NARRATIVA
-def velo_narrativa():
-    print('QUAL A VELOCIDADE QUE VOCÊ PREFERE O TEXTO?')
-    print('\033[33m[1] NORMAL')
-    print('[2] RÁPIDO (Recomendado)')
-    print('[3] INSTANTÂNEO\033[m')
-    sleep(1)
-
-    while True:
-        escolha = input('Digite a velocidade: ')
-        if escolha not in '123':
-            sleep(1)
-            print('\033[31mNão é uma opção.\033[m\n')
-            continue
-        else:
-            break
-
-    global tempo
-    if escolha == '1':
-        tempo = 20
-    elif escolha == '2':
-        tempo = 70
-    elif escolha == '3':
-        tempo = 0
-
-    return tempo
-
-
-# FUNÇÃO DE NARRATIVA
-def narrativa(comeco, final, arquivo):
-    file = open(arquivo)
-    dia = file.readlines()
-
-    nar = []
-    sleep(1)
-    print(end='\n')
-    for linha in range(len(dia)):
-        if final in dia[linha]:
-            break
-        elif comeco in dia[linha]:
-            nar.append(dia[linha][len(comeco) + 1:-1])
-    file.close()
-
-    for linha in nar:
-        if tempo == 0:
-            seg = 0
-        else:
-            seg = round(len(linha) / tempo)
-
-        if '{NOME}' in linha:
-            linha = linha.replace('{NOME}', perso_info['Nome'])
-        elif '{a}' in linha:
-            if perso_info['Genero'] == 'M':
-                linha = linha.replace('{a}', 'o')
-            else:
-                linha = linha.replace('{a}', 'a')
-        elif '{e}' in linha:
-            if perso_info['Genero'] == 'M':
-                linha = linha.replace('{e}', 'e')
-            else:
-                linha = linha.replace('{e}', 'a')
-
-        print(f'\033[32m{linha}')
-        sleep(seg)
 
 
 # MOSTRAR attributes FORMATADOS E COLORIDOS:
@@ -510,7 +502,7 @@ def add_inve(key, value):
     global inventario
     inventario[key] = value
 
-    return inventario
+    modi_file(f' {key},', '.save', 2, 'a')
 
 
 # SALVAR CONQUISTAS NO .INFO E PEGÁ-LAS DE VOLTA CASO PRECISE

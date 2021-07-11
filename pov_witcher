@@ -1,0 +1,110 @@
+intro. Entidade: "Lá você conseguirá o que procura."
+intro. {NOME} (Você): "Mas isso é quilômetros daqui! Não sei se tenho Energia suficiente..."
+intro. Entidade: "Tome isso, e se apresse. Você não é o único que procura a esfera."
+intro. Uma poção azul brilhante se manifesta ao seu lado e você a toma.
+
+intro_2. A Entidade se dispersa e você se retira de sua tenda de viagem,
+intro_2. voltando ao frio extremo da região. A paisagem está embaçada de tanta neve que cai.
+intro_2. Porém, olhando para o horizonte, você percebe que tem duas opções.
+intro_2. Ir até o seu destino a pé e manter toda essa energia que ganhou com a poção.
+intro_2. Você seria invencível e poderia pegar a esfera de qualquer pessoa ou monstro.
+intro_2. Ou você poderia fazer um portal e chegar lá rapidamente.
+
+andar_intro. Se passaram três dias...
+andar_intro. Sua ideia de salvar Energia não foi muito bem elaborada,
+andar_intro. pois você teve que lutar com diversos monstros e você ainda não está nem na metade do caminho.
+andar_intro. ...
+andar_intro. Uma semana se passou, e você finalmente chegou.
+andar_intro. Contudo, o que você procurava foi levado há dias.
+andar_intro. É tarde demais para você...
+
+portal_intro. Você conjura o feitiço
+portal_intro. e quase instantâneamente uma brecha temporal aparece na sua frente.
+portal_intro. A paisagem do outro lado é quase oposta à que você está no momento,
+portal_intro. com árvores verdes por todos os lados e um céu azul radiante.
+portal_intro. Você consegue sentir que seu destino está próximo do outro lado.
+portal_intro. Você atravessa o portal e começa sua jornada.
+
+ato 1. Você sobe um morro íngreme e escuro.
+ato 1. Você sabe que não falta muito, e consegue sentir a presença do que procura logo à frente.
+ato 1. Não demora muito e a lua o encontra novamente, seu cajado refletindo a luz noturna.
+ato 1. Você está no pico do morro, à beira de um penhasco.
+ato 1. Fazendo parte da paisagem, uma enorme torre de pedra fortificada arranha as nuvens.
+ato 1. Seu topo brilha com luz interna. Você chegou ao seu destino.
+ato 1. Na sua frente, uma ponte de tábuas de madeira leva até a torre.
+ato 1. Ela tem uma aparência velha e nada segua. Algumas tábuas estão faltando e outras estão claramente quebradas.
+ato 1. Penhasco abaixo, você consegue ver um vasto campo de espinhos de pedra. Não seria muito confortável cair neles.
+
+ponte. Você toma coragem para arriscar andar pela ponte.
+ponte. Os primeiros cinco passos parecem ser tranquilos.
+ponte. Então você cai. Você grita enquanto os espinhos de pedra se aproximam de você em uma velocidade horrorizante.
+ponte. Em um instante de desespero você se lembra que é um feiticeiro e pode flutuar.
+ponte. Você diminui a velocidade da queda até estar parado no ar. Essa foi por pouco.
+ponte. Você observa o cenário.
+ponte. Você está há quilômetros da superfície.
+ponte. Porém, no escuro, a poucos metros de você,
+ponte. você consegue ver na parede do abismo uma caverna escura e misteriosa.
+
+superficie_ponte. Você gasta todas suas forças para subir.
+superficie_ponte. Porém, você não consegue alcançar a superfície antes de se esgotar completamente.
+
+caverna_ponte. Você flutua até a caverna na absoluta escuridão da noite e pousa.
+caverna_ponte. Você usa sua magia para criar chamas que iluminam o lugar, e então segue em frente.
+caverna_ponte. Depois de muito tempo andando, você chega em uma câmara iluminada apenas por algumas tochas.
+caverna_ponte. Descansando no canto da caverna há um enorme dragão albino.
+caverna_ponte. Rapidamente ele sente o seu cheiro e abre os olhos enormes, soltando fumaça pelas narinas.
+caverna_ponte. Você vê uma escada seguindo para a superfície, mas é impossível chegar nela sem passar pelo dragão.
+caverna_ponte. E a criatura não vai deixar você passar.
+caverna_ponte. Você se prepara para lutar.
+
+outro caminho. Se passaram três dias... O penhasco se estende por quilômetros.
+outro caminho. ...
+outro caminho. Uma semana se passou e você finalmente chegou,
+outro caminho. após diversos monstros e obstáculos.
+outro caminho. Contudo, o que você procurava já se foi há muito tempo.
+outro caminho. É tarde demais para você...
+
+atravessar magia. Você se concentra e começa a flutuar.
+atravessar magia. Você atravessa com segurança.
+atravessar magia. Você está de frente à torre. Só precisa entrar.
+
+porta_atravessar magia. Você enfeitiça a porta da frente para que destranque.
+porta_atravessar magia. Você se depara com uma alcateia de lobos mutantes na entrada.
+porta_atravessar magia. Eles rosnam e te atacam.
+porta_atravessar magia. Você consegue derrotar todos os lobos eventualmente.
+
+outro_atravessar magia. Você se dirige à parte de trás da torre,
+outro_atravessar magia. e começa a procurar por outra forma de entrar.
+outro_atravessar magia. Porém você sente a presença de outras pessoas fora da torre, atrás de você.
+
+esconder_atravessar magia. Você se torna invisível e se afasta da área, observando atentamente.
+esconder_atravessar magia. Alguns minutos depois, você escuta um cavalgar, e um cavalheiro montado em um cavalo sai da floresta.
+esconder_atravessar magia. Ele murmura algo sobre finalmente ter chegado, amarra o cavalo numa árvore e começa a procurar uma entrada.
+esconder_atravessar magia. Você vê ele deixando algo cair, porém ele não percebe.
+esconder_atravessar magia. Em pouco tempo, o cavalheiro parece achar alguma coisa.
+esconder_atravessar magia. Ele afasta alguma folhas e raízes e descobre um alçapão de madeira.
+esconder_atravessar magia. Ele abre sem nenhum esforço e mergulha na escuridão do porão da torre, sem perder tempo.
+
+pegar_item_atravessar magia. Você se apressa para ir atrás do cavalheiro, desfazendo sua invisibilidade.
+
+logo_atras_atravessar magia. Você começa a se dirigir para o alçapão, quando escuta um barulho nas folhas.
+logo_atras_atravessar magia. Você achou que a sensação de outros seres era apenas o cavalheiro e o cavalo, mas parece ter outra pessoa escondida.
+logo_atras_atravessar magia. Você se mantém quieto, e uma mulher desce das árvores como um ninja e corre para o alçapão, pulando direto no porão.
+logo_atras_atravessar magia. Você vai logo atrás.
+
+lutar_atravessar magia. Você se prepara para lutar, enchendo os punhos de magia.
+lutar_atravessar magia. Alguns minutos depois, você escuta um cavalgar, e um cavalheiro montado em um cavalo sai da floresta.
+lutar_atravessar magia. Ele para abruptamente assim que te vê, e desce do cavalo lentamente.
+lutar_atravessar magia. Ele pergunta quem você é, porém você se recusa a responder. Ele percebe que você também está procurando invadir a torre.
+lutar_atravessar magia. Doug: "Eu estou aqui em uma missão. Talvez nós pudessemos nos ajudar. Sou Doug, aliás."
+lutar_atravessar magia. {NOME} (Você): "Não vai rolar, Doug. Você provavelmente está aqui pelo mesmo motivo que eu, e eu não vou entregar a esfera para você."
+lutar_atravessar magia. Antes que Doug pudesse responder, uma flecha passa raspando pela sua orelha,
+lutar_atravessar magia. e uma mulher desce das árvores como um ninja, apontando um arco e uma flecha para você e Doug.
+lutar_atravessar magia. ???: "Nenhum de vocês vai pegar a esfera. Eu vou."
+lutar_atravessar magia. Ela nocauteia Doug e em poucos segundos, tudo está preto para você.
+lutar_atravessar magia. ...
+lutar_atravessar magia. Você acorda ainda no campo atrás da torre, Doug está levantando, e atrás de vocês um alçapão está aberto, levando pro porão da torre.
+lutar_atravessar magia. Você e Doug se entreolham e correm para dentro da torre.
+
+ato 2.
+

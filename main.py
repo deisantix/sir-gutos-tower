@@ -726,12 +726,12 @@ def main():
     print('─\033[32m~\033[m' * 20)
     print(f'\033[91m{"SIR GUTOs TOWER":^40}\033[m')
     print('─\033[32m~\033[m' * 20)
-
+    
+    info.ver_save()
+    
     sz = path.getsize('.info')
     if sz < 2:
         info.narrativa('bemvindo.', 'classes.', '.help')
-
-    info.ver_save()
 
     global personagem, atributos, arquivo, perdeu
 

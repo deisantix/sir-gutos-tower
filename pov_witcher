@@ -1,6 +1,6 @@
 intro. Entidade: "Lá você conseguirá o que procura."
 intro. {NOME} (Você): "Mas isso é quilômetros daqui! Não sei se tenho Energia suficiente..."
-intro. Entidade: "Tome isso, e se apresse. Você não é o único que procura a esfera."
+intro. Entidade: "Tome isso, e se apresse. Você não é {a} únic{a} que procura a esfera."
 intro. Uma poção azul brilhante se manifesta ao seu lado e você a toma.
 
 intro_2. A Entidade se dispersa e você se retira de sua tenda de viagem,
@@ -19,15 +19,15 @@ andar_intro. Contudo, o que você procurava foi levado há dias.
 andar_intro. É tarde demais para você...
 
 portal_intro. Você conjura o feitiço
-portal_intro. e quase instantâneamente uma brecha temporal aparece na sua frente.
+portal_intro. e quase instantâneamente uma brecha espacial aparece na sua frente.
 portal_intro. A paisagem do outro lado é quase oposta à que você está no momento,
 portal_intro. com árvores verdes por todos os lados e um céu azul radiante.
 portal_intro. Você consegue sentir que seu destino está próximo do outro lado.
 portal_intro. Você atravessa o portal e começa sua jornada.
 
 ato 1. Você sobe um morro íngreme e escuro.
-ato 1. Você sabe que não falta muito, e consegue sentir a presença do que procura logo à frente.
-ato 1. Não demora muito e a lua o encontra novamente, seu cajado refletindo a luz noturna.
+ato 1. Você sabe que não falta muito e consegue sentir a presença do que procura logo à frente.
+ato 1. Não demora muito e a lua {a} encontra novamente, seu cajado refletindo a luz noturna.
 ato 1. Você está no pico do morro, à beira de um penhasco.
 ato 1. Fazendo parte da paisagem, uma enorme torre de pedra fortificada arranha as nuvens.
 ato 1. Seu topo brilha com luz interna. Você chegou ao seu destino.
@@ -38,7 +38,7 @@ ato 1. Penhasco abaixo, você consegue ver um vasto campo de espinhos de pedra. 
 ponte. Você toma coragem para arriscar andar pela ponte.
 ponte. Os primeiros cinco passos parecem ser tranquilos.
 ponte. Então você cai. Você grita enquanto os espinhos de pedra se aproximam de você em uma velocidade horrorizante.
-ponte. Em um instante de desespero você se lembra que é um feiticeiro e pode flutuar.
+ponte. Em um instante de desespero você se lembra que é um{ae} feiticeir{a} e pode flutuar.
 ponte. Você diminui a velocidade da queda até estar parado no ar. Essa foi por pouco.
 ponte. Você observa o cenário.
 ponte. Você está há quilômetros da superfície.
@@ -107,4 +107,3 @@ lutar_atravessar magia. Você acorda ainda no campo atrás da torre, Doug está 
 lutar_atravessar magia. Você e Doug se entreolham e correm para dentro da torre.
 
 ato 2.
-

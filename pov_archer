@@ -1,0 +1,195 @@
+# INTRO
+intro. Você escuta um grupo de nobres falando sobre um item mágico guardado no topo de uma torre não tão longe daqui.
+intro. Esse item mágico pode valer uma fortuna.
+
+roubar_intro. Você atira em um dos nobres com seu arco e flecha e desce das sombras para pegar seus pertences.
+roubar_intro. Seu plano não vai muito bem, pois os guardas reais estavam perto.
+
+ir_embora_intro. Você se camufla nas sombras e segue seu caminho em busca do tal item.
+
+# ATO 1
+ato_1. Você entra na floresta, andando às cegas pela escuridão, até que você escuta um barulho entre as folhas.
+ato_1. Você percebe que é tarde demais quando você tenta se esconder, porém é impedido por uma mão humana.
+ato_1. A pessoa diz que é para você entregar todos seus itens de valor. Não é como se você tivesse muita coisa...
+
+entregar_tudo. Você dá todos seus pertences, incluindo arco e flechas, e continua seu caminho em paz.
+
+continuar_floresta_sem_defesa. Você continua andando na floresta escura e tropeça em alguma coisa.
+continuar_floresta_sem_defesa. Você força os olhos para enxergar no que tropeçou. Foi um cogumelo.
+continuar_floresta_sem_defesa. Você não dá atenção, mas o chão se abre um monstro cogumelo sai do chão e te ataca.
+continuar_floresta_sem_defesa. Contudo, você não tem com o que lutar.
+
+nao_entregar. Você recusa dar seus pertences e se prepara para lutar.
+
+ganhou_nao_entregar. O humano cai no chão inconsciente, e você aproveita para vasculhar seus itens.
+ganhou_nao_entregar. Você acha algumas partes de armadura e as coloca.
+
+continuar_floresta. Você continua andando na floresta escura e tropeça em alguma coisa.
+continuar_floresta. Você força os olhos para enxergar no que tropeçou. Foi um cogumelo.
+continuar_floresta. Você não dá atenção, mas o chão se abre um monstro cogumelo sai do chão e te ataca.
+
+ganhou_monstro_cogumelo. O monstro explode em fumaça e deixa um cogumelo vermelho cair no chão.
+
+pegar_cogumelo. Você pega o cogumelo e coloca nas suas coisas.
+
+nao_pegar_cogumelo. Você prefere ignorar o cogumelo insignificante.
+
+fugir. Você convence o ladrão que vai entregar tudo, e assim que ele te solta, você foge, se camuflando na floresta e subindo as árvores.
+fugir. Depois de ter certeza que os despitou, você segue o seu caminho.
+
+torre. Depois de um tempo andando você começa a escutar cavalgar de um cavalo. Você descobre que vem de um cavalheiro de armadura e tudo.
+torre. Você se esconde nas folhas das árvores e começa a segui-lo, para ser levado a uma torre de pedra enorme.
+torre. Você deduz que essa é a torre do item mágico. O homem desce do cavalo e você tem que decidir o que fazer.
+
+entrar_antes_torre. Você desce das árvores e nocauteia o cavalheiro. Você procura e encontra um alçapão escondido por raízes.
+
+entrar_depois_torre. Você espera o homem encontrar um alçapão escondido por raízes e entrar na torre.
+entrar_depois_torre. Logo depois, antes que você pudesse fazer algo, um homem vestindo um sobretudo aparece do nada e entra na torre também.
+entrar_depois_torre. É pior do que você imaginava. Você corre para entrar na torre.
+
+# ATO 2 CAMINHO 1
+ato_2_1. Você desce as escadas e entra em um porão mal iluminado. Você observa o cômodo e vê uma gaiola com um grande javali dentro.
+ato_2_1. Ele é verde, com flores nascendo nas costas e raízes nascendo dos pés. É um espírito da natureza.
+
+lutar_javali. O javali se desfaz em fumaça e alguma coisa cai no chão.
+lutar_javali. É um dente de javali.
+
+sair_javali. Você prefere deixar o javali em paz.
+
+# ATO 2 CAMINHO 2
+ato_2_2. Você desce as escadas e entra em um porão mal iluminado.
+ato_2_2. Você consegue ouvir o cavalheiro e o homem de sobretudo discutindo no mesmo cômodo.
+
+nocautear_os_dois. Você tem a ideia de derrubar os dois para poder seguir com calma.
+nocautear_os_dois. O cavalheiro te vê tentando se esconder pelo cenário, e o homem de sobretudo rapidamente lança um feitiço em você, que te paralisa.
+nocautear_os_dois. Eles recusam te soltar e continuam o caminho sem você.
+
+passar_fininho. Você passa escondid{a} por trás dos dois e começa as subir as escadas. Porém eles te veem.
+passar_fininho. Você precisa correr.
+
+# CONTINUAÇÃO DO ATO 2 SEM GUSTAV
+primeira_sala. Você sobe as escadas para o térreo e chega em outro depósito.
+primeira_sala. Há duas portas em paredes opostas no cômodo.
+
+sala_estar. Você entra em uma sala de lazer. Só há uma porta do outro lado da sala.
+sala_estar. Não parece haver haver nada de interessante aqui além de um retrato de um homem esquelético e assustador vestido de rei em cima da lareira.
+sala_estar. Então você entra no próximo cômodo e se depara com uma reunião de monstros. Eles são monstros elementais do fogo, o que deixa a sala extremamente quente.
+
+um_por_um. Você pula para o meio do cômodo, levantando seu arco.
+
+observar_sala. Você vê copos de chá na mesinha de centro, o que é meio controverso para criaturas do fogo.
+observar_sala. Há uma pá do outro lado da sala e irrigadores anti-incêndio no teto.
+
+irrigadores. Você tira uma flecha da aljava e atira certeiro nos irrigadores de incêndio.
+irrigadores. Nada acontece. Os irrigadores não funcionam, por isso ainda não ativaram com tanta fumaça no cômodo.
+
+pa. Você corre até o outro lado da sala, agarra a pá encostada na parede e acerta o primeiro monstro que vê.
+pa. O monstro cai inconsciente, porém os restantes parecem enfurecidos.
+
+copos. Você pula para o centro do cômodo e joga um copo de chá no rosto do primeiro monstro que vê.
+copos. O monstro evapora, deixando todas as roupas e itens para trás.
+copos. Os restantes parecem indignados por um momento, porém no outro estão todos correndo para fora do quarto, apavorados.
+
+monstro_porta. Você continua seu caminho, quando na sala seguinte dá de cara com um ogro enorme guardando uma porta.
+monstro_porta. Pode significar que essa é uma porta importante. Porém o monstro está dormindo no ponto.
+
+passar_fininho_monstro_porta. Você se camufla no cenário, andando de ponta do pé. Você abre a porta, que está destrancada e passa por ela.
+passar_fininho_monstro_porta. Você conseguiu! Porém na sua frente há alguém bem pior...
+passar_fininho_monstro_porta. Um homem esquelético e pálido de dois metros de altura está te observando com uma expressão estranha.
+passar_fininho_monstro_porta. Ele ri e balança o cajado dele em sua direção.
+
+enfrentar_monstro_porta. Você vê o ogro como mais uma oportunidade de se fortalecer, então você o acorda com uma flechada na cabeça.
+enfrentar_monstro_porta. A flecha nem mesmo o arranha, mas ele acorda e olha para você enfurecido.
+enfrentar_monstro_porta. Você se prepara para lutar.
+
+perdeu_monstro_porta. O ogro é muito mais poderoso do que você imaginou. Ele te derruba no chão e está prestes a dar o último golpe.
+perdeu_monstro_porta. Porém alguém rapidamente se coloca na frente e o monstro se desfaz em fumaça. É o homem de sobretudo que você viu entrar na torre atrás do cavalheiro.
+perdeu_monstro_porta. Quando você olha para trás, o cavalheiro também está presente. Eles se apresentam como Gustav, o feiticeiro, e Doug, o cavalheiro.
+perdeu_monstro_porta. Você percebe que não vai conseguir chegar até o final sozinh{a}, então aceita fazer parte do grupo.
+
+gustav_perdeu_monstro_porta. O ogro é muito mais poderoso do que você imaginou. Ele te derruba no chão e está prestes a dar o último golpe.
+gustav_perdeu_monstro_porta. Porém alguém rapidamente se coloca na frente e o monstro se desfaz em fumaça. É o Gustav!
+gustav_perdeu_monstro_porta. Quando você olha para trás, o cavalheiro também está presente. Ele se apresenta como Doug, o cavalheiro.
+gustav_perdeu_monstro_porta. Você percebe que não vai conseguir chegar até o final sozinh{a}, então aceita fazer parte do grupo.
+
+continuar_monstro_porta. Vocês entram na sala seguinte e veem o homem esquelético em carne e osso na sua frente, Sir Guto.
+continuar_monstro_porta. Ele tem a pele pálida, seus braços e pernas são desproporcionalmente grandes e esqueléticos, e veste uma roupa vermelha de rei.
+continuar_monstro_porta. Vocês confrontram ele, mas ele corre para os andares de cima assim que tem oportunidade.
+
+lobos. Você entra em uma sala grande, porém infestada de monstros, lobos mutantes.
+lobos. Eles rosnam, e você se prepara para lutar. Mas no final são muitos para você resistir.
+
+# ONDE JOGADOR ENCONTRA GUSTAV CASO TENHA ESCOLHIDO CAMINHO 1
+lobos_gustav_aviso. Você vai em direção da porta da direita, mas alguém te impede, dizendo para não ir nessa direção.
+lobos_gustav_aviso. É um homem em um sobretudo, ele diz que seu nome é Gustav, e que também está procurando o item mágico. Você pode se juntar a ele, se quiser.
+
+lobos_ignorar_aviso_sem_gustav. Você vai para a direita mesmo com Gustav te avisando para não ir nessa direção.
+lobos_ignorar_aviso_sem_gustav. Você entra em uma sala grande, porém infestada de monstros, lobos mutantes.
+lobos_ignorar_aviso_sem_gustav. Eles rosnam, e você se prepara para lutar. Mas no final são muitos para você resistir.
+
+lobos_ignorar_aviso_com_gustav. Você vai para a direita mesmo com Gustav te avisando para não ir nessa direção, e leva ele junto.
+lobos_ignorar_aviso_com_gustav. Vocês entram em uma sala grande, porém infestada de monstros, lobos mutantes.
+lobos_ignorar_aviso_com_gustav. Eles rosnam, e vocês se preparam para lutar. Mas no final são muitos para você resistir.
+
+lobos_gustav_recusar. Você decide não se juntar a ele e continua seu caminho. Você também pede para que ele se mantenha afastado.
+
+# CONTINUAÇÃO DO ATO 2 COM GUSTAV
+sala_estar_gustav. Vocês entram em uma sala de lazer. Só há uma porta do outro lado da sala.
+sala_estar_gustav. Não parece haver haver nada de interessante aqui além de um retrato de um homem esquelético e assustador vestido de rei em cima da lareira.
+sala_estar_gustav. Então vocês entram no próximo cômodo e se deparam com uma reunião de monstros. Eles são monstros elementais do fogo, o que deixa a sala extremamente quente.
+
+um_por_um_gustav. Vocês começam a atacar os monstros, mas são muitos para ganhar sem uma estratégia.
+
+copos_gustav. Você pula para o centro do cômodo e joga um copo de chá no rosto do primeiro monstro que vê.
+copos_gustav. O monstro evapora, deixando todas as roupas e itens para trás.
+copos_gustav. Os restantes parecem indignados por um momento, porém no outro estão todos correndo para fora do quarto, apavorados.
+copos_gustav. Gustav ri e te parabeniza pela ideia genial.
+
+pedir_ajuda_gustav. Você pede ajuda a Gustav para derrotar todos esses monstros.
+pedir_ajuda_gustav. Gustav parece se concentrar e uma nuvem de tempestade se manifesta dentro do cômodo, chuvendo e evaporando todos os monstros presentes.
+
+monstro_porta_gustav. Vocês continuam seu caminho, quando na sala seguinte dão de cara com um ogro enorme guardando uma porta.
+monstro_porta_gustav. Pode significar que essa é uma porta importante. Porém o monstro está dormindo no ponto.
+
+fininho_monstro_porta_gustav. Você se camufla no cenário, andando de ponta do pé e vai em direção a porta. Porém Gustav não é tão silencioso.
+fininho_monstro_porta_gustav. O ogro acorda enfurecido e vocês não têm para onde fugir. Vocês se preparam para lutar.
+
+enfrentar_monstro_porta_gustav. Vocês decidem que a única forma de continuar é se livrando do monstros, então você o acorda com uma flechada na cabeça.
+enfrentar_monstro_porta_gustav. A flecha nem mesmo o arranha, mas ele acorda e olha para vocês enfurecido.
+enfrentar_monstro_porta_gustav. Vocês se preparam para lutar.
+
+ganhou_monstro_porta_gustav. O ogro explode em fumaça em meio a gritos grotescos. Ele foi bem mais difícil do que vocês imaginavam.
+ganhou_monstro_porta_gustav. Vocês olham para trás e o cavalheiro está observando os dois.
+ganhou_monstro_porta_gustav. Sem ajuda você não teria chegado aqui, então você oferece ao cavalheiro que se junte a vocês. Ele aceita, e se apresenta como Doug.
+
+# ATO 3
+ato_3. Vocês sobem até o último andar da torre, onde Sir Guto os espera pacientemente.
+ato_3. O que vocês procuram está no centro da sala, uma enorme esfera de cristal poderosíssima. Ela promete realização de um desejo. Literalmente qualquer coisa.
+ato_3. Sir Guto se vira para vocês, e vocês se preparam para a luta final.
+
+ganhou_sir_guto. Em meio a gritos, Sir Guto se desfaz em fumaça, deixando seu cajado mágico e roupa de rei caírem.
+ganhou_sir_guto. Vocês olham para a esfera no meio da sala, e se olham entre si. Vocês se ajudaram para chegar até aqui com o mesmo objetivo, porém com caminhos diferentes.
+ganhou_sir_guto. A esfera é capaz de realizar desejos de apenas uma pessoa. É hora da grande decisão.
+
+perdeu_sir_guto. Sir Guto é forte demais até mesmo para vocês três juntos.
+
+motivos_gustav. Gustav é um feiticeiro solitário que vive de jornadas para descobrir o desconhecido.
+motivos_gustav. Mas sua curiosidade com o mágico acabou levando ele para uma fonte sombria, que suga a vida dele aos poucos.
+motivos_gustav. Com a esfera ele poderia desejar poder viver.
+
+motivos_doug. Doug é um cavalheiro no reino do sul. Ele tem a missão de entregar a esfera pro rei.
+motivos_doug. Caso contrário, ele não poderá voltar para o reino, e se volta sem a esfera, poderá ser executado.
+
+escolher_gustav. Você pensa bem e decide que Gustav deveria levar a esfera. Doug parece aborrecido, porém concorda.
+escolher_gustav. Gustav consegue continuar vivendo e continua suas jornadas, e você volta a morar nas ruas.
+escolher_gustav. Porém Gustav chama você para que você faça parte das aventuras dele, e agora você tem um propósito.
+escolher_gustav. Vocês encontram Doug uma semana depois, fugindo dos cavalheiros do próprio rei, e ele aceita fazer parte do grupo de vocês.
+escolher_gustav. Agora vocês são um grupo permanente.
+
+escolher_doug. Você pensa bem e decide que Doug deveria levar a esfera. Gustav concorda com você, sem parecer sentir nada.
+escolher_doug. Doug consegue voltar para casa e é promovido pelo rei à nobreza. O reino do sul se torna o mais rico do continente.
+escolher_doug. Gustav morre em uma semana e você volta a viver nas ruas.
+
+escolher_você. Você pensa bem e decide que você deveria levar a esfera. Doug parece enfurecido, mas Gustav o acalma.
+escolher_você. Você passa a viver uma vida de luxo, tendo tudo que sempre quis e ajudando os pobres.
+escolher_você. Doug se torna um exilado do reino, sendo perseguido, e Gustav morre após uma semana.

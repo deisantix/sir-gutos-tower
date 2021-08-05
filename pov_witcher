@@ -1,0 +1,144 @@
+intro. A Entidade aponta para onde você precisa ir, porém é quilômetros de onde você está!
+intro. Quando você afirma que talvez não tenha Energia suficiente, a Entidade lhe entrega uma poção e você a toma.
+
+intro_2. A Entidade se dispersa e você volta para o frio extremo das montanhas.
+intro_2. Você percebe que há duas opções. Andar e salvar Energia, ou seguir os conselhos da Entidade de fazer um portal.
+
+andar_intro. Uma semana se passou e você finalmente chegou. Contudo, você gastou toda sua energia no caminho.
+andar_intro. O que você procurava foi levado há dias, e já é tarde demais para você...
+
+portal_intro. Você conjura um portal e entra em um cenário tropical e úmido no meio da floresta.
+portal_intro. Você inicia sua jornada.
+
+ato_1. Você sobe um morro íngreme e escuro. Você consegue sentir que está perto.
+ato_1. Você finalmente chega no topo do morro e se depara com uma grande torre. Você chegou ao seu destino.
+ato_1. Na sua frente há uma ponte arruinada atravessando um grande penhasco com um vasto campo de espinhos de pedra no fundo.
+
+ponte. Você arrisca pela ponte e cai. Porém você lembra que é um feiticeiro e consegue flutuar.
+ponte. Você para no ar bem a tempo de não ser triturado pelos espinhos.
+ponte. No escuro, você consegue ver que há uma entrada de uma caverna na parede do abismo.
+
+superficie_ponte. Você gasta todas suas forças para subir.
+superficie_ponte. Porém, você não consegue alcançar a superfície antes de se esgotar completamente.
+
+caverna_ponte. Você entra na caverna escura e usa sua magia para iluminar o caminho.
+caverna_ponte. Você finalmente acha uma câmara subterrânea, porém há um grande dragão albino adormecido.
+caverna_ponte. Mas não adormecido por muito tempo, pois ele sente seu cheiro e desperta.
+caverna_ponte. Você se prepara para lutar.
+
+outro_caminho. Cinco dias se passaram e você finalmente chegou. Contudo, você gastou toda sua energia no caminho.
+outro_caminho. O que você procurava foi levado há dias, e já é tarde demais para você...
+
+atravessar_magia. Você se concentra e flutua até o outro lado.
+atravessar_magia. Você está de frente à torre. Só precisa entrar.
+
+porta_atravessar_magia. Você consegue invadir a torre com magia, porém uma alcateia de lobos mutantes de guarda te atacam.
+
+outro_atravessar_magia. Você se dirige à parte de trás da torre, e começa a procurar por outra forma de entrar.
+outro_atravessar_magia. Porém você sente a presença de outras pessoas fora da torre, atrás de você.
+
+esconder_atravessar_magia. Você se torna invisível e um cavalheiro em cima de um cavalo sai da floresta.
+esconder_atravessar_magia. Ele deixa algo cair quando desce do cavalo.
+esconder_atravessar_magia. Não demora muito tempo até ele encontrar um alçapão para o porão da torre e entrar.
+
+pegar_item_atravessar_magia. Quando você vai pegar o item, uma mulher sai de cima das árvores e corre para dentro da torre.
+pegar_item_atravessar_magia. Você pega o item e se apressa para ir atrás dos dois.
+
+logo_atras_atravessar_magia. Quando você está indo em direção ao alçapão, uma mulher sai de cima das árvores e corre para dentro da torre.
+logo_atras_atravessar_magia. Você se apressa para ir atrás dos dois.
+
+lutar_atravessar_magia. Você se prepara para lutar e um cavalheiro montado em um cavalo sai da floresta.
+lutar_atravessar_magia. Ele te observa desconfiado e vocês trocam algumas informações, o nome dele é Doug, porém você não está disposto a ajudá-lo.
+lutar_atravessar_magia. Então de repente outra pessoa sai da floresta, e nocauteia vocês dois.
+lutar_atravessar_magia. Vocês dois acordam desnorteados e correm para alcançar quem for que seja.
+
+ato_2_1. Você desce as escadas e entra em um porão mal iluminado, onde o cavalheiro está caído no chão.
+ato_2_1. Ele está vivo, você checa. Você observa o cômodo e vê uma gaiola com um grande javali dentro.
+ato_2_1. Ele é verde, com flores nascendo nas costas e raízes nascendo dos pés. É um espírito da natureza.
+
+lutar_javali. O javali se desfaz em fumaça e você sente sua essência te rodear.
+
+sair_javali. Você prefere deixar o javali em paz.
+
+continuar_ato_2_1. Você olha para trás e o cavalheiro está se levantando.
+continuar_ato_2_1. Vocês trocam algumas informações, o nome dele é Doug. Vocês decidem se ajudar para ir atrás a mulher que entrou na frente de vocês.
+continuar_ato_2_1. Assim, vocês terão menos chance de perder o que procuram.
+
+ato_2_2. Vocês descem as escadas e entram em um porão mal iluminado. A pessoa que derrubou vocês não está à vista.
+ato_2_2. Você observa o cômodo e vê uma gaiola com um grande javali dentro.
+ato_2_2. Ele é verde, com flores nascendo nas costas e raízes nascendo dos pés. É um espírito da natureza.
+ato_2_2. Doug te apressa para que vocês sigam o caminho.
+
+primeira_sala. Vocês correm paras as escadas e sobem para o térreo e chegam em outro depósito.
+primeira_sala. Há duas portas em paredes opostas no cômodo.
+
+sala_estar. Vocês entram em uma sala de lazer. Só há uma porta do outro lado da sala.
+sala_estar. Não parece haver haver nada de interessante aqui além de um retrato de um homem esquelético e assustador vestido de rei em cima da lareira.
+sala_estar. Vocês passam por um cômodo poluído de fumaça de monstro, o que é um sinal que alguém passou por ali recentemente.
+sala_estar. Vocês chegam em outra sala e lá está ela, lutando com um monstro. Ela parece estar cansada e está perdendo a luta.
+
+ajudar_noelle. Você avança e destrói o monstro bem no momento em que ele iria dar seu ataque final na desconhecida.
+ajudar_noelle. Ela não agradece, e tampouco quer falar com vocês. Vocês perguntam se ela quer ajudar, você vê que ela considera negar, mas vê que não tem outra opção.
+ajudar_noelle. Sem ajuda, nenhum de vocês conseguem chegar muito longe.
+
+continuar_noelle. Vocês entram na sala seguinte e veem Sir Guto em carne e osso na frente de vocês,
+continuar_noelle. ele tem a pele pálida, seus braços e pernas são desproporcionalmente grandes e esqueléticos, e claro, veste uma roupa vermelha de rei.
+continuar_noelle. Vocês confrontam ele, mas ele corre para os andares de cima assim que tem oportunidade.
+
+nao_ajudar_noelle. Doug tenta ajudar, mas você o impede. O monstro acaba derrotando a mulher, que cai no chão inconsciente.
+nao_ajudar_noelle. O monstro vem para cima de vocês.
+
+ganhou_monstro_noelle. O monstro explode em fumaça e Doug te observa incrédulo.
+ganhou_monstro_noelle. Ele se vira e vai embora. Você está sozinho agora.
+
+continuar_monstro_noelle. Você entra na sala seguinte e vê Sir Guto em carne e osso na sua frente.
+continuar_monstro_noelle. Ele tem a pele pálida, seus braços e pernas são desproporcionalmente grandes e esqueléticos, e claro, veste uma roupa vermelha de rei.
+continuar_monstro_noelle. Você confronta ele, mas ele te deixa para morrer com uma horda de monstros que avançam para cima de você.
+
+lobos. Vocês entram em uma sala grande, porém infestada de monstros, lobos mutantes.
+lobos. Eles rosnam, e vocês se preparam para lutar. Mas no final são muitos para você e Doug resistirem.
+
+ato_3. Vocês sobem até o último andar da torre, onde Sir Guto os espera pacientemente.
+ato_3. O que vocês procuram está no centro da sala, uma enorme esfera de cristal poderosíssima. Ela promete realização de um desejo. Literalmente qualquer coisa.
+ato_3. Sir Guto se vira para vocês, e vocês se preparam para a luta final.
+
+ganhou_sir_guto. Em meio a gritos, Sir Guto se desfaz em fumaça, deixando seu cajado mágico e roupa de rei caírem.
+ganhou_sir_guto. Vocês olham para a esfera no meio da sala, e se olham entre si. Vocês se ajudaram para chegar até aqui com o mesmo objetivo, porém com caminhos diferentes.
+ganhou_sir_guto. A esfera é capaz de realizar desejos de apenas uma pessoa. É hora da grande decisão.
+
+perdeu_sir_guto. Sir Guto é forte demais até mesmo para vocês três juntos.
+
+motivos_doug. Doug é um cavalheiro no reino do sul. Ele tem a missão de entregar a esfera pro rei.
+motivos_doug. Caso contrário, ele não poderá voltar para o reino, e se volta sem a esfera, poderá ser executado.
+
+motivos_noelle. Noelle é uma arqueira sem teto, que vive de roubar os mais ricos para poder sobreviver.
+motivos_noelle. Com a esfera ela poderia ganhar dinheiro suficiente para viver uma vida confortável, ou então fazer um pedido para que isso aconteça.
+
+escolher_doug. Você pensa bem e decide que Doug deveria levar a esfera. Noelle fica enfurecida e avança para cima de vocês, porém você a impede com sua magia.
+escolher_doug. Doug consegue voltar para casa e é promovido pelo rei para a nobreza. O reino cresce e se torna o mais rico do continente.
+escolher_doug. Noelle volta a viver sua vida antiga, roubando para sobreviver.
+escolher_doug. Você morre após uma semana. A magia estava te consumindo, e você queria a esfera para que pudesse continuar vivendo.
+
+escolher_noelle. Você pensa bem e decide que Noelle deveria levar a esfera. Doug parece enfurecido, mas concorda com você.
+escolher_noelle. Noelle passa a viver uma vida de luxo, podendo ter o que nunca pode ter, e sempre ajudando os mais pobres.
+escolher_noelle. Doug se torna um exilado do reino, não podendo retornar, e sendo caçado por outros cavalheiros do rei.
+escolher_noelle. Você morre após uma semana. A magia estava te consumindo, e você queria a esfera para que pudesse continuar vivendo.
+
+escolher_você. Você pensa bem e decide que você deveria levar a esfera. Noelle fica enfurecida, e Doug parece indignado. Você foge com a esfera.
+escolher_você. Doug se torna um exilado do reino, não podendo retornar, e sendo caçado por outros cavalheiros do rei.
+escolher_você. Noelle volta a viver sua vida antiga, roubando para sobreviver.
+escolher_você. Você vive. A magia estava te consumindo e você tinha pouco tempo. Você agora tem a oportunidade de viver uma vida longa, com mais aventuras.
+
+escolher_todos. Você decide que não tem como escolher o destino dos seus companheiros. Você deseja que todos tenham seus desejos realizados.
+escolher_todos. A esfera brilha e se multiplica. Agora vocês têm três esferas mágicas.
+escolher_todos. Doug consegue voltar para casa e é promovido pelo rei para a nobreza. O reino cresce e se torna o mais rico do continente.
+escolher_todos. Noelle passa a viver uma vida de luxo, podendo ter o que nunca pode ter, e sempre ajudando os mais pobres.
+escolher_todos. Você vive. A magia estava te consumindo e você tinha pouco tempo. Você agora tem a oportunidade de viver um vida longa, com mais aventuras.
+
+consequencia_escolher_todos. Mas espera... Algo não parece certo.
+consequencia_escolher_todos. Você sente sua realidade tremer e vacilar.
+consequencia_escolher_todos. De repente, você está de volta ao momento da escolha.
+
+final_misterioso. As esferas começam a brilhar com tanta intensidade que você não consegue enxergar nada.
+final_misterioso. Quando o brilho cessa, você não está mais na torre, e sim em uma floresta sombria iluminada apenas pela luz da lua.
+final_misterioso. As folhas caídas das árvores indicam um caminho longo. Sua única opção é segui-las.

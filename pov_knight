@@ -1,0 +1,99 @@
+intro. O rei é bem claro que você não pode voltar ao castelo sem o item que ele está pedindo.
+intro. Você se prepara para sair do castelo.
+intro. Você sobe em seu cavalo, Han, e começa sua jornada.
+
+ato_1. Você entra na floresta e se depara com dois caminhos traçados.
+ato_1. Um caminho leva para uma área escura e assombrosa e o outro, para um lugar basicamente oposto, alegre e ensolarado.
+ato_1. Você sente um impulso dentro de você de ir pelo caminho esverdeado e alegre.
+
+caminho_alegre_ato_1. Você segue o impulso de ir pelo caminho mais ensolarado e aparentemente seguro.
+caminho_alegre_ato_1. O caminho é lindo e pacífico. Você escuta risada e conversas alegres a sua volta, as flores e árvores parecem dançar.
+caminho_alegre_ato_1. Você decide que não quer mais sair dali.
+
+caminho_sombrio_ato_1. Você entra na escuridão silenciosa, um medo percorre você.
+caminho_sombrio_ato_1. Você sente algo de observando, então você desce do cavalo. O que você pensava que fosse uma árvore morta, se revela uma criatura humanoide.
+caminho_sombrio_ato_1. Você se prepara para lutar.
+
+continuar_caminho_sombrio. O monstro explode em fumaça e algo cai no chão na sua frente. Aparentemente é uma barrinha de energia.
+
+pegar_barrinha_caminho_sombrio. Você pega a Barrinha Protein e coloca no seu bolso.
+
+nao_pegar_barrinha_caminho_sombrio. Você prefere não confiar em nada que caiu de um monstro como aquele.
+
+torre. Você segue seu caminho e horas depois finalmente sai da floresta, avistando uma enorme torre de pedra.
+torre. Você chegou pela parte de trás.
+
+procurar_entrada_visivel. Você desce do cavalo e dá a volta na torre e encontra uma grande porta. Você a abre e se depara com uma alcateia de lobos mutantes te encarando.
+procurar_entrada_visivel. Eles te atacam logo em seguida. Sua defesa é forte, porém não contra tantos monstros de uma vez só.
+
+procurar_entrada_escondida. Você desce do cavalo e começa a procurar entre as plantas.
+procurar_entrada_escondida. Finalmente, você encontra um alçapão por entre raízes. Você o abre e entra sem hesitar.
+
+ato_2. Você desce para um porão escuro e poeirento. O cômodo não parece muito interessante, exceto por uma gaiola com um animal enorme dentro.
+ato_2. Parece um javali, mas é verde e com plantas por todo o corpo. Você nunca viu algo assim antes.
+
+lutar_javali. O javali explode em fumaça e deixa cair algo. Parece uma presa.
+
+nao_lutar_javali. Você prefere deixar o javali em paz.
+
+subir_torre. Você sente alguém passando por você. Quando você olha para trás, alguém está subindo as escadas para o andar de cima.
+subir_torre. Você começa a ir atrás da pessoa, porém um homem com uma barba e um cajado entra no porão por onde você entrou.
+subir_torre. Ele diz que uma mulher entrou logo atrás de você, e que provavelmente está atrás do item que você procura, e coincidentemente o mago também quer.
+subir_torre. O nome do mago é Gustav. Vocês se juntam para ir atrás da mulher.
+
+primeira_sala. Vocês correm para as escadas e sobem para o térreo e chegam em outro depósito.
+primeira_sala. Há duas portas em paredes opostas no cômodo.
+
+esquerda. Vocês seguem pela esquerda e finalmente alcançam a mulher. Ela está lutando com alguns monstros, e perdendo.
+esquerda. Ela parece estar cansada de tanto lutar.
+
+ajudar_noelle. Você avança e destrói os monstros restantes bem no momento em que a mulher estava cercada.
+ajudar_noelle. Ela não agradece, e tampouco quer falar com vocês. Vocês perguntam se ela quer ajudar, ela começa a negar, porém vê que não tem outra opção.
+ajudar_noelle. Sem ajuda, nenhum de vocês conseguem chegar muito longe. Aliás, o nome dela é Noelle, ela diz.
+
+continuar_noelle. Vocês entram na sala seguinte e veem Sir Guto em carne e osso na frente de vocês,
+continuar_noelle. ele tem a pele pálida, seus braços e pernas são desproporcionalmente grandes e esquelético, e claro, veste uma roupa vermelha de rei.
+continuar_noelle. Vocês confrontam ele, mas ele corre para os andares de cima da torre, como um covarde. Vocês o seguem.
+
+nao_ajudar_noelle. Gustav tenta ajudar, porém você o impede. Os monstros acabam derrotando a mulher, que cai no chão inconsciente.
+nao_ajudar_noelle. Os restantes vem pra cima de vocês.
+
+ganhou_monstro_noelle. O monstro explode em fumaça e Gustav te observa incrédulo.
+ganhou_monstro_noelle. Ele se vira e vai embora. Você está sozinho agora.
+
+continuar_monstro_noelle. Você entra na sala seguinte e vê Sir Guto em carne e osso na sua frente.
+continuar_monstro_noelle. Ele tem a pele pálida, seus braços e pernas são desproporcionalmente grandes e esqueléticos, e claro, veste uma roupa vermelha de rei.
+continuar_monstro_noelle. Você confronta ele, porém ele apenas balança o cajado e você é derrotado.
+
+lobos. Vocês entram em uma sala grande, porém infestada de monstros lobos mutantes.
+lobos. Eles rosnam, e vocês se preparam para lutar, mas no final são muitos para você e Gustav resistirem.
+
+ato_3. Vocês sobem até o último andar da torre, onde Sir Guto os espera pacientemente.
+ato_3. O que vocês procuram está no centro da sala, uma enorme esfera de cristal poderosíssima. Ela promete realização de um desejo. Literalmente qualquer coisa.
+ato_3. Sir Guto se vira para vocês, e vocês se preparam para a luta final.
+
+ganhou_sir_guto. Em meio a gritos, Sir Guto se desfaz em fumaça, deixando seu cajado mágico e roupa de rei caírem.
+ganhou_sir_guto. Vocês olham para a esfera no meio da sala, e se olham entre si. Vocês se ajudaram para chegar até aqui com o mesmo objetivo, porém com caminhos diferentes.
+ganhou_sir_guto. A esfera é capaz de realizar desejos de apenas uma pessoa. É hora da grande decisão.
+
+perdeu_sir_guto. Sir Guto é forte demais até mesmo para vocês três juntos.
+
+motivos_gustav. Gustav é um feiticeiro solitário que vive de jornadas para descobrir o desconhecido.
+motivos_gustav. Mas sua curiosidade com o mágico acabou levando ele para uma fonte sombria, que suga a vida dele aos poucos.
+motivos_gustav. Com a esfera ele poderia desejar poder viver.
+
+motivos_noelle. Noelle é uma arqueira sem teto, que vive de roubar os mais ricos para poder sobreviver.
+motivos_noelle. Com a esfera ela poderia ganhar dinheiro suficiente para viver uma vida confortável, ou então fazer um pedido para que isso aconteça.
+
+escolher_gustav. Você pensa bem e decide que Gustav deveria levar a esfera. Noelle fica enfurecida e avança para cima de vocês, porém você a impede com seu escudo.
+escolher_gustav. Gustav consegue continuar vivendo e continua suas jornadas, e você vira um exilado do seu próprio reino.
+escolher_gustav. Porém Gustav chama você para que você faça parte das aventuras dele, e embora você tenha perdido uma casa, você ganhou outra.
+escolher_gustav. Vocês encontram Noelle uma semana depois e ela aceita viajar com vocês. Vocês se tornam um grupo permanente.
+
+escolher_noelle. Você pensa bem e decide que Noelle deveria levar a esfera. Gustav concorda com você, sem parecer sentir nada.
+escolher_noelle. Noelle passa a viver uma vida de luxo, podendo ter o que nunca pode ter, e sempre ajudando os mais pobres.
+escolher_noelle. Gustav morre após uma semana. E você vira um exilado do seu próprio reino, sendo perseguido por outro cavalheiros do rei.
+
+escolher_você. Você pensa bem e decide que você deveria levar a esfera. Noelle fica enfurecida, e Gustav parece concordar. Você leva a esfera de volta.
+escolher_você. O rei recebe você com uma festa imensa, e você é promovido à nobreza. O reino se torna o mais rico do continente em tempo record de toda a história.
+escolher_você. Porém Noelle volta a viver sua vida antiga, roubando para sobreviver, e Gustav morre após uma semana.

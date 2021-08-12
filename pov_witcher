@@ -14,7 +14,7 @@ ato_1. Você sobe um morro íngreme e escuro. Você consegue sentir que está pe
 ato_1. Você finalmente chega no topo do morro e se depara com uma grande torre. Você chegou ao seu destino.
 ato_1. Na sua frente há uma ponte arruinada atravessando um grande penhasco com um vasto campo de espinhos de pedra no fundo.
 
-ponte. Você arrisca pela ponte e cai. Porém você lembra que é um feiticeiro e consegue flutuar.
+ponte. Você arrisca pela ponte e cai. Porém você lembra que é um{ae} feiticeir{a} e consegue flutuar.
 ponte. Você para no ar bem a tempo de não ser triturado pelos espinhos.
 ponte. No escuro, você consegue ver que há uma entrada de uma caverna na parede do abismo.
 
@@ -48,7 +48,7 @@ logo_atras_atravessar_magia. Quando você está indo em direção ao alçapão, 
 logo_atras_atravessar_magia. Você se apressa para ir atrás dos dois.
 
 lutar_atravessar_magia. Você se prepara para lutar e um cavalheiro montado em um cavalo sai da floresta.
-lutar_atravessar_magia. Ele te observa desconfiado e vocês trocam algumas informações, o nome dele é Doug, porém você não está disposto a ajudá-lo.
+lutar_atravessar_magia. Ele te observa desconfiado e vocês trocam algumas informações, o nome dele é Doug, porém você não está dispost{a} a ajudá-lo.
 lutar_atravessar_magia. Então de repente outra pessoa sai da floresta, e nocauteia vocês dois.
 lutar_atravessar_magia. Vocês dois acordam desnorteados e correm para alcançar quem for que seja.
 
@@ -89,11 +89,11 @@ nao_ajudar_noelle. Doug tenta ajudar, mas você o impede. O monstro acaba derrot
 nao_ajudar_noelle. O monstro vem para cima de vocês.
 
 ganhou_monstro_noelle. O monstro explode em fumaça e Doug te observa incrédulo.
-ganhou_monstro_noelle. Ele se vira e vai embora. Você está sozinho agora.
+ganhou_monstro_noelle. Ele se vira e vai embora. Você está sozinh{a} agora.
 
 continuar_monstro_noelle. Você entra na sala seguinte e vê Sir Guto em carne e osso na sua frente.
 continuar_monstro_noelle. Ele tem a pele pálida, seus braços e pernas são desproporcionalmente grandes e esqueléticos, e claro, veste uma roupa vermelha de rei.
-continuar_monstro_noelle. Você confronta ele, mas ele te deixa para morrer com uma horda de monstros que avançam para cima de você.
+continuar_monstro_noelle. Você confronta ele, porém com um balançar de cajado você é derrotad{a}.
 
 lobos. Vocês entram em uma sala grande, porém infestada de monstros, lobos mutantes.
 lobos. Eles rosnam, e vocês se preparam para lutar. Mas no final são muitos para você e Doug resistirem.

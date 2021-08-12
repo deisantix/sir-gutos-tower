@@ -6,7 +6,6 @@ doug_atri = {'Nome': 'Doug', 'Vida': 50, 'Ataque': 35, 'Defesa': 110, 'Escudo': 
 noelle_atri = {'Nome': 'Noelle', 'Vida': 75, 'Ataque': 35, 'Defesa': 15, 'Flecha': 5, 'Energia': 30, 'Critico': 20}
 gustav_atri = {'Nome': 'Gustav', 'Vida': 50, 'Ataque': 5, 'Defesa': 10, 'Magia': 35, 'Energia': 210, 'Critico': 15}
 
-txt = ''
 tempo = 20
 deaths = 0
 perso_info = {}
@@ -16,8 +15,6 @@ achievements = {}
 
 itens = {'Barrinha Protein': {'Quantidade': 1, 'Descricao': 'Parece uma boa fonte de Energia, e um ótimo petisco...',
                               'Usavel': 'S', 'Efeito': 35, 'Onde': 'E'},
-         'Papel Misterioso': {'Quantidade': 1, 'Descricao': 'Há uma frase apagada no papel, o que será que significa?',
-                              'Usavel': 'N', 'Efeito': 'S/N', 'Onde': ''},
          'Cogumelo Vermelho': {'Quantidade': 1, 'Descricao': 'Não é muito apetitoso, mas é uma boa fonte de Energia',
                                'Usavel': 'S', 'Efeito': 35, 'Onde': 'E'}
          }
@@ -44,45 +41,41 @@ conquistas = {
             }
 
 
+# FUNÇÕES RELACIONADAS A ARQUIVOS ─────────────────────────────────────────────────────────────────────────────
 # FUNÇÃO PARA VERIFICAR SAVE
 def ver_save():
     file1_exists = path.isfile('.info')
     file2_exists = path.isfile('.save')
 
-    if file1_exists:
-        filesize = path.getsize('.info')
-    else:
-        filesize = 0
-
-    global txt
-    txt = ''
-
-    if not file1_exists or not file2_exists or filesize < 2:
+    if not file1_exists and not file2_exists:
         save = open('.info', 'a+')
         save_2 = open('.save', 'a+')
 
-    else:
-        save = open('.info', 'a+')
-        save_2 = open('.save', 'a+')
+        save.close()
+        save_2.close()
 
+    else:
         while True:
             sleep(1)
             keep = input('Deseja resetar o save? [N/S] ').upper().strip()
-            if keep not in 'SN':
-                sleep(1)
-                print('Oh não... Tente novamente.')
-            else:
+            if verifica_resposta(keep, 'SN'):
                 break
 
         if keep == 'S':
+            apagar_save('.save', '.info', '.conq')
+            with open('.conq', 'w') as conquists:
+                conquists.write('conquistas:\n')
+
+
+# APAGAR DE SAVE
+def apagar_save(*args):
+    for arg in args:
+        existe = path.isfile(arg)
+        if not existe:
+            raise FileNotFoundError(f'{arg} não existe')
+
+        with open(arg, 'w') as save:
             save.truncate(0)
-            save_2.truncate(0)
-
-        elif keep == 'N':
-            txt = 'PPCOP'
-
-    save.close()
-    save_2.close()
 
 
 # FUNÇÃO PARA MODIFICAR O ARQUIVO DE TEXTO
@@ -110,24 +103,263 @@ def modi_file(texto, arquivo, pos, mode='w'):
         file.writelines(list_lines)
 
 
-# FUNÇÃO PARA DEFINIR VELOCIDADE DE NARRATIVA
-def velo_narrativa():
-    print('\n\033[mQUAL A VELOCIDADE QUE VOCÊ PREFERE O TEXTO?')
-    print('\033[33m[1] NORMAL (Recomendado)')
-    print('[2] RÁPIDO')
-    print('[3] INSTANTÂNEO\033[m')
-    sleep(1)
+# FUNÇÃO QUE DESIGNA TODAS AS CARACTERÍSTICAS INICIAIS DO PERSONAGEM PRINCIPAL
+def caract():
+    global perso_info
 
+    with open('.info') as save:
+        tamanho = path.getsize('.info')
+        if tamanho > 1:
+            save = save.readlines()
+
+            for line in range(len(save)):
+                caracteristica = save[line].split(':')
+                perso_info[caracteristica[0]] = caracteristica[1].strip()
+
+            if ('Classe' in perso_info) and ('Nome' in perso_info) and ('Genero' in perso_info) and ('Arquivo' in perso_info):
+                skills()
+                return perso_info['Arquivo']
+            else:
+                print('\033[31mARQUIVO DE PROGRESSO INCOMPLETO. REINICIANDO...\033[m')
+                sleep(2)
+
+                apagar_save('.save')
+                ver_save()
+
+    # GENERO ───────────────────────────────────────────────────────────────────────────────
     while True:
-        escolha = input('Digite a velocidade: ')
-        if escolha not in '123':
-            sleep(1)
-            print('\033[31mNão é uma opção.\033[m\n')
+        sleep(1)
+        genero = input('\nDigite seu gênero [M/F]: ').upper().strip()
+        if not verifica_resposta(genero, 'MF'):
             continue
         else:
             break
 
+    perso_info['Genero'] = genero
+
+    with open('.info', 'a') as save:
+        save.write(f'Genero: {genero}\n')
+
+    # NOME ────────────────────────────────────────────────────────────────────────────────
+    while True:
+        sleep(1)
+        nome = input('Digite o nome do seu personagem: ').capitalize().strip()
+
+        while True:
+            sleep(1)
+            assure = input(f'\033[33m{nome}\033[m? Esse nome está correto? [S/N]: ').upper().strip()
+            if not verifica_resposta(assure, 'SN'):
+                continue
+            else:
+                break
+
+        if assure == 'S':
+            break
+        else:
+            continue
+
+    perso_info['Nome'] = nome
+
+    with open('.info', 'a') as save:
+        save.write(f'Nome: {nome}\n')
+
+    # CLASSE ────────────────────────────────────────────────────────────────────────────
+    while True:
+        sleep(1)
+        print('\nAgora escolha sua classe!')
+        sleep(.5)
+        print('[1] \033[95mFeiticeiro\033[m [2] \033[37mCavalheiro\033[m [3] \033[33mArqueiro\033[m [4] Saber mais?')
+        sleep(.5)
+
+        classe = input('Digite um número para escolher a classe: ').strip()
+        if not verifica_resposta(classe, '1234'):
+            continue
+
+        # OPÇÃO 4 ─ EXPLICAÇÃO
+        if classe == '4':
+            while True:
+                narrativa('classes.', '.help')
+
+                while True:
+                    gotit = input('\n\033[mEntendeu? [S/N] ').upper().strip()
+                    if not verifica_resposta(gotit, 'SN'):
+                        continue
+                    else:
+                        break
+
+                if gotit == 'N':
+                    continue
+                else:
+                    break
+
+        else:
+            break
+
+    # OPÇÃO 1
+    if classe == '1':
+        perso_info['Classe'] = 'Feiticeiro'
+        perso_info['Arquivo'] = 'pov_witcher'
+
+        with open('.info', 'a') as save:
+            save.write('Classe: Feiticeiro\n')
+            save.write('Arquivo: pov_witcher\n')
+
+        print('Você escolheu \033[95mFeiticeiro\033[m!')
+        sleep(2)
+
+    # OPÇÃO 2
+    elif classe == '2':
+        perso_info['Classe'] = 'Cavalheiro'
+        perso_info['Arquivo'] = 'pov_knight'
+
+        with open('.info', 'a') as save:
+            save.write('Classe: Cavalheiro\n')
+            save.write('Arquivo: pov_knight\n')
+
+        print('Você escolheu \033[37mCavalheiro\033[m!')
+        sleep(2)
+
+    # OPÇÃO 3
+    elif classe == '3':
+        perso_info['Classe'] = 'Arqueiro'
+        perso_info['Arquivo'] = 'pov_archer'
+
+        with open('.info', 'a') as save:
+            save.write('Classe: Arqueiro\n')
+            save.write('Arquivo: pov_archer\n')
+
+        print('Você escolheu \033[33mArqueiro\033[m!')
+        sleep(2)
+
+    skills()
+    return perso_info['Arquivo']
+
+
+# FUNÇÕES RELACIONADAS COM TOMADAS DE DECISÕES ───────────────────────────────────────────────────────────────
+# CRIAR UMA LISTA COM AS OPÇÕES DE ESCOLHA
+def criar_lista_com_escolhas(escolhas):  # ESCOLHAS SEPARADOS POR '_'
+    escolhas = escolhas.split('_')
+
+    options = ''
+    for i in range(1, len(escolhas) + 1):
+        options += str(i)
+
+    with open('.save') as save:
+        file = save.read()
+        if 'Inventario: True' in file:
+            invent = True
+        else:
+            invent = False
+
+    escolhas.append('VER ATRIBUTOS')
+    options = options + str(len(options) + 1)
+
+    if invent:
+        escolhas.append('ABRIR INVENTÁRIO')
+        options = options + str(len(options) + 1)
+
+    return escolhas, options
+
+
+# IMPRIMIR AS ESCOLHAS E OPÇÕES
+def imprimir_escolhas(escolhas):
+    for n in range(len(escolhas)):
+        pare = escolhas[n].find('-')
+
+        if pare != -1:
+            r_pare = escolhas[n].rfind('E')
+
+            try:
+                energy = abs(int(escolhas[n][pare:r_pare]))
+            except ValueError:
+                energy = None
+
+        else:
+            energy = None
+
+        if energy is None:
+            print(f'\033[33m[{n + 1}] {escolhas[n]}')
+        elif energy is not None and attributes['Energia'] >= energy:
+            print(f'\033[33m[{n + 1}] {escolhas[n][:pare - 1]}\033[36m(-{energy} E)')
+        else:
+            print(f'\033[31m[{n + 1}] {escolhas[n][:pare - 1]}\033[31m(-{energy} E)')
+
+
+# FUNÇÃO PARA TOMAR DECISÕES
+def make_decision(escolhas, pergunta='O que você vai fazer?'):
+    escolhas_e_opcoes = criar_lista_com_escolhas(escolhas)
+    options = escolhas_e_opcoes[1]
+
+    invent = False
+    with open('.save') as save:
+        save = save.read()
+        if 'Inventario: True' in save:
+            invent = True
+
+    while True:
+        sleep(1)
+        print('')
+        imprimir_escolhas(escolhas_e_opcoes[0])
+
+        dc = input(f'\n\033[m{pergunta} ').strip()
+        if not verifica_resposta(dc, options):
+            continue
+
+        if not invent:
+
+            # VER attributes
+            if dc == options[-1]:
+                show_atri()
+                continue
+            else:
+                break
+
+        elif invent:
+
+            # VER attributes
+            if dc == options[-2]:
+                show_atri()
+                continue
+
+            # ABRIR INVENTÁRIO
+            elif dc == options[-1]:
+                show_inve()
+                continue
+
+            else:
+                break
+
+    return dc
+
+
+# VERIFICAR RESPOSTA
+def verifica_resposta(op, options):
+    if (op not in options) or (op == ''):
+        sleep(1)
+        print('\033[31mNão é uma opção.\033[m')
+        return False
+
+    return True
+
+
+# FUNÇÕES RELACIONADAS A NARRATIVA ───────────────────────────────────────────────────────────────────────────
+# FUNÇÃO PARA DEFINIR VELOCIDADE DE NARRATIVA
+def velo_narrativa():
     global tempo
+
+    while True:
+        print('\n\033[mQUAL A VELOCIDADE QUE VOCÊ PREFERE O TEXTO?')
+        print('\033[33m[1] NORMAL (Recomendado)')
+        print('[2] RÁPIDO')
+        print('[3] INSTANTÂNEO\033[m')
+        sleep(1)
+
+        escolha = input('Digite o número da velocidade: ')
+        if not verifica_resposta(escolha, '123'):
+            continue
+        else:
+            break
+
     if escolha == '1':
         tempo = 20
     elif escolha == '2':
@@ -205,148 +437,7 @@ def narrativa(comeco, arquivo):
         sleep(seg)
 
 
-# FUNÇÃO QUE DESIGNA TODAS AS CARACTERÍSTICAS INICIAIS DO PERSONAGEM PRINCIPAL
-def caract():
-    global perso_info
-
-    if txt == 'PPCOP':
-        with open('.info', 'r+') as save:
-            for line in save:
-                line = line.rstrip()
-                if 'Genero' in line:
-                    perso_info['Genero'] = line[8:]
-                elif 'Nome' in line:
-                    perso_info['Nome'] = line[6:]
-                elif 'Classe' in line:
-                    perso_info['Classe'] = line[8:]
-                elif 'Arquivo' in line:
-                    arquivo = line[9:]
-
-            if 'Classe' in perso_info and 'Nome' in perso_info and 'Genero' in perso_info:
-                return perso_info, arquivo
-            else:
-                sleep(1)
-                print('\033[31mARQUIVO DE PROGRESSO INCOMPLETO. REINICIANDO...\033[m')
-                sleep(1)
-                save.truncate(0)
-                ver_save()
-
-    # GENERO ───────────────────────────────────────────────────────────────────────────────
-    while True:
-        sleep(1)
-        genero = input('\nDigite seu gênero [M/F]: ').upper().strip()
-        if genero not in 'MF':
-            sleep(1)
-            print('Oh não... Tente novamente.')
-            continue
-        else:
-            break
-
-    perso_info['Genero'] = genero
-
-    with open('.info', 'a') as save:
-        save.write(f'Genero: {genero}\n')
-
-    # NOME ────────────────────────────────────────────────────────────────────────────────
-    while True:
-        sleep(1)
-        nome = input('Digite o nome do seu personagem: ').capitalize().strip()
-
-        while True:
-            sleep(1)
-            assure = input(f'\033[33m{nome}\033[m? Esse nome está correto? [S/N]: ').upper().strip()
-            if assure not in 'SN':
-                sleep(1)
-                print('Oh não... Tente novamente.')
-                continue
-            else:
-                break
-
-        if assure == 'S':
-            break
-        else:
-            continue
-
-    perso_info['Nome'] = nome
-
-    with open('.info', 'a') as save:
-        save.write(f'Nome: {nome}\n')
-
-    # CLASSE ────────────────────────────────────────────────────────────────────────────
-    while True:
-        sleep(1)
-        print('\nAgora escolha sua classe!')
-        sleep(.5)
-        print('[1] \033[95mFeiticeiro\033[m [2] \033[37mCavalheiro\033[m [3] \033[33mArqueiro\033[m [4] Saber mais?')
-        sleep(.5)
-        classe = input('Digite um número para escolher a classe: ').strip()
-
-        # OPÇÃO 1
-        if classe == '1':
-            perso_info['Classe'] = 'Feiticeiro'
-            arquivo = 'pov_witcher'
-
-            with open('.info', 'a') as save:
-                save.write('Classe: Feiticeiro\n')
-                save.write('Arquivo: pov_witcher\n')
-
-            print('Você escolheu \033[95mFeiticeiro\033[m!')
-            sleep(2)
-            break
-
-        # OPÇÃO 2
-        elif classe == '2':
-            perso_info['Classe'] = 'Cavalheiro'
-            arquivo = 'pov_knight'
-
-            with open('.info', 'a') as save:
-                save.write('Classe: Cavalheiro\n')
-                save.write('Arquivo: pov_knight\n')
-
-            print('Você escolheu \033[37mCavalheiro\033[m!')
-            sleep(2)
-            break
-
-        # OPÇÃO 3
-        elif classe == '3':
-            perso_info['Classe'] = 'Arqueiro'
-            arquivo = 'pov_archer'
-
-            with open('.info', 'a') as save:
-                save.write('Classe: Arqueiro\n')
-                save.write('Arquivo: pov_archer\n')
-
-            print('Você escolheu \033[33mArqueiro\033[m!')
-            sleep(2)
-            break
-
-        # OPÇÃO 4 ─ EXPLICAÇÃO
-        elif classe == '4':
-            while True:
-                narrativa('classes.', '.help')
-
-                while True:
-                    gotit = input('\n\033[mEntendeu? [S/N] ').upper().strip()
-                    if gotit not in 'SN':
-                        sleep(1)
-                        print('Oh não... Tente novamente.')
-                        continue
-                    else:
-                        break
-
-                if gotit == 'S':
-                    break
-                else:
-                    continue
-
-        else:
-            sleep(1)
-            print('\033[31mNão é uma opção.\033[m')
-            continue
-
-    return perso_info, arquivo
-
-
+# FUNÇÕES RELACIONADAS A ATRIBUTOS ──────────────────────────────────────────────────────────────────────────
 # FUNÇÃO QUE DESIGNA OS attributes DO PERSONAGEM DEPENDENDO DA SUA CLASSE
 def skills():
     global attributes
@@ -383,6 +474,42 @@ def show_atri():
             continue
 
 
+# SALVAR ATRIBUTOS NO .SAVE
+def save_atri():
+    modi_file('Atributos\n', '.save', 7)
+
+    for pos, k in enumerate(attributes):
+        modi_file(f'{k}: {attributes[k]}\n', '.save', pos+8)
+
+
+# VOLTAR ATRIBUTOS PARA OS VALORES INICIAIS
+def reset_atri():
+    global attributes
+
+    if perso_info['Classe'] == 'Feiticeiro':
+        attributes['Vida'], attributes['Energia'] = 50, 210
+
+    elif perso_info['Classe'] == 'Cavalheiro':
+        attributes['Vida'], attributes['Energia'] = 50, 50
+
+    elif perso_info['Classe'] == 'Arqueiro':
+        attributes['Vida'], attributes['Energia'] = 75, 50
+
+
+# SETAR ATRIBUTOS PELO ARQUIVO
+def setar_atri():
+    with open('.save') as save:
+        atri = save.readlines()
+
+        for line in range(len(atri)):
+
+            for k in attributes:
+                if k in atri[line]:
+                    value = int(atri[line][len(k)+1:])
+                    attributes[k] = value
+
+
+# FUNÇÕES RELACIONADAS COM INVENTÁRIO ─────────────────────────────────────────────────────────────────────────
 # DELETAR ITEM NO ARQUIVO DO SAVE
 def delet_item_inve(key):
     # DIMINUIR QUANTIDADE CASO FOR MAIS DE UM MESMO ITEM ────────────────────────────
@@ -497,107 +624,6 @@ def show_inve():
                 print('\033[31mNão é uma opção.\033[m')
 
 
-# FUNÇÃO PARA TOMAR DECISÕES
-def make_decision(escolhas, pergunta='O que você vai fazer?'):  # ESCOLHAS SEPARADOS POR '_'
-    escolhas = escolhas.split('_')
-
-    options = ''
-    for i in range(1, len(escolhas) + 1):
-        options += str(i)
-
-    with open('.save') as save:
-        file = save.read()
-        if 'Inventario: True' in file:
-            invent = True
-        else:
-            invent = False
-
-    escolhas.append('VER ATRIBUTOS')
-    options = options + str(len(options) + 1)
-
-    if invent:
-        escolhas.append('ABRIR INVENTÁRIO')
-        options = options + str(len(options) + 1)
-
-    while True:
-        sleep(1)
-        print()
-        for n in range(len(escolhas)):
-            pare = escolhas[n].find('-')
-
-            if pare != -1:
-                r_pare = escolhas[n].rfind('E')
-
-                try:
-                    energy = abs(int(escolhas[n][pare:r_pare]))
-                except ValueError:
-                    energy = None
-
-            else:
-                energy = None
-
-            if energy is None:
-                print(f'\033[33m[{n + 1}] {escolhas[n]}')
-            elif energy is not None and attributes['Energia'] >= energy:
-                print(f'\033[33m[{n + 1}] {escolhas[n][:pare - 1]}\033[36m(-{energy} E)')
-            else:
-                print(f'\033[31m[{n + 1}] {escolhas[n][:pare - 1]}\033[31m(-{energy} E)')
-
-        dc = input(f'\n\033[m{pergunta} ').strip()
-        if dc not in options or dc == '':
-            sleep(1)
-            print('\033[31mNão é uma opção.\033[m\n')
-            continue
-
-        if not invent:
-
-            # VER attributes
-            if dc == options[-1]:
-                show_atri()
-                continue
-            else:
-                break
-
-        elif invent:
-
-            # VER attributes
-            if dc == options[-2]:
-                show_atri()
-                continue
-
-            # ABRIR INVENTÁRIO
-            elif dc == options[-1]:
-                show_inve()
-                continue
-
-            else:
-                break
-
-    return dc
-
-
-# VOLTAR ATRIBUTOS PARA OS VALORES INICIAIS
-def reset_atri():
-    global attributes
-
-    if perso_info['Classe'] == 'Feiticeiro':
-        attributes['Vida'], attributes['Energia'] = 50, 210
-
-    elif perso_info['Classe'] == 'Cavalheiro':
-        attributes['Vida'], attributes['Energia'] = 50, 50
-
-    elif perso_info['Classe'] == 'Arqueiro':
-        attributes['Vida'], attributes['Energia'] = 75, 50
-
-
-# SALVAR ATRIBUTOS NO .SAVE
-def save_atri():
-    modi_file('Atributos\n', '.save', 7)
-
-    for pos, k in enumerate(attributes):
-        modi_file(f'{k}: {attributes[k]}\n', '.save', pos+8)
-
-
 # ADICIONAR ITEM AO INVENTÁRIO DO JOGADOR
 def add_inve(key, mode='add'):
     global inventario
@@ -613,96 +639,6 @@ def add_inve(key, mode='add'):
                 return None
             elif key in inventario:
                 modi_file(f' {key}{inventario[key]["Quantidade"]},', '.save', 3, 'a')
-
-
-# SALVAR CONQUISTAS NO .INFO E PEGÁ-LAS DE VOLTA CASO PRECISE
-def achieve(conquis):
-    global achievements
-
-    with open('.conq') as inform:
-        file = inform.read()
-        if conquis in file:
-            return None
-
-    if conquis in conquistas:
-        modi_file(f' {conquis},', '.conq', 0, 'a')
-        achievements[conquis] = conquistas[conquis]
-
-
-def show_achieve():
-    with open('.conq') as save:
-        inform = save.read()
-        if 'conquistas' in inform:
-
-            for key in conquistas:
-                if key in inform:
-                    x = achievements.get(key, 0)
-
-                    if x == 0:
-                        achievements[key] = conquistas[key]
-
-    print(f'\n\033[93m{"CONQUISTAS ":─<40}\033[m')
-    sleep(1)
-    for k in achievements:
-        print(f'\033[93m{k}\033[m: \033[32m{achievements[k]}\033[m')
-
-    tm = len(conquistas)
-    tm_nw = len(achievements)
-    print(f'{tm_nw} de {tm} alcançadas\n')
-
-
-# CONTADOR DE MORTES
-def death_count():
-    global deaths
-
-    with open('.info',) as file:
-        inform = file.read()
-        if 'Mortes' in inform:
-            dth = True
-        else:
-            dth = False
-
-    if dth:
-        with open('.info') as file:
-            inform = file.readlines()
-
-            for line in inform:
-                if 'Mortes' in line:
-                    deaths = int(line[7:])
-                    old_number = deaths
-                    deaths += 1
-
-                    newline = inform[5].replace(f'Mortes: {old_number}\n', f'Mortes: {deaths}\n')
-                    inform[5] = newline
-
-                    file = open('.info', 'w')
-                    file.writelines(inform)
-
-    else:
-        modi_file('Mortes: 1\n', '.info', 4)
-        deaths = 1
-
-    if deaths == 1:
-        achieve('Má decisão')
-    elif deaths == 5:
-        achieve('Péssima sorte')
-    elif deaths == 10:
-        achieve('A curiosidade matou o gato')
-    elif deaths == 20:
-        achieve('Masoquista')
-
-
-# SETAR ATRIBUTOS PELO ARQUIVO
-def setar_atri():
-    with open('.save') as save:
-        atri = save.readlines()
-
-        for line in range(len(atri)):
-
-            for k in attributes:
-                if k in atri[line]:
-                    value = int(atri[line][len(k)+1:])
-                    attributes[k] = value
 
 
 # SETAR INVENTARIO PELO ARQUIVO
@@ -725,6 +661,86 @@ def setar_inve():
                             inventario[key]['Quantidade'] = qtd
 
 
+# FUNÇÕES RELACIONADAS COM CONQUISTAS ────────────────────────────────────────────────────────────────────────
+# SALVAR CONQUISTAS NO .INFO E PEGÁ-LAS DE VOLTA CASO PRECISE
+def achieve(conquis):
+    global achievements
+
+    with open('.conq') as inform:
+        file = inform.read()
+        if conquis in file:
+            return None
+
+    if conquis in conquistas:
+        modi_file(f' {conquis},', '.conq', 0, 'a')
+        achievements[conquis] = conquistas[conquis]
+
+
+# MOSTRAR CONQUISTAS NA TELA
+def show_achieve():
+    with open('.conq') as save:
+        inform = save.read()
+        if 'conquistas' in inform:
+
+            for key in conquistas:
+                if key in inform:
+                    x = achievements.get(key, 0)
+
+                    if x == 0:
+                        achievements[key] = conquistas[key]
+
+    print(f'\n\033[93m{"CONQUISTAS ":─<40}\033[m')
+    sleep(1)
+    for k in achievements:
+        print(f'\033[93m{k}\033[m: \033[32m{achievements[k]}\033[m')
+
+    tm = len(conquistas)
+    tm_nw = len(achievements)
+    print(f'{tm_nw} de {tm} alcançadas')
+
+
+# FUNÇÕES RELACIONADAS A MORTE ───────────────────────────────────────────────────────────────────────────────
+# CONTADOR DE MORTES
+def death_count():
+    global deaths
+
+    with open('.info',) as file:
+        inform = file.read()
+        if 'Mortes' in inform:
+            dth = True
+        else:
+            dth = False
+
+    if dth:
+        with open('.info') as file:
+            inform = file.readlines()
+
+            for line in inform:
+                if 'Mortes' in line:
+                    deaths = int(line[7:])
+                    old_number = deaths
+                    deaths += 1
+
+                    newline = inform[4].replace(f'Mortes: {old_number}\n', f'Mortes: {deaths}\n')
+                    inform[4] = newline
+
+                    file = open('.info', 'w')
+                    file.writelines(inform)
+
+    else:
+        modi_file('Mortes: 1\n', '.info', 4)
+        deaths = 1
+
+    if deaths == 1:
+        achieve('Má decisão')
+    elif deaths == 5:
+        achieve('Péssima sorte')
+    elif deaths == 10:
+        achieve('A curiosidade matou o gato')
+    elif deaths == 20:
+        achieve('Masoquista')
+
+
 # MENSAGEM DE MORTE
 def mensagem_morte(forma_da_morte):
     death_count()
@@ -737,9 +753,8 @@ def mensagem_morte(forma_da_morte):
     print(f'\033[31m{" VOCÊ PERDEU ":─^40}\033[m')
 
 
-# FUNÇÕES GERAIS DO SISTEMA DE LUTA
-
-# VERIFICAR ACCURACY ─
+# FUNÇÕES GERAIS DO SISTEMA DE LUTA ─────────────────────────────────────────────────────────────────────────
+# VERIFICAR ACCURACY
 def verifica_accuracy(accuracy_rate):
     chance = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
@@ -759,7 +774,7 @@ def verifica_accuracy(accuracy_rate):
     return chance, hit_chance
 
 
-# MODIFICAR RODADA PARA QUE O FLUXO DO JOGO CONTINUE NORMAL ─
+# MODIFICAR RODADA PARA QUE O FLUXO DO JOGO CONTINUE NORMAL
 def modificar_rodada(rodada, vez2, vez3):
     if vez2 and vez3:
         if rodada == 4:
@@ -782,7 +797,7 @@ def modificar_rodada(rodada, vez2, vez3):
     return rodada
 
 
-# IMPRIMIR BARRINHA DE ATAQUE ESPECIAL ─
+# IMPRIMIR BARRINHA DE ATAQUE ESPECIAL
 def imprimir_amount_ea(amount_ea):
     if amount_ea <= 6:
         especial_attack = '\033[31m='
@@ -797,7 +812,7 @@ def imprimir_amount_ea(amount_ea):
     print(f'\033[36mAE\033[m: {especial_attack * amount_ea}')
 
 
-# SE NÃO TIVER ENERGIA O SUFICIENTE PARA O ATAQUE ─
+# SE NÃO TIVER ENERGIA O SUFICIENTE PARA O ATAQUE
 def if_not_enough_energy(limit):
     if attributes['Energia'] < limit:
         sleep(1)
@@ -806,7 +821,7 @@ def if_not_enough_energy(limit):
     return attributes['Energia'] < limit
 
 
-# MODIFICAR LISTA DE ATAQUE ANTERIOR ─
+# MODIFICAR LISTA DE ATAQUE ANTERIOR
 def modifi_ataque_anterior_list(decision_to_add, ataque_anterior_lista):
     ataque_anterior_lista.append(decision_to_add)
 
@@ -816,7 +831,7 @@ def modifi_ataque_anterior_list(decision_to_add, ataque_anterior_lista):
     return ataque_anterior_lista
 
 
-# MODIFICAR O AMOUNT_EA QUANDO FAZER ALGUM MOVIMENTO ─
+# MODIFICAR O AMOUNT_EA QUANDO FAZER ALGUM MOVIMENTO
 def ganhar_bonus_ea(amount_ea, pontos):
     bonus_ea = random.choice(pontos)
 
@@ -830,7 +845,7 @@ def ganhar_bonus_ea(amount_ea, pontos):
         return 0
 
 
-# MENSAGEM DE ALIADO DERROTADO ─
+# MENSAGEM DE ALIADO DERROTADO
 def mensagem_aliado_derrotado(nome_aliado):
     nome_aliado = nome_aliado.upper()
 

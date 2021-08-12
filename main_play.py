@@ -3,15 +3,46 @@ from time import sleep
 from os import path
 import info
 
-doug_atri = {'Nome': 'Doug', 'Vida': 50, 'Ataque': 35, 'Defesa': 110, 'Escudo': 55, 'Han': 70, 'Energia': 30, 'Critico': 10}
-noelle_atri = {'Nome': 'Noelle', 'Vida': 75, 'Ataque': 35, 'Defesa': 15, 'Energia': 30, 'Critico': 20}
-gustav_atri = {'Nome': 'Gustav', 'Vida': 50, 'Ataque': 5, 'Defesa': 10, 'Magia': 35, 'Energia': 210, 'Critico': 15}
 
-personagem = info.perso_info
-atributos = info.attributes.copy()
+# ESCOLHER QUAL FUNÇÃO DO JOGO RODAR
+def rodar_funcao(arquivo):
+    with open('.save') as save:
+        tamanho = path.getsize('.save')
 
-arquivo = ''
-perdeu = False
+        if tamanho:
+            files = save.readlines()
+            act = files[0].strip()
+
+        if info.perso_info['Classe'] == 'Feiticeiro':
+            funcoes_jogo = {
+                'intro.': game_witcher_intro,
+                'ato 1.': game_witcher_ato1,
+                'ato 2.': game_witcher_ato2,
+                'ato 3.': game_witcher_ato3
+            }
+
+        elif info.perso_info['Classe'] == 'Cavalheiro':
+            funcoes_jogo = {
+                'intro.': game_knight_intro,
+                'ato 1.': game_knight_ato1,
+                'ato 2.': game_knight_ato2,
+                'ato 3.': game_knight_ato3
+            }
+
+        else:
+            funcoes_jogo = {
+                'intro.': game_archer_intro,
+                'ato 1.': game_archer_ato1,
+                'ato 2.': game_archer_ato2,
+                'ato 3.': game_archer_ato3
+            }
+
+        if tamanho <= 2:
+            perdeu = funcoes_jogo['intro.'](arquivo)
+        else:
+            perdeu = funcoes_jogo[act](arquivo)
+
+    return perdeu
 
 
 #    ▄████████    ▄████████  ▄█      ███      ▄█   ▄████████    ▄████████  ▄█     ▄████████  ▄██████▄
@@ -24,7 +55,7 @@ perdeu = False
 #   ███          ██████████ █▀      ▄████▀   █▀   ████████▀    ██████████ █▀     ███    ███  ▀██████▀
 #                                                                                ███    ███
 # ATO 3
-def game_witcher_ato3():
+def game_witcher_ato3(arquivo):
     info.achieve('Últimos passos')
 
     with open('.save') as save:
@@ -39,7 +70,6 @@ def game_witcher_ato3():
     if inventario:
         info.setar_inve()
 
-    info.modi_file('ato 3.\n', '.save', 0)
     info.modi_file('Doug: True\n', '.save', 4)
     info.modi_file('Noelle: True\n', '.save', 5)
 
@@ -121,7 +151,7 @@ def game_witcher_ato3():
 
 
 # ATO 2
-def game_witcher_ato2():
+def game_witcher_ato2(arquivo):
     with open('.save') as save:
 
         inventario = False
@@ -140,7 +170,6 @@ def game_witcher_ato2():
     if inventario:
         info.setar_inve()
 
-    info.modi_file('ato 2.\n', '.save', 0)
     info.modi_file('Doug: False\n', '.save', 4)
     info.modi_file('Noelle: False\n', '.save', 5)
 
@@ -160,17 +189,12 @@ def game_witcher_ato2():
 
         # LUTAR COM O JAVALI ──────────────────────────────────────────────────────────────────────────
         if decision == '1':
-            while True:
-                luta = info.fight_witch('Javali Elemental', 150, 8, 4, 4)  # VIDA_MONSTRO = 150
+            luta = info.fight_witch('Javali Elemental', 150, 8, 4, 4)  # VIDA_MONSTRO = 150
 
-                # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
-                if not luta:
-                    info.death_count()
-                    return True
-
-                # SE GANHOU
-                else:
-                    break
+            # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
+            if not luta:
+                info.death_count()
+                return True
 
             info.narrativa('lutar_javali.', arquivo)
 
@@ -198,17 +222,12 @@ def game_witcher_ato2():
 
         # LUTAR COM O JAVALI ──────────────────────────────────────────────────────────────────────────
         if decision == '1':
-            while True:
-                luta = info.fight_witch('Javali Elemental', 150, 8, 4, 4)  # VIDA_MONSTRO = 150
+            luta = info.fight_witch('Javali Elemental', 150, 8, 4, 4)  # VIDA_MONSTRO = 150
 
-                # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
-                if not luta:
-                    info.death_count()
-                    return True
-
-                # SE GANHOU
-                else:
-                    break
+            # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
+            if not luta:
+                info.death_count()
+                return True
 
             info.narrativa('lutar_javali.', arquivo)
 
@@ -257,17 +276,12 @@ def game_witcher_ato2():
         else:
             info.narrativa('nao_ajudar_noelle.', arquivo)
 
-            while True:
-                luta = info.fight_witch('Monstro', 63, 31, 25, 2)
+            luta = info.fight_witch('Monstro', 63, 31, 25, 2)
 
-                # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
-                if not luta:
-                    info.death_count()
-                    return True
-
-                # SE GANHOU
-                else:
-                    break
+            # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
+            if not luta:
+                info.death_count()
+                return True
 
             info.narrativa('ganhou_monstro_noelle.', arquivo)
 
@@ -276,11 +290,7 @@ def game_witcher_ato2():
 
             info.narrativa('continuar_monstro_noelle.', arquivo)
 
-            info.death_count()
-            sleep(1)
-            print('\n\033[32mVocê é derrotado facilmente pelos monstros\033[m')
-            sleep(2)
-            print(f'\033[31m{" VOCÊ PERDEU ":─^40}\033[m')
+            info.mensagem_morte('Você é derrotado pelo poder absurdo de Sir Guto')
             return True
 
     # CONTINUANDO ───────────────────────────────────────────────────────────────────────────────────
@@ -294,7 +304,8 @@ def game_witcher_ato2():
     sleep(1)
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
-
+    
+    info.modi_file('ato 3.\n', '.save', 0)
     info.save_atri()
 
     with open('.save') as save:
@@ -304,15 +315,11 @@ def game_witcher_ato2():
             if k not in info.inventario and k in save:
                 info.deledecision = info.make_decision('Lutar um por um \033[35m(-? E)_Se desesperar \033[35m(-? E)')
 
-    global perdeu
-    perdeu = game_witcher_ato3()
-    return perdeu
+    return False
 
 
 # ATO 1
-def game_witcher_ato1():
-    info.modi_file('ato 1.\n', '.save', 0)
-
+def game_witcher_ato1(arquivo):
     info.modi_file('Inventario: False\n', '.save', 2)
     info.modi_file('Itens: \n', '.save', 3)
 
@@ -349,17 +356,12 @@ def game_witcher_ato1():
             info.narrativa('caverna_ponte.', arquivo)
             info.achieve('Caminho impossível')
 
-            while True:
-                luta = info.fight_witch('Sir Dragon', 10000, 2500, 5000, 0)
+            luta = info.fight_witch('Sir Dragon', 10000, 2500, 5000, 0)
 
-                # SE PERDEU A LUTA E NÃO QUER TENTAR NOVAMENTE ─────────────────────────
-                if luta is False:
-                    info.death_count()
-                    return True
-
-                # SE GANHOU ────────────────────────────────────────────────────────────
-                else:
-                    break
+            # SE PERDEU A LUTA E NÃO QUER TENTAR NOVAMENTE ─────────────────────────
+            if luta is False:
+                info.death_count()
+                return True
 
     # SE PROCURAR OUTRO CAMINHO ────────────────────────────────────────────────────────
     elif decision == '2':
@@ -448,16 +450,15 @@ def game_witcher_ato1():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
+    info.modi_file('ato 2.\n', '.save', 0)
     info.save_atri()
     info.add_inve('Barrinha Protein', 'm')
 
-    global perdeu
-    perdeu = game_witcher_ato2()
-    return perdeu
+    return False
 
 
 # INTRO
-def game_witcher_intro():
+def game_witcher_intro(arquivo):
     info.achieve('Que a magia esteja com você')
 
     info.modi_file('intro.\n', '.save', 0)
@@ -495,9 +496,9 @@ def game_witcher_intro():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
-    global perdeu
-    perdeu = game_witcher_ato1()
-    return perdeu
+    info.modi_file('ato 1.\n', '.save', 0)
+
+    return False
 
 
 #  ▄████████    ▄████████  ▄█    █▄     ▄████████  ▄█          ▄█    █▄       ▄████████  ▄█     ▄████████  ▄██████▄
@@ -510,7 +511,7 @@ def game_witcher_intro():
 # ████████▀    ███    █▀   ▀██████▀    ███    █▀  █████▄▄██   ███    █▀      ██████████ █▀     ███    ███  ▀██████▀
 #                                                 ▀                                            ███    ███
 # ATO 3
-def game_knight_ato3():
+def game_knight_ato3(arquivo):
     info.achieve('Últimos passos')
 
     with open('.save') as save:
@@ -524,8 +525,7 @@ def game_knight_ato3():
 
     if inventario:
         info.setar_inve()
-
-    info.modi_file('ato 3.\n', '.save', 0)
+        
     info.modi_file('Gustav: True\n', '.save', 4)
     info.modi_file('Noelle: True\n', '.save', 5)
 
@@ -589,8 +589,7 @@ def game_knight_ato3():
 
 
 # ATO 2
-def game_knight_ato2():
-    info.modi_file('ato 2.\n', '.save', 0)
+def game_knight_ato2(arquivo):
     info.modi_file('caminho:\n', '.save', 1)
 
     info.modi_file('Gustav: False\n', '.save', 4)
@@ -619,17 +618,12 @@ def game_knight_ato2():
 
     # LUTAR COM O JAVALI ──────────────────────────────────────────────────────────────────────
     if decision == '1':
-        while True:
-            luta = info.fight_knight('Javali Elemental', 150, 8, 4, 4)  # VIDA_MONSTRO = 150
+        luta = info.fight_knight('Javali Elemental', 150, 8, 4, 4)  # VIDA_MONSTRO = 150
 
-            # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
-            if not luta:
-                info.death_count()
-                return True
-
-            # SE GANHOU
-            else:
-                break
+        # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
+        if not luta:
+            info.death_count()
+            return True
 
         info.narrativa('lutar_javali.', arquivo)
 
@@ -685,17 +679,12 @@ def game_knight_ato2():
         else:
             info.narrativa('nao_ajudar_noelle.', arquivo)
 
-            while True:
-                luta = info.fight_knight('Monstro', 63, 31, 25, 2)  # VIDA_MONSTRO = 150
+            luta = info.fight_knight('Monstro', 63, 31, 25, 2)  # VIDA_MONSTRO = 150
 
-                # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
-                if not luta:
-                    info.death_count()
-                    return True
-
-                # SE GANHOU
-                else:
-                    break
+            # SE PERDEU E > NÃO < QUER JOGAR NOVAMENTE
+            if not luta:
+                info.death_count()
+                return True
 
             info.narrativa('ganhou_monstro_noelle.', arquivo)
 
@@ -724,6 +713,7 @@ def game_knight_ato2():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
+    info.modi_file('ato 3.\n', '.save', 0)
     info.save_atri()
 
     with open('.save') as save:
@@ -733,14 +723,11 @@ def game_knight_ato2():
             if k not in info.inventario and k in save:
                 info.delet_item_inve(k)
 
-    global perdeu
-    perdeu = game_knight_ato3()
-    return perdeu
+    return False
 
 
 # ATO 1
-def game_knight_ato1():
-    info.modi_file('ato 1.\n', '.save', 0)
+def game_knight_ato1(arquivo):
     info.modi_file('caminho:\n', '.save', 1)
 
     info.modi_file('Inventario: False\n', '.save', 2)
@@ -768,17 +755,12 @@ def game_knight_ato1():
     else:
         info.narrativa('caminho_sombrio_ato_1.', arquivo)
 
-        while True:
-            luta = info.fight_knight('Sombrio', 100, 15, 5, 6)
+        luta = info.fight_knight('Sombrio', 100, 15, 5, 6)
 
-            # SE PERDEU A LUTA E NÃO QUER TENTAR NOVAMENTE ───────────────────────────────────
-            if not luta:
-                info.death_count()
-                return True
-
-            # SE GANHOU ──────────────────────────────────────────────────────────────────────
-            else:
-                break
+        # SE PERDEU A LUTA E NÃO QUER TENTAR NOVAMENTE ───────────────────────────────────
+        if not luta:
+            info.death_count()
+            return True
 
         info.narrativa('continuar_caminho_sombrio.', arquivo)
 
@@ -826,16 +808,15 @@ def game_knight_ato1():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
+    info.modi_file('ato 2.\n', '.save', 0)
     info.save_atri()
     info.add_inve('Barrinha Protein', 'm')
 
-    global perdeu
-    perdeu = game_knight_ato2()
-    return perdeu
+    return False
 
 
 # INTRO
-def game_knight_intro():
+def game_knight_intro(arquivo):
     info.achieve('Um por todos e todos por um')
 
     info.modi_file('intro.\n', '.save', 0)
@@ -856,9 +837,9 @@ def game_knight_intro():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
-    global perdeu
-    perdeu = game_knight_ato1()
-    return perdeu
+    info.modi_file('ato 1.\n', '.save', 0)
+
+    return False
 
 
 #    ▄████████    ▄████████ ████████▄   ███    █▄     ▄████████  ▄█     ▄████████  ▄██████▄
@@ -871,7 +852,7 @@ def game_knight_intro():
 #   ███    █▀    ███    ███  ▀██████▀▄█ ████████▀    ██████████ █▀     ███    ███  ▀██████▀
 #                ███    ███                                            ███    ███
 # ATO 3
-def game_archer_ato3():
+def game_archer_ato3(arquivo):
     info.achieve('Últimos passos')
 
     with open('.save') as save:
@@ -886,7 +867,6 @@ def game_archer_ato3():
     if inventario:
         info.setar_inve()
 
-    info.modi_file('ato 3.\n', '.save', 0)
     info.modi_file('Gustav: True\n', '.save', 4)
     info.modi_file('Doug: True\n', '.save', 5)
 
@@ -950,7 +930,7 @@ def game_archer_ato3():
 
 
 # ATO 2
-def game_archer_ato2():
+def game_archer_ato2(arquivo):
     with open('.save') as save:
 
         inventario = False
@@ -968,8 +948,6 @@ def game_archer_ato2():
 
     if inventario:
         info.setar_inve()
-
-    info.modi_file('ato 2.\n', '.save', 0)
 
     info.modi_file('Gustav: False\n', '.save', 4)
     info.modi_file('Doug: False\n', '.save', 5)
@@ -991,15 +969,11 @@ def game_archer_ato2():
 
         # LUTAR COM O JAVALI ─────────────────────────────────────────────────────────────────────────────
         if decision == '1':
-            while True:
-                luta = info.fight_archer('Javali Elemental', 150, 8, 4, 4)
+            luta = info.fight_archer('Javali Elemental', 150, 8, 4, 4)
 
-                if not luta:
-                    info.death_count()
-                    return True
-
-                else:
-                    break
+            if not luta:
+                info.death_count()
+                return True
 
             info.narrativa('lutar_javali.', arquivo)
 
@@ -1146,17 +1120,13 @@ def game_archer_ato2():
             info.narrativa('fininho_monstro_porta_gustav.', arquivo)
 
         # LUTA COM OGRO ────────────────────────────────────────────────────────────────────────────────────────
-        while True:
-            luta = info.fight_archer('Ogro Guardião', 500, 20, 72, 2)
+        luta = info.fight_archer('Ogro Guardião', 500, 20, 72, 2)
 
-            if not luta:
-                info.death_count()
-                return True
+        if not luta[0]:
+            info.death_count()
+            return True
 
-            else:
-                break
-
-        if gustav_atri['Vida'] != 0:
+        if luta[2]:
             info.achieve('Sorte ou habilidade?')
 
         info.narrativa('ganhou_monstro_porta_gustav.', arquivo)
@@ -1221,15 +1191,11 @@ def game_archer_ato2():
         if decision == '1':
             info.narrativa('enfrentar_monstro_porta.', arquivo)
 
-            while True:
-                luta = info.fight_archer('Ogro Guardião', 500, 46, 72, 0)
+            luta = info.fight_archer('Ogro Guardião', 500, 46, 72, 0)
 
-                if not luta:
-                    break
-
-                else:
-                    print('\n\033[31mComo você fez isso?\033[m')
-                    return True
+            if luta[0]:
+                print('Como você fez isso?')
+                return True
 
             # se já conhecia gustav
             if conhece_gustav:
@@ -1268,6 +1234,7 @@ def game_archer_ato2():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
+    info.modi_file('ato 3.\n', '.save', 0)
     info.save_atri()
 
     with open('.save') as save:
@@ -1277,14 +1244,11 @@ def game_archer_ato2():
             if k not in info.inventario and k in save:
                 info.delet_item_inve(k)
 
-    global perdeu
-    perdeu = game_archer_ato3()
-    return perdeu
+    return False
 
 
 # ATO 1
-def game_archer_ato1():
-    info.modi_file('ato 1.\n', '.save', 0)
+def game_archer_ato1(arquivo):
     info.modi_file('caminho:\n', '.save', 1)
 
     info.modi_file('Inventario: False\n', '.save', 2)
@@ -1317,15 +1281,11 @@ def game_archer_ato1():
     elif decision == '1':
         info.narrativa('nao_entregar.', arquivo)
 
-        while True:
-            luta = info.fight_archer('Forasteiro', 200, 15, 15, 2)
+        luta = info.fight_archer('Forasteiro', 200, 15, 15, 2)
 
-            if not luta:
-                info.death_count()
-                return True
-
-            else:
-                break
+        if not luta:
+            info.death_count()
+            return True
 
         info.narrativa('ganhou_nao_entregar.', arquivo)
 
@@ -1342,15 +1302,11 @@ def game_archer_ato1():
     # CONTINUANDO ───────────────────────────────────────────────────────────────────────
     info.narrativa('continuar_floresta.', arquivo)
 
-    while True:
-        luta = info.fight_archer('Monstro Cogumelo', 150, 12, 8, 4)
+    luta = info.fight_archer('Monstro Cogumelo', 150, 12, 8, 4)
 
-        if not luta:
-            info.death_count()
-            return True
-
-        else:
-            break
+    if not luta:
+        info.death_count()
+        return True
 
     info.narrativa('ganhou_monstro_cogumelo.', arquivo)
 
@@ -1399,16 +1355,15 @@ def game_archer_ato1():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
+    info.modi_file('ato 2.\n', '.save', 0)
     info.save_atri()
     info.add_inve('Cogumelo Vermelho', 'm')
 
-    global perdeu
-    perdeu = game_archer_ato2()
-    return perdeu
+    return False
 
 
 # INTRO
-def game_archer_intro():
+def game_archer_intro(arquivo):
     info.achieve('Mira certeira')
 
     info.modi_file('intro.\n', '.save', 0)
@@ -1442,9 +1397,9 @@ def game_archer_intro():
     print('\n\033[37mSalvando progresso... Não interrompa o programa.\033[m')
     sleep(2)
 
-    global perdeu
-    perdeu = game_archer_ato1()
-    return perdeu
+    info.modi_file('ato 1.\n', '.save', 0)
+
+    return False
 
 
 #   ▄▄▄▄███▄▄▄▄      ▄████████  ▄█  ███▄▄▄▄
@@ -1465,80 +1420,32 @@ def main():
         info.narrativa('bemvindo.', '.help')
 
     info.ver_save()
-
-    global personagem, atributos, arquivo, perdeu
-
     info.velo_narrativa()
-
-    caract_tuple = info.caract()
-    personagem = caract_tuple[0]
-    arquivo = caract_tuple[1]
-
-    atributos = info.skills()
+    arquivo = info.caract()
 
     perdeu = False
     while True:
-        print('\n\033[37mDefinindo atributos...')
-        sleep(1)
-        print('Costurando linhas do tempo...')
-        sleep(1)
-        print('Carregando...\033[m')
-        sleep(2)
+        # PERDEU = FALSE
+        if not perdeu:
+            print('\n\033[37mDefinindo atributos...')
+            sleep(1)
+            print('Costurando linhas do tempo...')
+            sleep(1)
+            print('Carregando...\033[m')
+            sleep(2)
 
-        if personagem['Classe'] == 'Feiticeiro':
-            with open('.save', 'r') as save:
-                tamanho = path.getsize('.save')
-                file = save.read()
+            perdeu = rodar_funcao(arquivo)
 
-                if 'intro.' in file or tamanho <= 2:
-                    perdeu = game_witcher_intro()
-                elif 'ato 1.' in file:
-                    perdeu = game_witcher_ato1()
-                elif 'ato 2.' in file:
-                    perdeu = game_witcher_ato2()
-                elif 'ato 3.' in file:
-                    perdeu = game_witcher_ato3()
-
-        elif personagem['Classe'] == 'Cavalheiro':
-            with open('.save', 'r') as save:
-                tamanho = path.getsize('.save')
-                file = save.read()
-
-                if 'intro.' in file or tamanho <= 2:
-                    perdeu = game_knight_intro()
-                elif 'ato 1.' in file:
-                    perdeu = game_knight_ato1()
-                elif 'ato 2.' in file:
-                    perdeu = game_knight_ato2()
-                elif 'ato 3.' in file:
-                    perdeu = game_knight_ato3()
-
-        else:
-            with open('.save') as save:
-                tamanho = path.getsize('.save')
-                file = save.read()
-
-                if 'intro.' in file or tamanho <= 2:
-                    perdeu = game_archer_intro()
-                elif 'ato 1.' in file:
-                    perdeu = game_archer_ato1()
-                elif 'ato 2.' in file:
-                    perdeu = game_archer_ato2()
-                elif 'ato 3.' in file:
-                    perdeu = game_archer_ato3()
-
-        # CASO O JOGADOR TENHA PERDIDO
-        if perdeu is True:
+        # CASO O JOGADOR TENHA PERDIDO ─ PERDEU = TRUE
+        elif perdeu:
             while True:
                 sleep(1)
                 info.show_achieve()
                 sleep(1)
                 try_again = input('Quer tentar de novo? [S/N] ').upper().strip()
 
-                if try_again not in 'SN':
-                    sleep(1)
-                    print('Oh não... Tente novamente.')
-                    continue
+                if not info.verifica_resposta(try_again, 'SN'):
+                    continue  # esse continue vai para o começo do loop em q está
                 else:
                     break
 
@@ -1547,40 +1454,34 @@ def main():
                 while True:
                     sleep(1)
                     pt = input('Deseja mudar suas características? (Ex.: Classe) [S/N] ').upper().strip()
-                    if pt not in 'SN':
-                        sleep(1)
-                        print('Oh não... Tente novamente.')
-                        continue
+                    if not info.verifica_resposta(pt, 'SN'):
+                        continue  # esse continue vai para o começo do loop em q está
                     else:
                         break
 
                 # CASO O JOGADOR QUEIRA MUDAR DE NOME E/OU CLASSE
                 if pt == 'S':
-                    with open('.info', 'r+') as save:
-                        save.truncate(0)
-                        info.ver_save()
-
-                    personagem = info.caract()
-                    atributos = info.skills()
-                    sleep(1)
-                    continue
-
-                # CASO O JOGADOR > NÃO < QUEIRA TROCAR DE NOME E/OU CLASSE
-                else:
+                    info.apagar_save('.info')
                     info.ver_save()
 
-                    atributos = info.skills()
-                    continue
+                    arquivo = info.caract()
+                    continue  # esse continue vai para o começo do loop principal (o game-loop)
+
+                # CASO O JOGADOR > NÃO < QUEIRA TROCAR DE NOME E/OU CLASSE MAS QUEIRA JOGAR NOVAMENTE
+                else:
+                    info.ver_save()
+                    continue  # esse continue vai para o começo do loop principal (o game-loop)
 
             # CASO O JOGADOR > NÃO < QUEIRA JOGAR NOVAMENTE
             else:
                 sleep(1)
                 print('\033[32mObrigado por jogar!\033[m')
                 break
+
+        # CASO PERDEU SEJA NONE
         else:
             sleep(1)
-            print('\033[31mPROGRAMA SAIU INEXPERADAMENTE DA ROTA\033[m')
-            break
+            raise ValueError('PROGRAMA SAIU INEXPERADAMENTE DA ROTA')
 
 
 if __name__ == '__main__':

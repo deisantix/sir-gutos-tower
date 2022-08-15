@@ -1,75 +1,84 @@
 from utils.exceptions.exceptions import FimDeJogoError
+from jogo.tomador_decisoes import TomadorDecisoes
 
-def rodar_historia(historia):
-    contar(historia['texto'])
+class Jogo:
 
-    try:
-        decisoes = historia['decisoes']
-    except KeyError:
-        return lidar_com_a_falta_de_decisoes(historia)
-
-    imprimir_decisoes(decisoes)
-    return tomar_decisao(decisoes)
+    def __init__(self, jogador, pov):
+        self.jogador = jogador
+        self.pov = pov
+        self.historia = None
+        self.tomador_decisoes = TomadorDecisoes(jogador)
 
 
-def contar(texto):
-    print()
-    for linha in texto:
-        print(linha)
+    def iniciar_historia(self):
+        intro = self.pov['intro']
+        self.historia = intro['historia']
 
-    print()
+        try:
+            while True:
+                self.historia = self.rodar_historia()
 
+                if type(self.historia) != dict:
+                    proximo_ato = self.historia
+                    novo_ato = self.pov[proximo_ato]
 
-def lidar_com_a_falta_de_decisoes(historia):
-    fim = verificar_se_fim_de_jogo(historia)
-    if fim:
-        fim_de_jogo(historia)
-
-    proximo_ato = verificar_se_existe_proximo_ato(historia)
-    if proximo_ato:
-        return proximo_ato
-
-    raise NotImplementedError
-
-
-def verificar_se_fim_de_jogo(historia):
-    try:
-        return historia['fim']
-
-    except KeyError:
-        return False
+                    self.historia = novo_ato['historia']
+        except FimDeJogoError:
+            print('Fim de Jogo')
+        except (KeyError, NotImplementedError):
+            print('Ocorreu um erro inesperado')
 
 
-def fim_de_jogo(historia):
-    print(historia['morte'])
-    raise FimDeJogoError
+    def rodar_historia(self):
+        self.contar()
+
+        try:
+            decisoes = self.historia['decisoes']
+        except KeyError:
+            return self.lidar_com_a_falta_de_decisoes()
+
+        self.tomador_decisoes.novas_decisoes(decisoes)
+        self.tomador_decisoes.imprimir_decisoes()
+        return self.tomador_decisoes.tomar_decisao()
 
 
-def verificar_se_existe_proximo_ato(historia):
-    try:
-        return historia['proximo']
+    def contar(self):
+        texto = self.historia['texto']
 
-    except KeyError:
-        return False
-
-
-def imprimir_decisoes(decisoes):
-    for decisao in decisoes:
-        decisao_detalhes = decisoes[decisao]
-
-        energia = decisao_detalhes['energia']
-        if energia == -1:
-            energia = '?'
-
-        print(f'{decisao}) {decisao_detalhes["decisao"]} (-{energia} E)')
+        print()
+        for linha in texto:
+            print(linha)
 
 
-def tomar_decisao(decisoes):
-    while True:
-        escolha_usuario = input('O que você vai fazer? ')
+    def lidar_com_a_falta_de_decisoes(self):
+        fim = self.verificar_se_fim_de_jogo()
+        if fim:
+            self.fim_de_jogo()
 
-        if escolha_usuario in decisoes:
-            return decisoes[escolha_usuario]['historia']
-        else:
-            print('Decisão inválida. Escolha novamente.')
-            continue
+        proximo_ato = self.verificar_se_existe_proximo_ato()
+        if proximo_ato:
+            return proximo_ato
+
+        raise NotImplementedError
+
+
+    def verificar_se_fim_de_jogo(self):
+        try:
+            return self.historia['fim']
+        except KeyError:
+            return False
+
+
+    def fim_de_jogo(self):
+        print(self.historia['morte'])
+        raise FimDeJogoError
+
+
+    def verificar_se_existe_proximo_ato(self):
+        try:
+            return self.historia['proximo']
+        except KeyError:
+            return False
+
+
+

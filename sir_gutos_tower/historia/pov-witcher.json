@@ -3,33 +3,43 @@
         "historia": {
             "texto": [
                 "A Entidade aponta para onde você precisa ir, porém é quilômetros de onde você está!",
-                "Quando você afirma que talvez não tenha Energia suficiente, a Entidade lhe entrega uma poção e você a toma.",
-                "SUA ENERGIA AUMENTA 2x! O suficiente para viajar!",
-                "A Entidade se dispersa e você volta para o frio extremo das montanhas.",
-                "Você percebe que há duas opções. Andar e salvar Energia, ou seguir os conselhos da Entidade de fazer um portal."
+                "Quando você afirma que talvez não tenha Energia suficiente, a Entidade lhe entrega uma poção e você a toma."
             ],
             "decisoes": {
-                "1": {
-                    "decisao": "Ir a pé",
-                    "energia": 0,
+                "0": {
+                    "decisao": "Tomar poção",
+                    "energia": -200,
                     "historia": {
                         "texto": [
-                            "Duas semanas se passaram e você finalmente chegou. Contudo, você gastou toda sua energia no caminho.",
-                            "O que você procurava foi levado há dias, e já é tarde demais para você..."
+                            "SUA ENERGIA AUMENTA 2x! O suficiente para viajar!\n",
+                            "A Entidade se dispersa e você volta para o frio extremo das montanhas.",
+                            "Você percebe que há duas opções. Andar e salvar Energia, ou seguir os conselhos da Entidade de fazer um portal."
                         ],
-                        "fim": true,
-                        "morte": "Você morre de cansaço."
-                    }
-                },
-                "2": {
-                    "decisao": "Fazer um portal",
-                    "energia": 200,
-                    "historia": {
-                        "texto": [
-                            "Você conjura um portal e entra em um cenário tropical e úmido no meio da floresta.",
-                            "Você inicia sua jornada."
-                        ],
-                        "proximo": "ato1"
+                        "decisoes": {
+                            "1": {
+                                "decisao": "Ir a pé",
+                                "energia": 0,
+                                "historia": {
+                                    "texto": [
+                                        "Duas semanas se passaram e você finalmente chegou. Contudo, você gastou toda sua energia no caminho.",
+                                        "O que você procurava foi levado há dias, e já é tarde demais para você..."
+                                    ],
+                                    "fim": true,
+                                    "morte": "Você morre de cansaço."
+                                }
+                            },
+                            "2": {
+                                "decisao": "Fazer um portal",
+                                "energia": 200,
+                                "historia": {
+                                    "texto": [
+                                        "Você conjura um portal e entra em um cenário tropical e úmido no meio da floresta.",
+                                        "Você inicia sua jornada."
+                                    ],
+                                    "proximo": "ato1"
+                                }
+                            }
+                        }
                     }
                 }
             }

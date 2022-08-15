@@ -1,27 +1,32 @@
 import json
 
-from config.files import POV_WITCHER
-from jogo.jogo import rodar_historia
+from jogo.jogo import Jogo
+from jogo.personagens.feiticeiro import Feiticeiro
 from utils.exceptions.exceptions import FimDeJogoError
 
+from config.files import POV_WITCHER
+from config.properties import PERSONAGEM
+from config.var import FEITICEIRO, CAVALEIRO, ARQUEIRO
+
 def main():
-    with open(POV_WITCHER, 'r') as arquivo_para_ler:
+    if PERSONAGEM == FEITICEIRO:
+        caminho_pov = POV_WITCHER
+        jogador = Feiticeiro()
+
+    elif PERSONAGEM == CAVALEIRO:
+        print('cavaleiro')
+        return
+
+    elif PERSONAGEM == ARQUEIRO:
+        print('arqueiro')
+        return
+
+    with open(caminho_pov, 'r') as arquivo_para_ler:
         pov = json.load(arquivo_para_ler)
 
-    intro = pov['intro']
-    historia = intro['historia']
+    jogo = Jogo(jogador, pov)
+    jogo.iniciar_historia()
 
-    try:
-        while True:
-            historia = rodar_historia(historia)
-            if type(historia) != dict:
-                novo_ato = pov[historia]
-                historia = novo_ato['historia']
-
-    except FimDeJogoError:
-        print('Fim de Jogo')
-    except (KeyError, NotImplementedError):
-        print('Ocorreu um erro inesperado')
 
 if __name__ == '__main__':
     main()

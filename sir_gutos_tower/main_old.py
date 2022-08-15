@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from time import sleep
 from os import path
-import info
+import sir_gutos_tower.info as info
 
 
 # ESCOLHER QUAL FUNÇÃO DO JOGO RODAR

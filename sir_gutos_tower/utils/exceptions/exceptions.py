@@ -1,0 +1,2 @@
+class FimDeJogoError(Exception):
+    pass

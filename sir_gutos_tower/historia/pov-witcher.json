@@ -1,0 +1,179 @@
+{
+    "intro": {
+        "historia": {
+            "texto": [
+                "A Entidade aponta para onde você precisa ir, porém é quilômetros de onde você está!",
+                "Quando você afirma que talvez não tenha Energia suficiente, a Entidade lhe entrega uma poção e você a toma.",
+                "SUA ENERGIA AUMENTA 2x! O suficiente para viajar!",
+                "A Entidade se dispersa e você volta para o frio extremo das montanhas.",
+                "Você percebe que há duas opções. Andar e salvar Energia, ou seguir os conselhos da Entidade de fazer um portal."
+            ],
+            "decisoes": {
+                "1": {
+                    "decisao": "Ir a pé",
+                    "energia": 0,
+                    "historia": {
+                        "texto": [
+                            "Duas semanas se passaram e você finalmente chegou. Contudo, você gastou toda sua energia no caminho.",
+                            "O que você procurava foi levado há dias, e já é tarde demais para você..."
+                        ],
+                        "fim": true,
+                        "morte": "Você morre de cansaço."
+                    }
+                },
+                "2": {
+                    "decisao": "Fazer um portal",
+                    "energia": 200,
+                    "historia": {
+                        "texto": [
+                            "Você conjura um portal e entra em um cenário tropical e úmido no meio da floresta.",
+                            "Você inicia sua jornada."
+                        ],
+                        "proximo": "ato1"
+                    }
+                }
+            }
+        }
+    },
+    "ato1": {
+        "historia": {
+            "texto": [
+                "Você sobe um morro íngreme e escuro. Você consegue sentir que está perto.",
+                "Você finalmente chega no topo do morro e se depara com uma grande torre. Você chegou ao seu destino.",
+                "Na sua frente há uma ponte arruinada atravessando um grande penhasco com um vasto campo de espinhos de pedra no fundo."
+            ],
+            "decisoes": {
+                "1": {
+                    "decisao": "Ir pela ponte mesmo assim",
+                    "energia": -1,
+                    "historia": {
+                        "texto": [
+                            "Você arrisca pela ponte e cai. Porém você lembra que é um feiticeiro e consegue flutuar.",
+                            "Você para no ar bem a tempo de não ser triturado pelos espinhos.",
+                            "No escuro, você consegue ver que há uma entrada de uma caverna na parede do abismo."
+                        ],
+                        "decisoes": {
+                            "1": {
+                                "decisao": "Voltar para a superfície",
+                                "energia": 210,
+                                "historia": {
+                                    "texto": [
+                                        "Você gasta todas suas forças para subir.",
+                                        "Porém, você não consegue alcançar a superfície antes de se esgotar completamente."
+                                    ],
+                                    "fim": true,
+                                    "morte": "Você volta a cair todo o penhasco e morre uma dor excruciante nos espinhos."
+                                }
+                            },
+                            "2": {
+                                "decisao": "Entrar na caverna",
+                                "energia": 0,
+                                "historia": {
+                                    "texto": [
+                                        "Você entra na caverna escura e usa sua magia para iluminar o caminho.",
+                                        "Você finalmente acha uma câmara subterrânea, porém há um grande dragão albino adormecido.",
+                                        "Mas não adormecido por muito tempo, pois ele sente seu cheiro e desperta.",
+                                        "Você se prepara para lutar."
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "2": {
+                    "decisao": "Achar outro caminho",
+                    "energia": 0,
+                    "historia": {
+                        "texto": [
+                            "Cinco dias se passaram e você finalmente chegou. Contudo, você gastou toda sua energia no caminho.",
+                            "O que você procurava foi levado há dias, e já é tarde demais para você..."
+                        ],
+                        "fim": true,
+                        "morte": "Você morre de cansaço."
+                    }
+                },
+                "3": {
+                    "decisao":"Usar magia para atravessar o outro lado",
+                    "energia": 25,
+                    "historia": {
+                        "texto": [
+                            "Você se concentra e flutua até o outro lado.",
+                            "Você está de frente à torre. Agora só precisa entrar."
+                        ],
+                        "decisoes": {
+                            "1": {
+                                "decisao": "Entrar pela porta da frente",
+                                "energia": -1,
+                                "historia": {
+                                    "texto": [
+                                        "Você consegue invadir pela porta da frente com magia,",
+                                        "porém uma alcateia de lobos mutantes de guarda te atacam."
+                                    ],
+                                    "fim": true,
+                                    "morte": "Você é devorado impiedosamente."
+                                }
+                            },
+                            "2": {
+                                "decisao": "Procurar outra entrada",
+                                "energia": 0,
+                                "historia": {
+                                    "texto": [
+                                        "Você se dirige à parte de trás da torre, e começa a procurar por outra forma de entrar.",
+                                        "Porém você sente a presença de outras pessoas fora da torre, atrás de você."
+                                    ],
+                                    "decisoes": {
+                                        "1": {
+                                            "decisao": "Se esconder",
+                                            "energia": 2,
+                                            "historia": {
+                                                "texto": [
+                                                    "Você se torna invisível e um cavalheiro em cima de um cavalo sai da floresta.",
+                                                    "Ele deixa algo cair quando desce do cavalo.",
+                                                    "Não demora muito tempo até ele encontrar um alçapão para o porão da torre e entrar."
+                                                ],
+                                                "decisoes": {
+                                                    "1": {
+                                                        "decisao": "Pegar item que o homem deixou cair",
+                                                        "energia": 0,
+                                                        "historia": {
+                                                            "texto": [
+                                                                "Quando você vai pegar o item, uma mulher sai de cima das árvores e corre para dentro da torre.",
+                                                                "Você pega o item e se apressa para ir atrás dos dois."
+                                                            ]
+                                                        }
+                                                    },
+                                                    "2": {
+                                                        "decisao": "Entrar na torre atrás dele",
+                                                        "energia": 0,
+                                                        "historia": {
+                                                            "texto": [
+                                                                "Quando você está indo em direção ao alçapão, uma mulher sai de cima das árvores e corre para dentro da torre.",
+                                                                "Você se apressa para ir atrás dos dois."
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "2": {
+                                            "decisao": "Se preparar para lutar",
+                                            "energia": 0,
+                                            "historia": {
+                                                "texto": [
+                                                    "Você se prepara para lutar e um cavalheiro montado em um cavalo sai da floresta.",
+                                                    "Ele te observa desconfiado e vocês trocam algumas informações, o nome dele é Doug, porém você não está disposto a ajudá-lo.",
+                                                    "Então de repente outra pessoa sai da floresta, e nocauteia vocês dois.",
+                                                    "Vocês dois acordam desnorteados e correm para alcançar quem for que seja."
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

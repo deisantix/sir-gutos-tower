@@ -1,5 +1,6 @@
-from utils.exceptions.exceptions import FimDeJogoError
-from jogo.tomador_decisoes import TomadorDecisoes
+from ..utils.exceptions.exceptions import FimDeJogoError
+from .tomador_decisoes import TomadorDecisoes
+
 
 class Jogo:
 
@@ -24,7 +25,7 @@ class Jogo:
 
                     self.historia = novo_ato['historia']
         except FimDeJogoError:
-            print('Fim de Jogo')
+            print('\nFim de Jogo')
         except (KeyError, NotImplementedError):
             print('Ocorreu um erro inesperado')
 

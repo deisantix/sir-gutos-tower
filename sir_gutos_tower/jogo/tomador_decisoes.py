@@ -1,9 +1,14 @@
+from sir_gutos_tower.config import var
+
+
 class TomadorDecisoes:
 
+    GASTO_MISTERIOSO = -1
     DECISAO_OBRIGATORIA = "0"
 
-    def __init__(self, jogador):
+    def __init__(self, jogador, retorno_decisao='historia'):
         self.jogador = jogador
+        self.retorno_decisao = retorno_decisao
         self.decisoes = None
 
         self.VER_ATRIBUTOS = None
@@ -31,8 +36,11 @@ class TomadorDecisoes:
         try:
             energia = detalhes['energia']
 
-            if energia == -1:
+            if energia == TomadorDecisoes.GASTO_MISTERIOSO:
                 energia = '?'
+            elif energia == var.ATAQUE_ESPECIAL:
+                return '(-AE)'
+
             return f'(-{energia} E)'
         except KeyError:
             return ''
@@ -40,14 +48,9 @@ class TomadorDecisoes:
 
     def tomar_decisao(self):
         while True:
-            if self.eh_decisao_obrigatoria():
-                escolha_usuario = TomadorDecisoes.DECISAO_OBRIGATORIA
-            else:
-                escolha_usuario = input('\nO que você vai fazer? ')
-
+            escolha_usuario = self.perguntar_ao_usuario()
             if escolha_usuario == self.VER_ATRIBUTOS:
-                print()
-                print(self.jogador)
+                self.imprimir_atributos()
 
             elif escolha_usuario in self.decisoes:
                 decisao_detalhes = self.decisoes[escolha_usuario]
@@ -55,14 +58,26 @@ class TomadorDecisoes:
                 energia = decisao_detalhes['energia']
                 self.gastar_energia_do_jogador(energia)
 
-                return decisao_detalhes['historia']
+                return decisao_detalhes[self.retorno_decisao]
 
             else:
                 print('Decisão inválida. Escolha novamente')
 
 
+    def perguntar_ao_usuario(self):
+        if self.eh_decisao_obrigatoria():
+            return TomadorDecisoes.DECISAO_OBRIGATORIA
+        else:
+            return input('\nO que você vai fazer? ')
+
+
+    def imprimir_atributos(self):
+        print()
+        print(self.jogador)
+
+
     def gastar_energia_do_jogador(self, energia):
-        if energia != -1:
+        if energia != TomadorDecisoes.GASTO_MISTERIOSO:
             self.jogador.executar_acao(energia)
 
 

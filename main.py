@@ -1,12 +1,12 @@
 import json
 
-from jogo.jogo import Jogo
-from jogo.personagens.feiticeiro import Feiticeiro
-from utils.exceptions.exceptions import FimDeJogoError
+from sir_gutos_tower.jogo.jogo import Jogo
+from sir_gutos_tower.jogo.personagens.feiticeiro import Feiticeiro
 
-from config.files import POV_WITCHER
-from config.properties import PERSONAGEM
-from config.var import FEITICEIRO, CAVALEIRO, ARQUEIRO
+from sir_gutos_tower.config.files import POV_WITCHER
+from sir_gutos_tower.config.properties import PERSONAGEM
+from sir_gutos_tower.config.var import FEITICEIRO, CAVALEIRO, ARQUEIRO
+
 
 def main():
     if PERSONAGEM == FEITICEIRO:

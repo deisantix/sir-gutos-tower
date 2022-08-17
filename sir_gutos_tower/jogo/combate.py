@@ -17,7 +17,7 @@ class Combate:
                 raise JaEstaNaFestaError
 
         if heroi.eh_jogador:
-            self.tomador_decisoes = TomadorDecisoes(heroi, 'acao')
+            self.tomador_decisoes = TomadorDecisoes(heroi)
         self.herois.append(heroi)
 
 
@@ -51,17 +51,12 @@ class Combate:
                 self.tomador_decisoes.novas_decisoes(ataques)
 
                 self.tomador_decisoes.imprimir_decisoes()
-                acao = self.tomador_decisoes.tomar_decisao()
+                decisao = self.tomador_decisoes.tomar_decisao()
 
                 try:
-                    if acao['tipo'] == 'ativo':
-                        dano = acao['ataque'](monstro)
-                        monstro.receber_dano(dano)
-                    else:
-                        acao['ataque']()
-
+                    dialogo = heroi.lutar(decisao, self.herois, monstro)
                     dialogo = self.tratar_dialogo_ataque_antes_de_imprimir(
-                        acao['texto'], heroi, monstro)
+                        dialogo, heroi, monstro)
                     self.imprimir_dialogo(dialogo)
                 except NaoAcertouAtaqueError:
                     print('\nVocê errou')
@@ -74,18 +69,15 @@ class Combate:
 
             lista_ataques = list(ataques.keys())
             ataque_escolhido = choice(lista_ataques)
-            acao_monstro = ataques[ataque_escolhido]['acao']
 
             try:
-                dano = acao_monstro['ataque'](heroi_a_atacar)
+                dialogo_monstro = inimigo.lutar(ataque_escolhido, self.monstros, heroi_a_atacar)
                 dialogo_monstro = self.tratar_dialogo_ataque_antes_de_imprimir(
-                    acao_monstro['texto'], heroi_a_atacar, inimigo)
+                    dialogo_monstro, heroi_a_atacar, inimigo)
                 self.imprimir_dialogo(dialogo_monstro)
-
-                heroi_a_atacar.receber_dano(dano)
-                self.anunciar_dano(heroi_a_atacar, dano)
-            except TypeError:
-                print(f'\n{inimigo.nome} errou')
+            # except TypeError as te:
+            #     print(te.with_traceback(TypeError))
+            #     print(f'\n{inimigo.nome} errou')
             except NaoAcertouAtaqueError:
                 print(f'\n{inimigo.nome} errou')
             except AdversarioProtegidoError:
@@ -95,17 +87,17 @@ class Combate:
                 self.imprimir_dialogo(dialogo_protegido)
 
 
-    def tratar_dialogo_ataque_antes_de_imprimir(self, textos_acao, heroi, monstro):
-        dialogo = self.escolher_texto(textos_acao)
-        dialogo = self.reescrever_placeholders_de_dialogo_ataque(dialogo, heroi, monstro)
-        return dialogo
-
-
-    def escolher_texto(self, textos_acao):
-        if type(textos_acao) == list:
-            return choice(textos_acao)
+    def tratar_dialogo_ataque_antes_de_imprimir(self, dialogo, heroi, monstro):
+        if type(dialogo) == list:
+            dialogos = []
+            for d in dialogo:
+                dialogos.append(
+                    self.reescrever_placeholders_de_dialogo_ataque(d, heroi, monstro)
+                )
+            return dialogos
         else:
-            return textos_acao
+            dialogo = self.reescrever_placeholders_de_dialogo_ataque(dialogo, heroi, monstro)
+            return dialogo
 
 
     def reescrever_placeholders_de_dialogo_ataque(self, dialogo, heroi, monstro):
@@ -118,6 +110,13 @@ class Combate:
         return dialogo
 
 
+    def decidir_pov_heroi(self, heroi):
+        pov = heroi.nome
+        if heroi.eh_jogador:
+            pov = 'Você'
+        return pov
+
+
     def minimizar_palavra_voce_caso_nao_no_inicio_da_frase(self, pov, dialogo):
         if pov == 'Você' and not dialogo.startswith('{jogador}'):
             pov = pov.lower()
@@ -126,16 +125,9 @@ class Combate:
 
     def imprimir_dialogo(self, dialogo):
         print()
-        print(dialogo)
 
-
-    def anunciar_dano(self, heroi, dano):
-        pov = self.decidir_pov_heroi(heroi)
-        print(f'{pov} perdeu {dano} de vida')
-
-
-    def decidir_pov_heroi(self, heroi):
-        pov = heroi.nome
-        if heroi.eh_jogador:
-            pov = 'Você'
-        return pov
+        if type(dialogo) == list:
+            for d in dialogo:
+                print(d)
+        else:
+            print(dialogo)

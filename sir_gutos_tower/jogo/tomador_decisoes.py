@@ -6,9 +6,8 @@ class TomadorDecisoes:
     GASTO_MISTERIOSO = -1
     DECISAO_OBRIGATORIA = "0"
 
-    def __init__(self, jogador, retorno_decisao='historia'):
+    def __init__(self, jogador):
         self.jogador = jogador
-        self.retorno_decisao = retorno_decisao
         self.decisoes = None
 
         self.VER_ATRIBUTOS = None
@@ -53,12 +52,7 @@ class TomadorDecisoes:
                 self.imprimir_atributos()
 
             elif escolha_usuario in self.decisoes:
-                decisao_detalhes = self.decisoes[escolha_usuario]
-
-                energia = decisao_detalhes['energia']
-                self.gastar_energia_do_jogador(energia)
-
-                return decisao_detalhes[self.retorno_decisao]
+                return escolha_usuario
 
             else:
                 print('Decisão inválida. Escolha novamente')

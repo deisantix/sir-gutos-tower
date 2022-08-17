@@ -1,3 +1,5 @@
+from random import choice
+
 from .lutavel import Lutavel
 from .heroi import Heroi
 from sir_gutos_tower.config.var import ATAQUE_ESPECIAL
@@ -30,47 +32,53 @@ class Feiticeiro(Heroi, Lutavel):
         self.energia -= energia_gasta
 
 
+    def lutar(self, ataque_escolhido, herois, inimigo):
+        ataques = self.retornar_ataques()
+
+        energia_gasta = ataques[ataque_escolhido]['energia']
+        self.executar_acao(energia_gasta)
+
+        if ataque_escolhido == '1':
+            self.usar_magia(inimigo)
+
+        return self.escolher_dialogo_ataque(ataques[ataque_escolhido])
+
+
+
     def retornar_ataques(self):
         return {
             '1': {
-                'decisao': 'Usar magia', 'energia': 8, 'acao': {
-                    'ataque': self.usar_magia,
-                    'tipo': 'ativo',
-                    'texto': [
-                        '{jogador} queima o monstro com fogo mágico',
-                        '{jogador} joga o monstro no ar, fazendo ele cair com força no chão',
-                        '{jogador} ataca {monstro} com magia',
-                        '{jogador} ativa seus poderes elétrico em {monstro}',
-                        '{jogador} invoca búfalos fantasma que atropelam {monstro}'
-                    ]
-                }
+                'decisao': 'Usar magia',
+                'energia': 8,
+                'texto': [
+                    '{jogador} queima o monstro com fogo mágico',
+                    '{jogador} joga o monstro no ar, fazendo ele cair com força no chão',
+                    '{jogador} ataca {monstro} com magia',
+                    '{jogador} ativa seus poderes elétrico em {monstro}',
+                    '{jogador} invoca búfalos fantasma que atropelam {monstro}'
+                ]
             },
             '2': {
-                'decisao': 'Ativar escudo', 'energia': 6, 'acao': {
-                    'ataque': self.ativar_escudo,
-                    'tipo': 'passivo',
-                    'texto': [
-                        'Você cria um escudo protetor para você e seus companheiros.',
-                        'Vocês estão protegidos por duas rodadas.'
-                    ]
-                }
+                'decisao': 'Ativar escudo',
+                'energia': 6,
+                'texto': [
+                    'Você cria um escudo protetor para você e seus companheiros.',
+                    'Vocês estão protegidos por duas rodadas.'
+                ]
             },
             '3': {
-                'decisao': 'Atacar com cajado', 'energia': 2, 'acao': {
-                    'ataque': self.atacar_com_cajado,
-                    'tipo': 'ativo',
-                    'texto': [
+                'decisao': 'Atacar com cajado',
+                'energia': 2,
+                'texto': [
 
-                    ]
-                }
+                ]
             },
             '4': {
-                'decisao': 'Curar festa', 'energia': ATAQUE_ESPECIAL, 'acao': {
-                    'ataque': self.usar_especial,
-                    'texto': [
+                'decisao': 'Curar festa',
+                'energia': ATAQUE_ESPECIAL,
+                'texto': [
 
-                    ]
-                }
+                ]
             },
         }
 
@@ -78,7 +86,8 @@ class Feiticeiro(Heroi, Lutavel):
     def usar_magia(self, inimigo):
         acertou = self.tentar_atacar(margem_erro_ataque=15)
         if acertou:
-            return calcular_dano(self.magia, inimigo.defesa)
+            dano = calcular_dano(self.magia, inimigo.defesa)
+            inimigo.receber_dano(dano)
         else:
             raise NaoAcertouAtaqueError
 
@@ -100,6 +109,8 @@ class Feiticeiro(Heroi, Lutavel):
             raise AdversarioProtegidoError
         else:
             self.vida -= dano
+            return '{jogador} perdeu ' + str(dano) + ' de dano'
+
 
 
     def __str__(self):

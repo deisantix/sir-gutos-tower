@@ -14,23 +14,30 @@ class Monstro(Lutavel):
         self.precisao = precisao
 
 
+    def lutar(self, ataque_escolhido, aliados, inimigo):
+        ataques = self.retornar_ataques()
+
+        dialogo_inimigo = ''
+        if ataque_escolhido == '1':
+            dialogo_inimigo = self.atacar(inimigo)
+
+        return [
+            self.escolher_dialogo_ataque(ataques[ataque_escolhido]),
+            dialogo_inimigo
+        ]
+
+
     def retornar_ataques(self):
         return {
             '1': {
-                'nome': 'Atacar', 'acao': {
-                    'ataque': self.atacar,
-                    'texto': [
-                        '{monstro} atacou {jogador}'
-                    ]
-                }
+                'nome': 'Atacar',
+                'texto': [
+                    '{monstro} atacou {jogador}'
+                ]
             },
             '2': {
-                'nome': 'Defender', 'acao': {
-                    'ataque': self.defender,
-                    'texto': [
-
-                    ]
-                }
+                'nome': 'Defender',
+                'texto': []
             }
         }
 
@@ -38,7 +45,8 @@ class Monstro(Lutavel):
     def atacar(self, heroi):
         acertou = self.tentar_atacar(margem_erro_ataque=12)
         if acertou:
-            return calcular_dano(self.ataque, heroi.defesa)
+            dano = calcular_dano(self.ataque, heroi.defesa)
+            return heroi.receber_dano(dano)
         else:
             raise NaoAcertouAtaqueError
 

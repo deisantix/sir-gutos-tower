@@ -1,5 +1,7 @@
 from random import choice
 
+from .personagens.lutavel import Lutavel
+
 from ..utils.exceptions.exceptions import AdversarioProtegidoError, JaEstaNaFestaError, NaoAcertouAtaqueError
 from ..jogo.tomador_decisoes import TomadorDecisoes
 
@@ -55,36 +57,33 @@ class Combate:
 
                 try:
                     dialogo = heroi.lutar(decisao, self.herois, monstro)
-                    dialogo = self.tratar_dialogo_ataque_antes_de_imprimir(
-                        dialogo, heroi, monstro)
-                    self.imprimir_dialogo(dialogo)
                 except NaoAcertouAtaqueError:
-                    print('\nVocê errou')
+                    dialogo = '{jogador} errou'
+
+                dialogo = self.tratar_dialogo_ataque_antes_de_imprimir(dialogo, heroi, monstro)
+                self.imprimir_dialogo(dialogo)
 
 
     def rodar_vez_dos_inimigos(self):
         for inimigo in self.monstros:
             heroi_a_atacar = choice(self.herois)
-            ataques = inimigo.retornar_ataques()
 
-            lista_ataques = list(ataques.keys())
-            ataque_escolhido = choice(lista_ataques)
+            ataques = inimigo.retornar_ataques()
+            ataque_escolhido = choice(list(ataques.keys()))
+
+            if ataques[ataque_escolhido]['tipo'] == 'defesa':
+                if 'defesa' in inimigo.acoes_previas and inimigo.acoes_previas[0] != 'defesa':
+                    ataque_escolhido = '1'
 
             try:
-                dialogo_monstro = inimigo.lutar(ataque_escolhido, self.monstros, heroi_a_atacar)
-                dialogo_monstro = self.tratar_dialogo_ataque_antes_de_imprimir(
-                    dialogo_monstro, heroi_a_atacar, inimigo)
-                self.imprimir_dialogo(dialogo_monstro)
-            # except TypeError as te:
-            #     print(te.with_traceback(TypeError))
-            #     print(f'\n{inimigo.nome} errou')
+                dialogo_monstro = inimigo.lutar(
+                    ataque_escolhido, self.monstros, heroi_a_atacar)
             except NaoAcertouAtaqueError:
-                print(f'\n{inimigo.nome} errou')
-            except AdversarioProtegidoError:
-                dialogo_protegido = self.tratar_dialogo_ataque_antes_de_imprimir(
-                    'Porém {jogador} se defendeu', heroi_a_atacar, inimigo
-                )
-                self.imprimir_dialogo(dialogo_protegido)
+                dialogo_monstro = '{monstro} errou'
+
+            dialogo_monstro = self.tratar_dialogo_ataque_antes_de_imprimir(
+                dialogo_monstro, heroi_a_atacar, inimigo)
+            self.imprimir_dialogo(dialogo_monstro)
 
 
     def tratar_dialogo_ataque_antes_de_imprimir(self, dialogo, heroi, monstro):

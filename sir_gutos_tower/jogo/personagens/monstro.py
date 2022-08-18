@@ -1,4 +1,4 @@
-from sir_gutos_tower.utils.exceptions.exceptions import NaoAcertouAtaqueError
+from sir_gutos_tower.utils.exceptions.exceptions import AdversarioProtegidoError, NaoAcertouAtaqueError
 from .calculador_de_dano import calcular_dano
 from .lutavel import Lutavel
 
@@ -13,31 +13,44 @@ class Monstro(Lutavel):
         self.critico = critico
         self.precisao = precisao
 
+        self.protegido = False
+        self.acoes_previas = [None, None, None]
+
 
     def lutar(self, ataque_escolhido, aliados, inimigo):
         ataques = self.retornar_ataques()
 
+        self.adicionar_acoes_previas(ataques[ataque_escolhido]['tipo'])
+
         dialogo_inimigo = ''
         if ataque_escolhido == '1':
             dialogo_inimigo = self.atacar(inimigo)
+        elif ataque_escolhido == '2':
+            self.defender()
 
-        return [
-            self.escolher_dialogo_ataque(ataques[ataque_escolhido]),
-            dialogo_inimigo
-        ]
+        dialogos = []
+        dialogos.append(self.escolher_dialogo_ataque(ataques[ataque_escolhido]['texto']))
+        if dialogo_inimigo:
+            dialogos.append(dialogo_inimigo)
+
+        return dialogos
 
 
     def retornar_ataques(self):
         return {
             '1': {
                 'nome': 'Atacar',
+                'tipo': 'ataque',
                 'texto': [
-                    '{monstro} atacou {jogador}'
+                    '{monstro} ataca {jogador}'
                 ]
             },
             '2': {
                 'nome': 'Defender',
-                'texto': []
+                'tipo': 'defesa',
+                'texto': [
+                    '{monstro} entra em alerta'
+                ]
             }
         }
 
@@ -46,14 +59,32 @@ class Monstro(Lutavel):
         acertou = self.tentar_atacar(margem_erro_ataque=12)
         if acertou:
             dano = calcular_dano(self.ataque, heroi.defesa)
-            return heroi.receber_dano(dano)
+
+            try:
+                return heroi.receber_dano(dano)
+            except AdversarioProtegidoError as protegido:
+                return str(protegido)
         else:
             raise NaoAcertouAtaqueError
 
 
     def defender(self):
-        pass
+        self.protegido = True
 
 
     def receber_dano(self, dano):
-        self.vida -= dano
+        if not self.protegido:
+            self.vida -= dano
+        else:
+            self.desfazer_defesas()
+            raise AdversarioProtegidoError('Porém {monstro} se defende')
+
+
+    def desfazer_defesas(self):
+        self.protegido = False
+
+
+    def adicionar_acoes_previas(self, acao):
+        if len(self.acoes_previas) == 3:
+            self.acoes_previas.pop(0)
+        self.acoes_previas.append(acao)

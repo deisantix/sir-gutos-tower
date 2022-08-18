@@ -5,6 +5,8 @@ from sir_gutos_tower.jogo.personagens.calculador_de_dano import calcular_precisa
 
 class Lutavel(ABC):
 
+    PROTEGIDO_COM_ESCUDO_GUSTAV = 7
+
     @abstractmethod
     def lutar(self, ataque_escolhido, aliados, inimigo):
         pass
@@ -18,8 +20,7 @@ class Lutavel(ABC):
         pass
 
 
-    def escolher_dialogo_ataque(self, ataque_escolhido):
-        textos = ataque_escolhido['texto']
+    def escolher_dialogo_ataque(self, textos):
         try:
             return choice(textos)
         except IndexError:

@@ -3,7 +3,11 @@ from random import choice
 from .lutavel import Lutavel
 from .heroi import Heroi
 from sir_gutos_tower.config.var import ATAQUE_ESPECIAL, GASTO_MISTERIOSO
-from sir_gutos_tower.utils.exceptions.exceptions import NaoAcertouAtaqueError, AdversarioProtegidoError
+from sir_gutos_tower.utils.exceptions.exceptions import (
+    JogadorSemPontosDeVidaError,
+    NaoAcertouAtaqueError,
+    AdversarioProtegidoError
+)
 
 from ..calculador_de_dano import calcular_dano
 
@@ -35,6 +39,7 @@ class Feiticeiro(Heroi, Lutavel):
         self.energia = 210
         self.critico = 15
         self.precisao = 10
+        self.esta_esgotado = False
 
 
     def retornar_ataques(self):
@@ -204,6 +209,9 @@ class Feiticeiro(Heroi, Lutavel):
             raise AdversarioProtegidoError(self.mensagem_protegido)
         else:
             self.vida -= dano
+            if self.vida <= 0:
+                self.esta_esgotado = True
+
             return '{jogador} recebe ' + str(dano) + ' de dano'
 
 

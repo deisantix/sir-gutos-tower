@@ -77,6 +77,11 @@ class Jogo:
         if combate:
             ganhou = self.iniciar_combate()
 
+            if ganhou:
+                pass
+            else:
+                pass
+
         raise NotImplementedError
 
 

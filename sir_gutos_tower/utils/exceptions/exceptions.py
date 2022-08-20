@@ -9,3 +9,9 @@ class NaoAcertouAtaqueError(Exception):
 
 class AdversarioProtegidoError(Exception):
     pass
+
+class JogadorSemPontosDeVidaError(Exception):
+    pass
+
+class InimigoSemPontosDeVidaError(Exception):
+    pass

@@ -1,4 +1,4 @@
-from sir_gutos_tower.utils.exceptions.exceptions import AdversarioProtegidoError, NaoAcertouAtaqueError
+from sir_gutos_tower.utils.exceptions.exceptions import AdversarioProtegidoError, InimigoSemPontosDeVidaError, NaoAcertouAtaqueError
 from ..calculador_de_dano import calcular_dano
 from .lutavel import Lutavel
 
@@ -73,11 +73,13 @@ class Monstro(Lutavel):
 
 
     def receber_dano(self, dano):
-        if not self.protegido:
-            self.vida -= dano
-        else:
+        if self.protegido:
             self.desfazer_defesas()
             raise AdversarioProtegidoError('Porém {monstro} se defende')
+        else:
+            self.vida -= dano
+            if self.vida <= 0:
+                raise InimigoSemPontosDeVidaError
 
 
     def desfazer_defesas(self):

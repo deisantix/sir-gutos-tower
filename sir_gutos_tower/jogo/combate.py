@@ -2,7 +2,7 @@ from random import choice
 
 from .personagens.lutavel import Lutavel
 
-from ..utils.exceptions.exceptions import AdversarioProtegidoError, JaEstaNaFestaError, NaoAcertouAtaqueError
+from ..utils.exceptions.exceptions import JaEstaNaFestaError, JogadorSemPontosDeVidaError, NaoAcertouAtaqueError
 from ..jogo.tomador_decisoes import TomadorDecisoes
 
 class Combate:
@@ -38,12 +38,28 @@ class Combate:
             print('Você se prepara para lutar.')
 
         while lutando:
+            try:
+                self.checar_status_dos_participantes()
+            except JogadorSemPontosDeVidaError:
+                print('\nVocê perdeu')
+                return False
+
             print()
             for monstro in self.monstros:
                 print(monstro.nome, str(monstro.vida) + ' HP')
 
             self.rodar_vez_dos_herois()
             self.rodar_vez_dos_inimigos()
+
+
+    def checar_status_dos_participantes(self):
+        for heroi in self.herois:
+            if heroi.esta_esgotado:
+                pov = self.decidir_pov_heroi(heroi)
+                print(pov + ' está esgotado')
+
+                if heroi.eh_jogador:
+                    raise JogadorSemPontosDeVidaError
 
 
     def rodar_vez_dos_herois(self):

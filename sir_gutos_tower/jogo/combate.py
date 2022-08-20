@@ -44,7 +44,8 @@ class Combate:
 
 
     def rodar_vez_dos_herois(self):
-        monstro = self.monstros[0]
+        if len(self.monstros) == 1:
+            monstro = self.monstros[0]
 
         for heroi in self.herois:
             ataques = heroi.retornar_ataques()

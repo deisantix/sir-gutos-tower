@@ -3,7 +3,7 @@ from random import choice
 from .personagens.lutavel import Lutavel
 
 from ..utils.exceptions.exceptions import JaEstaNaFestaError, JogadorSemPontosDeVidaError, NaoAcertouAtaqueError
-from ..jogo.tomador_decisoes import TomadorDecisoes
+from ..jogo.tomador_decisoes.decisor_historia import DecisorHistoria
 
 class Combate:
 
@@ -19,7 +19,7 @@ class Combate:
                 raise JaEstaNaFestaError
 
         if heroi.eh_jogador:
-            self.tomador_decisoes = TomadorDecisoes(heroi)
+            self.tomador_decisoes = DecisorHistoria()
         self.herois.append(heroi)
 
 
@@ -73,7 +73,7 @@ class Combate:
                 self.tomador_decisoes.novas_decisoes(ataques)
 
                 self.tomador_decisoes.imprimir_decisoes()
-                decisao = self.tomador_decisoes.tomar_decisao()
+                decisao = self.tomador_decisoes.tomar_decisao(heroi)
 
                 try:
                     dialogo = heroi.lutar(decisao, self.herois, monstro)

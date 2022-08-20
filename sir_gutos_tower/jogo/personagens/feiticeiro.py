@@ -3,11 +3,8 @@ from random import choice
 from .lutavel import Lutavel
 from .heroi import Heroi
 from sir_gutos_tower.config.var import ATAQUE_ESPECIAL, GASTO_MISTERIOSO
-from sir_gutos_tower.utils.exceptions.exceptions import (
-    JogadorSemPontosDeVidaError,
-    NaoAcertouAtaqueError,
-    AdversarioProtegidoError
-)
+from sir_gutos_tower.utils.exceptions.exceptions import InventarioVazioError, NaoAcertouAtaqueError, AdversarioProtegidoError
+from sir_gutos_tower.jogo.inventario.inventario import Inventario
 
 from ..calculador_de_dano import calcular_dano
 
@@ -29,6 +26,7 @@ class Feiticeiro(Heroi, Lutavel):
 
         self.init_atributos()
         self.acoes = self.retornar_ataques()
+        self.inventario = Inventario()
 
 
     def init_atributos(self):
@@ -213,6 +211,24 @@ class Feiticeiro(Heroi, Lutavel):
                 self.esta_esgotado = True
 
             return '{jogador} recebe ' + str(dano) + ' de dano'
+
+
+    def pegar_item(self, novo_item):
+        self.inventario.adicionar_item(novo_item)
+
+
+    def usar_item(self):
+        try:
+            item_retirado = self.inventario.retirar_item()
+            if item_retirado:
+                item_retirado.usar(self)
+        except InventarioVazioError as vazio:
+            print(vazio)
+
+
+    def imprimir_atributos(self):
+        print()
+        print(self)
 
 
     def __str__(self):

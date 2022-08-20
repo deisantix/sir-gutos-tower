@@ -1,19 +1,16 @@
+from .tomador_decisoes import TomadorDecisoes
 from sir_gutos_tower.config import var
 
 
-class TomadorDecisoes:
+class DecisorHistoria(TomadorDecisoes):
 
-    DECISAO_OBRIGATORIA = "0"
-
-    def __init__(self, jogador):
-        self.jogador = jogador
-        self.decisoes = None
-
+    def __init__(self):
+        super().__init__()
         self.VER_ATRIBUTOS = None
 
 
     def novas_decisoes(self, decisoes):
-        self.decisoes = decisoes
+        super().novas_decisoes(decisoes)
 
         quantas_decisoes = len(self.decisoes)
         self.VER_ATRIBUTOS = str(quantas_decisoes + 1)
@@ -23,6 +20,7 @@ class TomadorDecisoes:
     def imprimir_decisoes(self):
         if not self.eh_decisao_obrigatoria():
             print()
+
             for decisao in self.decisoes:
                 decisao_detalhes = self.decisoes[decisao]
 
@@ -44,30 +42,11 @@ class TomadorDecisoes:
             return ''
 
 
-    def tomar_decisao(self):
+    def tomar_decisao(self, jogador):
         while True:
-            escolha_usuario = self.perguntar_ao_usuario()
+            escolha_usuario = super().tomar_decisao()
+
             if escolha_usuario == self.VER_ATRIBUTOS:
-                self.imprimir_atributos()
-
-            elif escolha_usuario in self.decisoes:
-                return escolha_usuario
-
+                jogador.imprimir_atributos()
             else:
-                print('Decisão inválida. Escolha novamente')
-
-
-    def perguntar_ao_usuario(self):
-        if self.eh_decisao_obrigatoria():
-            return TomadorDecisoes.DECISAO_OBRIGATORIA
-        else:
-            return input('\nO que você vai fazer? ')
-
-
-    def imprimir_atributos(self):
-        print()
-        print(self.jogador)
-
-
-    def eh_decisao_obrigatoria(self):
-        return TomadorDecisoes.DECISAO_OBRIGATORIA in self.decisoes
+                return escolha_usuario

@@ -15,3 +15,6 @@ class JogadorSemPontosDeVidaError(Exception):
 
 class InimigoSemPontosDeVidaError(Exception):
     pass
+
+class InventarioVazioError(Exception):
+    pass

@@ -166,7 +166,10 @@
                                                             "texto": [
                                                                 "Quando você vai pegar o item, uma mulher sai de cima das árvores e corre para dentro da torre.",
                                                                 "Você pega o item e se apressa para ir atrás dos dois."
-                                                            ]
+                                                            ],
+                                                            "item": {
+                                                                "nome": "Cogumelo amarelo"
+                                                            }
                                                         }
                                                     },
                                                     "2": {

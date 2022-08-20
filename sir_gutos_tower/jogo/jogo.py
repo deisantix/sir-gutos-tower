@@ -34,8 +34,8 @@ class Jogo:
                     raise NotImplementedError
         except FimDeJogoError:
             print('\nFim de Jogo')
-        except (KeyError, NotImplementedError):
-            print('Ocorreu um erro inesperado')
+        # except (KeyError, NotImplementedError):
+        #     print('Ocorreu um erro inesperado')
         except KeyboardInterrupt:
             print('\n\nSaindo...')
 
@@ -57,7 +57,9 @@ class Jogo:
 
 
     def contar(self):
-        texto = self.historia['texto']
+        texto = self.verificar_funcionalidade_do_jogo('texto')
+        if not texto:
+            return
 
         print()
         for linha in texto:
@@ -75,12 +77,7 @@ class Jogo:
 
         combate = self.verificar_se_entrou_em_combate()
         if combate:
-            ganhou = self.iniciar_combate()
-
-            if ganhou:
-                pass
-            else:
-                pass
+            return self.iniciar_combate()
 
         raise NotImplementedError
 
@@ -90,8 +87,10 @@ class Jogo:
 
 
     def fim_de_jogo(self):
-        print(self.historia['morte'])
-        raise FimDeJogoError
+        try:
+            print(self.historia['morte'])
+        finally:
+            raise FimDeJogoError
 
 
     def verificar_se_existe_proximo_ato(self):
@@ -118,7 +117,11 @@ class Jogo:
                     ini['precisao']
                 )
             )
-        combate.comecar()
+        ganhou = combate.comecar()
+        if ganhou:
+            pass
+        else:
+            return detalhes['perdeu']
 
 
     def verificar_funcionalidade_do_jogo(self, funcionalidade):

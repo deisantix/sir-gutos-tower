@@ -94,7 +94,13 @@
                                                 "critico": 100,
                                                 "precisao": 50
                                             }
-                                        ]
+                                        ],
+                                        "ganhou": {
+
+                                        },
+                                        "perdeu": {
+                                            "fim": true
+                                        }
                                     }
                                 }
                             }

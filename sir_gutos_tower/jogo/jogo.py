@@ -1,5 +1,8 @@
 from ..utils.exceptions.exceptions import FimDeJogoError
 from .tomador_decisoes import TomadorDecisoes
+from .combate import Combate
+from .personagens.monstro import Monstro
+from ..config.var import GASTO_MISTERIOSO
 
 
 class Jogo:
@@ -17,17 +20,24 @@ class Jogo:
 
         try:
             while True:
-                self.historia = self.rodar_historia()
+                retorno = type(self.historia)
+                if retorno == dict:
+                    self.historia = self.rodar_historia()
 
-                if type(self.historia) != dict:
+                elif type(self.historia) == str:
                     proximo_ato = self.historia
                     novo_ato = self.pov[proximo_ato]
 
                     self.historia = novo_ato['historia']
+
+                else:
+                    raise NotImplementedError
         except FimDeJogoError:
             print('\nFim de Jogo')
         except (KeyError, NotImplementedError):
             print('Ocorreu um erro inesperado')
+        except KeyboardInterrupt:
+            print('\n\nSaindo...')
 
 
     def rodar_historia(self):
@@ -36,11 +46,14 @@ class Jogo:
         try:
             decisoes = self.historia['decisoes']
         except KeyError:
+            # caso não haja decisões então provavelmente é outra funcionalidade do jogo
             return self.lidar_com_a_falta_de_decisoes()
 
         self.tomador_decisoes.novas_decisoes(decisoes)
         self.tomador_decisoes.imprimir_decisoes()
-        return self.tomador_decisoes.tomar_decisao()
+
+        decisao = self.tomador_decisoes.tomar_decisao()
+        return self.lidar_com_decisao(decisoes[decisao])
 
 
     def contar(self):
@@ -60,14 +73,15 @@ class Jogo:
         if proximo_ato:
             return proximo_ato
 
+        combate = self.verificar_se_entrou_em_combate()
+        if combate:
+            ganhou = self.iniciar_combate()
+
         raise NotImplementedError
 
 
     def verificar_se_fim_de_jogo(self):
-        try:
-            return self.historia['fim']
-        except KeyError:
-            return False
+        return self.verificar_funcionalidade_do_jogo('fim')
 
 
     def fim_de_jogo(self):
@@ -76,10 +90,40 @@ class Jogo:
 
 
     def verificar_se_existe_proximo_ato(self):
+        return self.verificar_funcionalidade_do_jogo('proximo')
+
+
+    def verificar_se_entrou_em_combate(self):
+        return self.verificar_funcionalidade_do_jogo('combate')
+
+
+    def iniciar_combate(self):
+        detalhes = self.historia['combate']
+        combate = Combate()
+
+        combate.adicionarHeroi(self.jogador)
+        for ini in detalhes['inimigos']:
+            combate.adicionarMonstro(
+                Monstro(
+                    ini['nome'],
+                    ini['vida'],
+                    ini['ataque'],
+                    ini['defesa'],
+                    ini['critico'],
+                    ini['precisao']
+                )
+            )
+        combate.comecar()
+
+
+    def verificar_funcionalidade_do_jogo(self, funcionalidade):
         try:
-            return self.historia['proximo']
+            return self.historia[funcionalidade]
         except KeyError:
             return False
 
 
+    def lidar_com_decisao(self, detalhes):
+        self.jogador.executar_acao(detalhes)
+        return detalhes['historia']
 

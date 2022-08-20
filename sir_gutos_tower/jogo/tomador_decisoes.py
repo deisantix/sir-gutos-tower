@@ -3,7 +3,6 @@ from sir_gutos_tower.config import var
 
 class TomadorDecisoes:
 
-    GASTO_MISTERIOSO = -1
     DECISAO_OBRIGATORIA = "0"
 
     def __init__(self, jogador):
@@ -35,7 +34,7 @@ class TomadorDecisoes:
         try:
             energia = detalhes['energia']
 
-            if energia == TomadorDecisoes.GASTO_MISTERIOSO:
+            if energia == var.GASTO_MISTERIOSO:
                 energia = '?'
             elif energia == var.ATAQUE_ESPECIAL:
                 return '(-AE)'
@@ -68,11 +67,6 @@ class TomadorDecisoes:
     def imprimir_atributos(self):
         print()
         print(self.jogador)
-
-
-    def gastar_energia_do_jogador(self, energia):
-        if energia != TomadorDecisoes.GASTO_MISTERIOSO:
-            self.jogador.executar_acao(energia)
 
 
     def eh_decisao_obrigatoria(self):

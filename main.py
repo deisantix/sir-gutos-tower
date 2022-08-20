@@ -11,7 +11,7 @@ from sir_gutos_tower.config.var import FEITICEIRO, CAVALEIRO, ARQUEIRO
 def main():
     if PERSONAGEM == FEITICEIRO:
         caminho_pov = POV_WITCHER
-        jogador = Feiticeiro()
+        jogador = Feiticeiro(nome='Ethaniel', eh_jogador=True)
 
     elif PERSONAGEM == CAVALEIRO:
         print('cavaleiro')

@@ -2,7 +2,7 @@ from random import choice
 
 from .lutavel import Lutavel
 from .heroi import Heroi
-from sir_gutos_tower.config.var import ATAQUE_ESPECIAL
+from sir_gutos_tower.config.var import ATAQUE_ESPECIAL, GASTO_MISTERIOSO
 from sir_gutos_tower.utils.exceptions.exceptions import NaoAcertouAtaqueError, AdversarioProtegidoError
 
 from ..calculador_de_dano import calcular_dano
@@ -92,7 +92,7 @@ class Feiticeiro(Heroi, Lutavel):
         self.inimigo_rodada = inimigo
         ataque_escolhido = self.acoes[decisao]
 
-        self.administrar_energia(ataque_escolhido)
+        self.executar_acao(ataque_escolhido)
         self.adicionar_acoes_previas(ataque_escolhido['tipo'])
 
         dialogos = []
@@ -109,12 +109,17 @@ class Feiticeiro(Heroi, Lutavel):
         return dialogos
 
 
-    def administrar_energia(self, ataque_escolhido):
-        energia_gasta = ataque_escolhido['energia']
-        self.executar_acao(energia_gasta)
+    def executar_acao(self, decisao):
+        self.administrar_energia(decisao)
 
 
-    def executar_acao(self, energia_gasta):
+    def administrar_energia(self, decisao):
+        energia_gasta = decisao['energia']
+        if energia_gasta != GASTO_MISTERIOSO:
+            self.gastar_energia(energia_gasta)
+
+
+    def gastar_energia(self, energia_gasta):
         self.energia -= energia_gasta
 
 
@@ -144,10 +149,10 @@ class Feiticeiro(Heroi, Lutavel):
 
     def definir_ataque(self, ataque_escolhido):
         self.onde_procurar_dialogo = 'texto'
-        ataque_escolhido['acao']()
-
         if ataque_escolhido['tipo'] == 'defesa' and not len(self.aliados):
             self.onde_procurar_dialogo = 'texto_sozinho'
+
+        return ataque_escolhido['acao']()
 
 
     def usar_magia(self):
@@ -199,7 +204,7 @@ class Feiticeiro(Heroi, Lutavel):
             raise AdversarioProtegidoError(self.mensagem_protegido)
         else:
             self.vida -= dano
-            return '{jogador} perde ' + str(dano) + ' de dano'
+            return '{jogador} recebe ' + str(dano) + ' de dano'
 
 
     def __str__(self):

@@ -82,9 +82,20 @@
                                     "texto": [
                                         "Você entra na caverna escura e usa sua magia para iluminar o caminho.",
                                         "Você finalmente acha uma câmara subterrânea, porém há um grande dragão albino adormecido.",
-                                        "Mas não adormecido por muito tempo, pois ele sente seu cheiro e desperta.",
-                                        "Você se prepara para lutar."
-                                    ]
+                                        "Mas não adormecido por muito tempo, pois ele sente seu cheiro e desperta."
+                                    ],
+                                    "combate": {
+                                        "inimigos": [
+                                            {
+                                                "nome": "Sir Dragon",
+                                                "vida": 10000,
+                                                "ataque": 2500,
+                                                "defesa": 5000,
+                                                "critico": 100,
+                                                "precisao": 50
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         }

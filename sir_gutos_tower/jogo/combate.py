@@ -34,6 +34,9 @@ class Combate:
     def comecar(self):
         lutando = True
 
+        if len(self.herois) == 1:
+            print('Você se prepara para lutar.')
+
         while lutando:
             print()
             for monstro in self.monstros:

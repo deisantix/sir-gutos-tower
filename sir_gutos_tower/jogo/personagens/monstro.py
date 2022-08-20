@@ -1,5 +1,5 @@
 from sir_gutos_tower.utils.exceptions.exceptions import AdversarioProtegidoError, NaoAcertouAtaqueError
-from .calculador_de_dano import calcular_dano
+from ..calculador_de_dano import calcular_dano
 from .lutavel import Lutavel
 
 

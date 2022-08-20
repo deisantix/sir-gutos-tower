@@ -5,7 +5,7 @@ from .heroi import Heroi
 from sir_gutos_tower.config.var import ATAQUE_ESPECIAL
 from sir_gutos_tower.utils.exceptions.exceptions import NaoAcertouAtaqueError, AdversarioProtegidoError
 
-from .calculador_de_dano import calcular_dano
+from ..calculador_de_dano import calcular_dano
 
 
 class Feiticeiro(Heroi, Lutavel):

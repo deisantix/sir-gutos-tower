@@ -168,7 +168,7 @@
                                                                 "Você pega o item e se apressa para ir atrás dos dois."
                                                             ],
                                                             "item": {
-                                                                "nome": "Cogumelo amarelo"
+                                                                "id": 192
                                                             }
                                                         }
                                                     },

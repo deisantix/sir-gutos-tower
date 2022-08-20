@@ -18,8 +18,12 @@ class DecisorInventario(TomadorDecisoes):
     def reorganizar_itens(self):
         novo_armazenamento = dict()
         i = 1
-        for item in self.decisoes:
-            novo_armazenamento[str(i)] = item
+        for id_item in self.decisoes:
+            itens = self.decisoes[id_item]
+            novo_armazenamento[str(i)] = {
+                "item": itens[0], # pegando o primeiro da lista apenas para representação
+                "quantidade": len(itens)
+            }
             i += 1
         novo_armazenamento[self.FECHAR_INVENTARIO] = 'Cancelar'
         return novo_armazenamento
@@ -31,11 +35,15 @@ class DecisorInventario(TomadorDecisoes):
             raise InventarioVazioError('Seu inventário está vazio...')
 
         for i in self.decisoes.keys():
-            item = self.decisoes[i]
+            item_detalhes = self.decisoes[i]
+
             try:
-                print(f'{i}) {item}: {item.descricao}')
-            except AttributeError:
-                print(f'{i}) {item}')
+                item = item_detalhes['item']
+                quantidade = item_detalhes['quantidade']
+
+                print(f'{i}) {item.nome:<17} (QTD: {quantidade})')
+            except TypeError:
+                print(f'{i}) {item_detalhes}')
 
 
     def tomar_decisao(self):
@@ -45,7 +53,8 @@ class DecisorInventario(TomadorDecisoes):
             if escolha_usuario == self.FECHAR_INVENTARIO:
                 return False
             else:
-                return self.decisoes[escolha_usuario]
+                return self.decisoes[escolha_usuario]['item']
+
 
     def fazer_escolha_sim_ou_nao(self, texto_pergunta="Tem certeza?"):
         return super().fazer_escolha_sim_ou_nao('Deseja usar esse item? ')

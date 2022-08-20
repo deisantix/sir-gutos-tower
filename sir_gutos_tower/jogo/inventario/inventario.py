@@ -4,12 +4,15 @@ from ..tomador_decisoes.decisor_inventario import DecisorInventario
 class Inventario:
 
     def __init__(self):
-        self.armazenamento = []
+        self.armazenamento = dict()
         self.decisor_inventario = DecisorInventario()
 
 
     def adicionar_item(self, novo_item):
-        self.armazenamento.append(novo_item)
+        id = novo_item.id
+        if self.armazenamento.get(id, -1) == -1:
+            self.armazenamento[id] = []
+        self.armazenamento[id].append(novo_item)
 
 
     def retirar_item(self):
@@ -35,18 +38,17 @@ class Inventario:
 
 
     def remover_item_do_inventario(self, item_escolhido):
-        index_do_item = -1
+        lista_itens = self.armazenamento.get(item_escolhido.id)
+        lista_itens.pop()
 
-        for i in range(len(self.armazenamento)):
-            if self.armazenamento[i] == item_escolhido:
-                index_do_item = i
-                break
-        self.armazenamento.pop(index_do_item)
+        if not len(lista_itens):
+            self.armazenamento.pop(item_escolhido.id)
 
 
     def __str__(self):
         inventario_texto = ''
-        for item in self.armazenamento:
-             inventario_texto += f'\n{item}: {item.descricao}'
+        for item_id in self.armazenamento:
+            itens = self.armazenamento[item_id]
+            inventario_texto += f'\n{itens[0]} (QTD: {len(itens)})'
         return inventario_texto
 

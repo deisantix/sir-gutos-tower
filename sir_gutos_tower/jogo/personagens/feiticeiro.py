@@ -79,6 +79,7 @@ class Feiticeiro(Heroi, Lutavel):
                 'decisao': 'Curar festa',
                 'energia': ATAQUE_ESPECIAL,
                 'tipo': 'especial',
+                'acao': self.usar_especial,
                 'texto': [
 
                 ]

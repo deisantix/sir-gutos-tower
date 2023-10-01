@@ -1,4 +1,5 @@
-from sir_gutos_tower.utils.exceptions.exceptions import AdversarioProtegidoError, InimigoSemPontosDeVidaError, NaoAcertouAtaqueError
+from sir_gutos_tower.utils.exceptions.exceptions import AdversarioProtegidoError, InimigoSemPontosDeVidaError, \
+    NaoAcertouAtaqueError
 from ..calculador_de_dano import calcular_dano
 from .lutavel import Lutavel
 
@@ -15,7 +16,6 @@ class Monstro(Lutavel):
 
         self.protegido = False
         self.acoes_previas = [None, None, None]
-
 
     def lutar(self, ataque_escolhido, aliados, inimigo):
         ataques = self.retornar_ataques()
@@ -35,7 +35,6 @@ class Monstro(Lutavel):
 
         return dialogos
 
-
     def retornar_ataques(self):
         return {
             '1': {
@@ -54,7 +53,6 @@ class Monstro(Lutavel):
             }
         }
 
-
     def atacar(self, heroi):
         acertou = self.tentar_atacar(margem_erro_ataque=12)
         if acertou:
@@ -67,10 +65,8 @@ class Monstro(Lutavel):
         else:
             raise NaoAcertouAtaqueError
 
-
     def defender(self):
         self.protegido = True
-
 
     def receber_dano(self, dano):
         if self.protegido:
@@ -81,10 +77,8 @@ class Monstro(Lutavel):
             if self.vida <= 0:
                 raise InimigoSemPontosDeVidaError
 
-
     def desfazer_defesas(self):
         self.protegido = False
-
 
     def adicionar_acoes_previas(self, acao):
         if len(self.acoes_previas) == 3:

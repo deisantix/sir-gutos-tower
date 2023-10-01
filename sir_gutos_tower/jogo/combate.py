@@ -5,6 +5,7 @@ from .personagens.lutavel import Lutavel
 from ..utils.exceptions.exceptions import JaEstaNaFestaError, JogadorSemPontosDeVidaError, NaoAcertouAtaqueError
 from ..jogo.tomador_decisoes.decisor_historia import DecisorHistoria
 
+
 class Combate:
 
     def __init__(self):
@@ -12,8 +13,7 @@ class Combate:
         self.monstros = []
         self.tomador_decisoes = None
 
-
-    def adicionarHeroi(self, heroi):
+    def adicionar_heroi(self, heroi):
         for heroiNaFesta in self.herois:
             if heroi == heroiNaFesta:
                 raise JaEstaNaFestaError
@@ -22,14 +22,12 @@ class Combate:
             self.tomador_decisoes = DecisorHistoria()
         self.herois.append(heroi)
 
-
-    def adicionarMonstro(self, monstro):
+    def adicionar_monstro(self, monstro):
         for monstroNaFesta in self.monstros:
             if monstro == monstroNaFesta:
                 raise JaEstaNaFestaError
 
         self.monstros.append(monstro)
-
 
     def comecar(self):
         lutando = True
@@ -51,7 +49,6 @@ class Combate:
             self.rodar_vez_dos_herois()
             self.rodar_vez_dos_inimigos()
 
-
     def checar_status_dos_participantes(self):
         for heroi in self.herois:
             if heroi.esta_esgotado:
@@ -60,7 +57,6 @@ class Combate:
 
                 if heroi.eh_jogador:
                     raise JogadorSemPontosDeVidaError
-
 
     def rodar_vez_dos_herois(self):
         if len(self.monstros) == 1:
@@ -83,7 +79,6 @@ class Combate:
                 dialogo = self.tratar_dialogo_ataque_antes_de_imprimir(dialogo, heroi, monstro)
                 self.imprimir_dialogo(dialogo)
 
-
     def rodar_vez_dos_inimigos(self):
         for inimigo in self.monstros:
             heroi_a_atacar = choice(self.herois)
@@ -105,7 +100,6 @@ class Combate:
                 dialogo_monstro, heroi_a_atacar, inimigo)
             self.imprimir_dialogo(dialogo_monstro)
 
-
     def tratar_dialogo_ataque_antes_de_imprimir(self, dialogo, heroi, monstro):
         if type(dialogo) == list:
             dialogos = []
@@ -118,7 +112,6 @@ class Combate:
             dialogo = self.reescrever_placeholders_de_dialogo_ataque(dialogo, heroi, monstro)
             return dialogo
 
-
     def reescrever_placeholders_de_dialogo_ataque(self, dialogo, heroi, monstro):
         pov = self.decidir_pov_heroi(heroi)
         pov = self.minimizar_palavra_voce_caso_nao_no_inicio_da_frase(pov, dialogo)
@@ -128,19 +121,16 @@ class Combate:
 
         return dialogo
 
-
     def decidir_pov_heroi(self, heroi):
         pov = heroi.nome
         if heroi.eh_jogador:
             pov = 'Você'
         return pov
 
-
     def minimizar_palavra_voce_caso_nao_no_inicio_da_frase(self, pov, dialogo):
         if pov == 'Você' and not dialogo.startswith('{jogador}'):
             pov = pov.lower()
         return pov
-
 
     def imprimir_dialogo(self, dialogo):
         print()

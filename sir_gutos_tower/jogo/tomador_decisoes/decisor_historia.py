@@ -8,14 +8,12 @@ class DecisorHistoria(TomadorDecisoes):
         super().__init__()
         self.VER_ATRIBUTOS = None
 
-
     def novas_decisoes(self, decisoes):
         super().novas_decisoes(decisoes)
 
         quantas_decisoes = len(self.decisoes)
         self.VER_ATRIBUTOS = str(quantas_decisoes + 1)
         self.decisoes[self.VER_ATRIBUTOS] = {"decisao": "Ver atributos"}
-
 
     def imprimir_decisoes(self):
         if not self.eh_decisao_obrigatoria():
@@ -26,7 +24,6 @@ class DecisorHistoria(TomadorDecisoes):
 
                 gasto_energia = self.definir_gasto_de_energia(decisao_detalhes)
                 print(f'{decisao}) {decisao_detalhes["decisao"]} {gasto_energia}')
-
 
     def definir_gasto_de_energia(self, detalhes):
         try:
@@ -40,7 +37,6 @@ class DecisorHistoria(TomadorDecisoes):
             return f'(-{energia} E)'
         except KeyError:
             return ''
-
 
     def tomar_decisao(self, jogador):
         while True:

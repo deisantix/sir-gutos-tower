@@ -86,9 +86,9 @@ class Jogo:
         detalhes = self.historia['combate']
         combate = Combate()
 
-        combate.adicionarHeroi(self.jogador)
+        combate.adicionar_heroi(self.jogador)
         for ini in detalhes['inimigos']:
-            combate.adicionarMonstro(
+            combate.adicionar_monstro(
                 Monstro(
                     ini['nome'],
                     ini['vida'],

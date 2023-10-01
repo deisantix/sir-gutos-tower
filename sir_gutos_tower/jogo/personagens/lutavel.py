@@ -4,7 +4,6 @@ from sir_gutos_tower.jogo.calculador_de_dano import calcular_precisao
 
 
 class Lutavel(ABC):
-
     PROTEGIDO_COM_ESCUDO_GUSTAV = 7
 
     @abstractmethod
@@ -19,13 +18,11 @@ class Lutavel(ABC):
     def receber_dano(self, dano):
         pass
 
-
     def escolher_dialogo_ataque(self, textos):
         try:
             return choice(textos)
         except IndexError:
             return ''
-
 
     def tentar_atacar(self, margem_erro_ataque):
         precisao_ataque = calcular_precisao(self.precisao, margem_erro_ataque)

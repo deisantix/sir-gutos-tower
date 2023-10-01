@@ -3,7 +3,8 @@ from random import choice
 from .lutavel import Lutavel
 from .heroi import Heroi
 from sir_gutos_tower.config.var import ATAQUE_ESPECIAL, GASTO_MISTERIOSO
-from sir_gutos_tower.utils.exceptions.exceptions import InventarioVazioError, NaoAcertouAtaqueError, AdversarioProtegidoError
+from sir_gutos_tower.utils.exceptions.exceptions import InventarioVazioError, NaoAcertouAtaqueError, \
+    AdversarioProtegidoError
 from sir_gutos_tower.jogo.inventario.inventario import Inventario
 
 from ..calculador_de_dano import calcular_dano
@@ -28,7 +29,6 @@ class Feiticeiro(Heroi, Lutavel):
         self.acoes = self.retornar_ataques()
         self.inventario = Inventario()
 
-
     def init_atributos(self):
         self.vida = 50
         self.ataque = 5
@@ -38,7 +38,6 @@ class Feiticeiro(Heroi, Lutavel):
         self.critico = 15
         self.precisao = 10
         self.esta_esgotado = False
-
 
     def retornar_ataques(self):
         return {
@@ -89,7 +88,6 @@ class Feiticeiro(Heroi, Lutavel):
             },
         }
 
-
     def lutar(self, decisao, herois, inimigo):
         self.aliados = herois
         self.inimigo_rodada = inimigo
@@ -111,26 +109,21 @@ class Feiticeiro(Heroi, Lutavel):
 
         return dialogos
 
-
     def executar_acao(self, decisao):
         self.administrar_energia(decisao)
-
 
     def administrar_energia(self, decisao):
         energia_gasta = decisao['energia']
         if energia_gasta != GASTO_MISTERIOSO:
             self.gastar_energia(energia_gasta)
 
-
     def gastar_energia(self, energia_gasta):
         self.energia -= energia_gasta
-
 
     def adicionar_acoes_previas(self, acao):
         if len(self.acoes_previas) == 3:
             self.acoes_previas.pop(0)
         self.acoes_previas.append(acao)
-
 
     def administrar_defesa(self):
         if self.protegido == Lutavel.PROTEGIDO_COM_ESCUDO_GUSTAV:
@@ -145,10 +138,8 @@ class Feiticeiro(Heroi, Lutavel):
             else:
                 self.contagem_rodadas += 1
 
-
     def desfazer_defesas(self):
         self.protegido = 0
-
 
     def definir_ataque(self, ataque_escolhido):
         self.onde_procurar_dialogo = 'texto'
@@ -156,7 +147,6 @@ class Feiticeiro(Heroi, Lutavel):
             self.onde_procurar_dialogo = 'texto_sozinho'
 
         return ataque_escolhido['acao']()
-
 
     def usar_magia(self):
         acertou = self.tentar_atacar(margem_erro_ataque=12)
@@ -170,7 +160,6 @@ class Feiticeiro(Heroi, Lutavel):
         else:
             raise NaoAcertouAtaqueError
 
-
     def ativar_escudo(self):
         for aliado in self.aliados:
             aliado.proteger(Lutavel.PROTEGIDO_COM_ESCUDO_GUSTAV)
@@ -180,10 +169,8 @@ class Feiticeiro(Heroi, Lutavel):
         else:
             self.mensagem_protegido = 'Porém o escudo lhe protege'
 
-
     def proteger(self, modo):
         self.protegido = modo
-
 
     def atacar_com_cajado(self):
         acertou = self.tentar_atacar(margem_erro_ataque=30)
@@ -197,10 +184,8 @@ class Feiticeiro(Heroi, Lutavel):
         else:
             raise NaoAcertouAtaqueError
 
-
     def usar_especial(self):
         pass
-
 
     def receber_dano(self, dano):
         if (self.protegido == Lutavel.PROTEGIDO_COM_ESCUDO_GUSTAV):
@@ -212,10 +197,8 @@ class Feiticeiro(Heroi, Lutavel):
 
             return '{jogador} recebe ' + str(dano) + ' de dano'
 
-
     def pegar_item(self, novo_item):
         self.inventario.adicionar_item(novo_item)
-
 
     def usar_item(self):
         try:
@@ -225,11 +208,9 @@ class Feiticeiro(Heroi, Lutavel):
         except InventarioVazioError as vazio:
             print(vazio)
 
-
     def imprimir_atributos(self):
         print()
         print(self)
-
 
     def __str__(self):
         atributos = (

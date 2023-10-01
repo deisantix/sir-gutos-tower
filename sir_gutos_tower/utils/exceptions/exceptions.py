@@ -18,3 +18,6 @@ class InimigoSemPontosDeVidaError(Exception):
 
 class InventarioVazioError(Exception):
     pass
+
+class ComportamentoInesperadoError(Exception):
+    pass

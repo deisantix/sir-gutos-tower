@@ -23,7 +23,6 @@ def main():
 
     with open(caminho_pov, 'r') as arquivo_para_ler:
         pov = json.load(arquivo_para_ler)
-
     jogo = Jogo(jogador, pov)
     jogo.iniciar_historia()
 

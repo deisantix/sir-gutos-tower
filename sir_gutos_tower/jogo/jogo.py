@@ -1,3 +1,6 @@
+
+from collections.abc import Iterable
+from .historia import Historia
 from ..utils.exceptions.exceptions import FimDeJogoError
 from .tomador_decisoes.decisor_historia import DecisorHistoria
 from .combate import Combate
@@ -10,28 +13,19 @@ class Jogo:
     def __init__(self, jogador, pov):
         self.jogador = jogador
         self.pov = pov
-        self.historia = None
+        self.historia = Historia(pov)
         self.tomador_decisoes = DecisorHistoria()
 
-
     def iniciar_historia(self):
-        intro = self.pov['intro']
-        self.historia = intro['historia']
+        self.historia.iniciar()
 
         try:
             while True:
-                retorno = type(self.historia)
-                if retorno == dict:
-                    self.historia = self.rodar_historia()
+                if self.historia.proximo_ato:
+                    self.historia.ir_para_proximo_ato()
 
-                elif type(self.historia) == str:
-                    proximo_ato = self.historia
-                    novo_ato = self.pov[proximo_ato]
-
-                    self.historia = novo_ato['historia']
-
-                else:
-                    raise NotImplementedError
+                novo_passo = self.rodar_historia()
+                self.historia.passo = novo_passo
         except FimDeJogoError:
             print('\nFim de Jogo')
         # except (KeyError, NotImplementedError):
@@ -39,32 +33,24 @@ class Jogo:
         except KeyboardInterrupt:
             print('\n\nSaindo...')
 
-
     def rodar_historia(self):
         self.contar()
 
-        try:
-            decisoes = self.historia['decisoes']
-        except KeyError:
-            # caso não haja decisões então provavelmente é outra funcionalidade do jogo
+        # caso não haja decisões então provavelmente é outra funcionalidade do jogo
+        if not self.historia.decisoes:
             return self.lidar_com_a_falta_de_decisoes()
+        decisoes_opcoes = self.historia.decisoes
 
-        self.tomador_decisoes.novas_decisoes(decisoes)
+        self.tomador_decisoes.novas_decisoes(decisoes_opcoes)
         self.tomador_decisoes.imprimir_decisoes()
 
-        decisao = self.tomador_decisoes.tomar_decisao(self.jogador)
-        return self.lidar_com_decisao(decisoes[decisao])
-
+        codigo_decisao = self.tomador_decisoes.tomar_decisao(self.jogador)
+        return self.lidar_com_decisao(decisoes_opcoes[codigo_decisao])
 
     def contar(self):
-        texto = self.verificar_funcionalidade_do_jogo('texto')
-        if not texto:
-            return
-
         print()
-        for linha in texto:
+        for linha in self.historia.texto:
             print(linha)
-
 
     def lidar_com_a_falta_de_decisoes(self):
         fim = self.verificar_se_fim_de_jogo()
@@ -81,10 +67,8 @@ class Jogo:
 
         raise NotImplementedError
 
-
     def verificar_se_fim_de_jogo(self):
         return self.verificar_funcionalidade_do_jogo('fim')
-
 
     def fim_de_jogo(self):
         try:
@@ -92,14 +76,11 @@ class Jogo:
         finally:
             raise FimDeJogoError
 
-
     def verificar_se_existe_proximo_ato(self):
         return self.verificar_funcionalidade_do_jogo('proximo')
 
-
     def verificar_se_entrou_em_combate(self):
         return self.verificar_funcionalidade_do_jogo('combate')
-
 
     def iniciar_combate(self):
         detalhes = self.historia['combate']
@@ -123,15 +104,12 @@ class Jogo:
         else:
             return detalhes['perdeu']
 
-
-    def verificar_funcionalidade_do_jogo(self, funcionalidade):
+    def verificar_funcionalidade_do_jogo(self, funcionalidade: str) -> Iterable | bool:
         try:
             return self.historia[funcionalidade]
         except KeyError:
             return False
 
-
     def lidar_com_decisao(self, detalhes):
         self.jogador.executar_acao(detalhes)
         return detalhes['historia']
-

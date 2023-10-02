@@ -95,9 +95,6 @@
                                                 "precisao": 50
                                             }
                                         ],
-                                        "ganhou": {
-
-                                        },
                                         "perdeu": {
                                             "fim": true
                                         }

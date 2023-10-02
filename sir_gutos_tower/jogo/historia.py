@@ -2,10 +2,15 @@ from ..utils.exceptions.exceptions import ComportamentoInesperadoError
 
 
 class Historia:
+
     INICIO = 'intro'
     PASSO = 'historia'
     TEXTO = 'texto'
     DECISOES = 'decisoes'
+    COMBATE = 'combate'
+    FIM = 'fim'
+    MORTE = 'morte'
+    PROXIMO = 'proximo'
 
     def __init__(self, pov):
         self._pov = pov
@@ -35,13 +40,33 @@ class Historia:
             return False
 
     @property
-    def proximo_ato(self) -> bool:
-        if type(self._trecho) == dict:
+    def combate(self) -> dict | bool:
+        try:
+            return self._passo[Historia.COMBATE]
+        except KeyError:
             return False
-        elif type(self._trecho) == str:
-            return True
-        else:
-            raise ComportamentoInesperadoError()
+
+    @property
+    def fim(self) -> bool:
+        try:
+            return self._passo[Historia.FIM]
+        except KeyError:
+            return False
+
+    @property
+    def morte(self) -> str:
+        try:
+            return self._passo[Historia.MORTE]
+        except KeyError:
+            return ''
+
+    @property
+    def proximo_ato(self) -> bool:
+        try:
+            if self._passo[Historia.PROXIMO]:
+                return True
+        except KeyError:
+            return False
 
     def iniciar(self, ato: str = None) -> None:
         if ato:
@@ -52,5 +77,4 @@ class Historia:
 
     def ir_para_proximo_ato(self):
         if self.proximo_ato:
-            nome_proximo_ato = self._trecho
-            self.iniciar(nome_proximo_ato)
+            self.iniciar(self._passo[Historia.PROXIMO])

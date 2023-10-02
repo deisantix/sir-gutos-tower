@@ -26,7 +26,7 @@ class Historia:
         self._passo = novo_passo
 
     @property
-    def texto(self) -> list:
+    def texto(self):
         try:
             return self._passo[Historia.TEXTO]
         except KeyError:
@@ -47,28 +47,28 @@ class Historia:
             return False
 
     @property
-    def fim(self) -> bool:
+    def fim(self):
         try:
             return self._passo[Historia.FIM]
         except KeyError:
             return False
 
     @property
-    def morte(self) -> str:
+    def morte(self):
         try:
             return self._passo[Historia.MORTE]
         except KeyError:
             return ''
 
     @property
-    def proximo_ato(self) -> bool:
+    def proximo_ato(self):
         try:
             if self._passo[Historia.PROXIMO]:
                 return True
         except KeyError:
             return False
 
-    def iniciar(self, ato: str = None) -> None:
+    def iniciar(self, ato: str = None):
         if ato:
             self._trecho = self._pov[ato]
         else:

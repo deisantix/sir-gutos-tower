@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class TomadorDecisoes(ABC):
+
     DECISAO_OBRIGATORIA = '0'
     CANCELAR = 'C'
     SIM = 'S'
@@ -10,14 +11,14 @@ class TomadorDecisoes(ABC):
     def __init__(self):
         self.decisoes = None
 
-    def novas_decisoes(self, decisoes):
+    def novas_decisoes(self, decisoes: dict):
         self.decisoes = decisoes
 
     @abstractmethod
-    def imprimir_decisoes(self):
+    def imprimir_decisoes(self) -> None:
         pass
 
-    def tomar_decisao(self, texto_pergunta="O que você vai fazer?"):
+    def tomar_decisao(self, texto_pergunta="O que você vai fazer?") -> str:
         while True:
             escolha_usuario = self.perguntar_ao_usuario(texto_pergunta)
 
@@ -25,7 +26,7 @@ class TomadorDecisoes(ABC):
             if resposta_valida:
                 return escolha_usuario
 
-    def perguntar_ao_usuario(self, texto_pergunta):
+    def perguntar_ao_usuario(self, texto_pergunta: str) -> str:
         if self.eh_decisao_obrigatoria():
             return TomadorDecisoes.DECISAO_OBRIGATORIA
         else:
@@ -34,8 +35,10 @@ class TomadorDecisoes(ABC):
     def eh_decisao_obrigatoria(self):
         return TomadorDecisoes.DECISAO_OBRIGATORIA in self.decisoes
 
-    def verificar_se_resposta_valida(self, escolha_usuario, conteiner_escolhas):
-        if escolha_usuario in conteiner_escolhas:
+    def verificar_se_resposta_valida(self, escolha_usuario, escolhas_alternativas):
+        if escolhas_alternativas and escolha_usuario in escolhas_alternativas:
+            return True
+        elif escolha_usuario in self.decisoes:
             return True
         else:
             print('Decisão inválida. Escolha novamente')

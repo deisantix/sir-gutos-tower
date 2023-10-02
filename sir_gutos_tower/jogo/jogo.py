@@ -4,7 +4,6 @@ from ..utils.exceptions.exceptions import FimDeJogoError
 from .decisores.decisor_historia import DecisorHistoria
 from .combate import Combate
 from .personagens.monstro import Monstro
-from ..config.var import GASTO_MISTERIOSO
 
 
 class Jogo:

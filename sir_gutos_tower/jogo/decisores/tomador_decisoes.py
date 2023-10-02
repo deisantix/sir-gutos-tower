@@ -18,7 +18,7 @@ class TomadorDecisoes(ABC):
     def imprimir_decisoes(self) -> None:
         pass
 
-    def tomar_decisao(self, texto_pergunta="O que você vai fazer?") -> str:
+    def tomar_decisao(self, texto_pergunta="O que você vai fazer?"):
         while True:
             escolha_usuario = self.perguntar_ao_usuario(texto_pergunta)
 
@@ -26,7 +26,7 @@ class TomadorDecisoes(ABC):
             if resposta_valida:
                 return escolha_usuario
 
-    def perguntar_ao_usuario(self, texto_pergunta: str) -> str:
+    def perguntar_ao_usuario(self, texto_pergunta: str):
         if self.eh_decisao_obrigatoria():
             return TomadorDecisoes.DECISAO_OBRIGATORIA
         else:

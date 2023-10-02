@@ -1,5 +1,3 @@
-from random import choice
-
 from .lutavel import Lutavel
 from .heroi import Heroi
 from sir_gutos_tower.config.var import ATAQUE_ESPECIAL, GASTO_MISTERIOSO
@@ -7,7 +5,7 @@ from sir_gutos_tower.utils.exceptions.exceptions import InventarioVazioError, Na
     AdversarioProtegidoError
 from sir_gutos_tower.jogo.inventario.inventario import Inventario
 
-from ..calculador_de_dano import calcular_dano
+from sir_gutos_tower.utils.fatores_batalha.calculador_de_dano import calcular_dano
 
 
 class Feiticeiro(Heroi, Lutavel):

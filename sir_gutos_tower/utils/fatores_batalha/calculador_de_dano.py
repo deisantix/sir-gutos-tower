@@ -35,6 +35,5 @@ def calcular_precisao(precisao, margem_erro):
     return precisao_ataque
 
 
-
 if __name__ == '__main__':
     print(calcular_precisao(10, 15))

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from random import randrange, choice
-from sir_gutos_tower.jogo.calculador_de_dano import calcular_precisao
+from sir_gutos_tower.utils.fatores_batalha.calculador_de_dano import calcular_precisao
 
 
 class Lutavel(ABC):

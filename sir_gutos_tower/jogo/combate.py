@@ -3,7 +3,7 @@ from random import choice
 from .personagens.lutavel import Lutavel
 
 from ..utils.exceptions.exceptions import JaEstaNaFestaError, JogadorSemPontosDeVidaError, NaoAcertouAtaqueError
-from ..jogo.tomador_decisoes.decisor_historia import DecisorHistoria
+from ..jogo.decisores.decisor_historia import DecisorHistoria
 
 
 class Combate:

@@ -1,5 +1,5 @@
 from ..inventario.item import Item
-from ..tomador_decisoes.decisor_inventario import DecisorInventario
+from ..decisores.decisor_inventario import DecisorInventario
 
 
 class Inventario:

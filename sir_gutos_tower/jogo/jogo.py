@@ -1,7 +1,7 @@
 
 from .historia import Historia
 from ..utils.exceptions.exceptions import FimDeJogoError
-from .tomador_decisoes.decisor_historia import DecisorHistoria
+from .decisores.decisor_historia import DecisorHistoria
 from .combate import Combate
 from .personagens.monstro import Monstro
 from ..config.var import GASTO_MISTERIOSO

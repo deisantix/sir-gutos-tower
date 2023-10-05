@@ -1,5 +1,5 @@
 from .tomador_decisoes import TomadorDecisoes
-from sir_gutos_tower.config import var
+from ...utils.decisores.exibicao import definir_gasto_energia
 
 
 class DecisorHistoria(TomadorDecisoes):
@@ -22,21 +22,8 @@ class DecisorHistoria(TomadorDecisoes):
             for decisao in self.decisoes:
                 decisao_detalhes = self.decisoes[decisao]
 
-                gasto_energia = self.definir_gasto_de_energia(decisao_detalhes)
+                gasto_energia = definir_gasto_energia(decisao_detalhes)
                 print(f'{decisao}) {decisao_detalhes["decisao"]} {gasto_energia}')
-
-    def definir_gasto_de_energia(self, detalhes):
-        try:
-            energia = detalhes['energia']
-
-            if energia == var.GASTO_MISTERIOSO:
-                energia = '?'
-            elif energia == var.ATAQUE_ESPECIAL:
-                return '(-AE)'
-
-            return f'(-{energia} E)'
-        except KeyError:
-            return ''
 
     def tomar_decisao(self, jogador):
         while True:

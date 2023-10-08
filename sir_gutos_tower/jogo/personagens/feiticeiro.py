@@ -11,6 +11,8 @@ from sir_gutos_tower.utils.fatores_batalha.calculador_de_dano import calcular_da
 class Feiticeiro(Heroi, Lutavel):
 
     def __init__(self, nome='Gustav', eh_jogador=False):
+        super().__init__()
+
         self.nome = nome
         self.eh_jogador = eh_jogador
 

@@ -1,18 +1,17 @@
-
 from .historia import Historia
+from .personagens.heroi import Heroi
+from .decisores.decisao import Decisao
 from ..utils.exceptions.exceptions import FimDeJogoError
-from .decisores.decisor_historia import DecisorHistoria
 from .combate import Combate
 from .personagens.monstro import Monstro
 
 
 class Jogo:
 
-    def __init__(self, jogador, pov):
+    def __init__(self, jogador: Heroi, pov: dict):
         self.jogador = jogador
         self.pov = pov
         self.historia = Historia(pov)
-        self.tomador_decisoes = DecisorHistoria()
 
     def iniciar_historia(self):
         self.historia.iniciar()
@@ -34,13 +33,11 @@ class Jogo:
         # caso não haja decisões então provavelmente é outra funcionalidade do jogo
         if not self.historia.decisoes:
             return self.lidar_com_a_falta_de_decisoes()
-        decisoes_opcoes = self.historia.decisoes
 
-        self.tomador_decisoes.novas_decisoes(decisoes_opcoes)
-        self.tomador_decisoes.imprimir_decisoes()
+        self.jogador.novas_decisoes(self.historia.decisoes)
+        self.jogador.imprimir_decisoes()
 
-        codigo_decisao = self.tomador_decisoes.tomar_decisao(self.jogador)
-        decisao_escolhida = decisoes_opcoes[codigo_decisao]
+        decisao_escolhida = self.jogador.tomar_decisao()
         return self.lidar_com_decisao(decisao_escolhida)
 
     def contar(self):
@@ -92,7 +89,5 @@ class Jogo:
         self.historia.ir_para_proximo_ato()
         return self.historia.passo
 
-    def lidar_com_decisao(self, detalhes):
-        self.jogador.executar_acao(detalhes)
-
-        return detalhes['historia']
+    def lidar_com_decisao(self, decisao: Decisao):
+        return self.historia.retornar_historia_por_decisao(decisao)

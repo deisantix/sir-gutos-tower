@@ -1,4 +1,5 @@
 import json
+import subprocess, sys
 
 from sir_gutos_tower.jogo.jogo import Jogo
 from sir_gutos_tower.jogo.personagens.feiticeiro import Feiticeiro

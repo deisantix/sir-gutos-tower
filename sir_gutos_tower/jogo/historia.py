@@ -1,4 +1,4 @@
-from ..utils.exceptions.exceptions import ComportamentoInesperadoError
+from .decisores.decisao import Decisao
 
 
 class Historia:
@@ -74,6 +74,9 @@ class Historia:
         else:
             self._trecho = self._pov[Historia.INICIO]
         self._passo = self._trecho[Historia.PASSO]
+
+    def retornar_historia_por_decisao(self, decisao: Decisao):
+        return self.decisoes[decisao.codigo][Historia.PASSO]
 
     def ir_para_proximo_ato(self):
         if self.proximo_ato:
